@@ -1,0 +1,26 @@
+@font-face {
+    font-family: "MTN Brighter Sans Regular";
+    src: url("../../fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
+    font-weight: 100 1000;
+    font-stretch: 25% 151%;
+}
+
+:root {
+    --fontRegular: "MTN Brighter Sans Regular";
+    --primaryColor: #f1ac21;
+    --opacityColor: #fff1d5;
+    --textColor: #36271e;
+    --labelColor: #4d4d4d;
+    --placeholderColor: #333333;
+    --blackColor: #1f1e1e;
+    --whiteColor: #f2f2f2;
+    --borderColor: #c2c2c2;
+    --bgColor: #ffffff47;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--fontRegular);
+}
