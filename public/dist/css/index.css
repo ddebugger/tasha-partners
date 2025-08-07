@@ -7,15 +7,14 @@
 
 :root {
     --fontRegular: "MTN Brighter Sans Regular";
-    --primaryColor: #f1ac21;
-    --opacityColor: #fff1d5;
-    --textColor: #36271e;
-    --labelColor: #4d4d4d;
-    --placeholderColor: #333333;
-    --blackColor: #1f1e1e;
+    --primaryColor: #f59e0b;
+    --thickOrange: #af720a;
+    --labelColor: #666666;
+    --blackColor: #333333;
     --whiteColor: #f2f2f2;
-    --borderColor: #c2c2c2;
-    --bgColor: #ffffff47;
+    --borderColor: #cccccc;
+    --lightBlue: #137699;
+    --darkBlue: #14546f;
 }
 
 * {
@@ -23,4 +22,46 @@
     padding: 0;
     box-sizing: border-box;
     font-family: var(--fontRegular);
+}
+
+.admin-app-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../../images/background.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.app-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.app-content .header-container {
+    position: sticky;
+}
+
+.app-content .app-content-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: scroll;
+    background-color: red;
+}
+
+.app-content .app-content-container::-webkit-scrollbar {
+    height: 8px;
+    width: 5px;
+}
+
+.app-content .app-content-container::-webkit-scrollbar-thumb {
+    background-color: var(--labelColor);
 }
