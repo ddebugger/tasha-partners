@@ -16,8 +16,13 @@
         <div class="app-content">
             <!-- Include Header -->
             <div class="header-container">
-                @include('layout.admin.header')
-                @include('layout.admin.content')
+                <div class="navbar">
+                    @include('layout.admin.header')
+                </div>
+
+                <div class="breadcrumb">
+                    @yield('breadcrumb')
+                </div>
             </div>
 
             <!-- Page-specific content -->

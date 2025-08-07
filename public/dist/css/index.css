@@ -11,10 +11,12 @@
     --thickOrange: #af720a;
     --labelColor: #666666;
     --blackColor: #333333;
-    --whiteColor: #f2f2f2;
+    --fadeWhite: #f2f2f2;
     --borderColor: #cccccc;
+    --whiteColor: #ffffff;
     --lightBlue: #137699;
     --darkBlue: #14546f;
+    --greenColor: #3aaf4b;
 }
 
 * {
@@ -24,12 +26,13 @@
     font-family: var(--fontRegular);
 }
 
+/* =======================App Layout ================= */
 .admin-app-container {
     display: flex;
     flex-direction: column;
     position: relative;
     gap: 0.5rem;
-    padding: 0.5rem;
+    padding: 0.2rem;
     width: 100vw;
     height: 100vh;
     background-image: url("../../images/background.png");
@@ -45,16 +48,301 @@
     height: 100%;
 }
 
+/* =======================App Layout || Header ================= */
 .app-content .header-container {
     position: sticky;
 }
 
+.app-content .header-container .navbar {
+    background-color: var(--darkBlue);
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px 10px 0 0;
+}
+
+.app-content .header-container .navbar nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.app-content .header-container .navbar .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.app-content .header-container .navbar .logo-container .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--whiteColor);
+    border-radius: 10px;
+    padding: 0.8rem 0.5rem;
+}
+
+.app-content .header-container .navbar .logo-container .logo-desc {
+    display: flex;
+    flex-direction: column;
+    line-height: 16px;
+}
+
+.app-content .header-container .navbar .logo-container .logo-desc p {
+    color: var(--fadeWhite);
+    font-size: 20px;
+}
+
+.app-content .header-container .navbar .logo-container .logo-desc span {
+    color: var(--fadeWhite);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.app-content .header-container .navbar .nav-items {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.app-content .header-container .navbar .nav-items a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--fadeWhite);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.app-content .header-container .navbar .nav-items a.active {
+    background-color: var(--lightBlue);
+    border-radius: 20px;
+    padding: 10px 20px;
+}
+
+.app-content .header-container .navbar .user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.app-content .header-container .navbar .user-profile .profile {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.app-content .header-container .navbar .user-profile .profile .profile-pic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem;
+    border-radius: 50%;
+    background-color: var(--primaryColor);
+    color: var(--darkBlue);
+    font-size: 14px;
+}
+
+.app-content .header-container .navbar .user-profile .profile .online {
+    height: 11px;
+    width: 11px;
+    border-radius: 50%;
+    background-color: var(--greenColor);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.app-content .header-container .navbar .user-profile .user-name {
+    display: flex;
+    flex-direction: column;
+    line-height: 14px;
+}
+
+.app-content .header-container .navbar .user-profile .user-name p {
+    color: var(--whiteColor);
+    font-size: 14px;
+}
+
+.app-content .header-container .navbar .user-profile .user-name span {
+    color: var(--fadeWhite);
+    font-size: 10px;
+}
+
+.app-content .header-container .navbar .mobile-menu {
+    display: none;
+}
+
+@media screen and (max-width: 1040px) {
+    .app-content .header-container .navbar {
+        padding: 0.6rem;
+    }
+
+    .app-content .header-container .navbar .logo-container .logo-desc p {
+        color: var(--fadeWhite);
+        font-size: 17px;
+    }
+
+    .app-content .header-container .navbar .logo-container .logo-desc span {
+        color: var(--fadeWhite);
+        font-size: 11px;
+        font-weight: bold;
+    }
+
+    .app-content .header-container .navbar .nav-items,
+    .app-content .header-container .navbar .user-profile {
+        display: none;
+    }
+
+    .app-content .header-container .navbar .mobile-menu {
+        display: flex;
+    }
+
+    .app-content .header-container .navbar .mobile-menu img {
+        height: 30px;
+    }
+}
+
+/* =======================App Layout || Header || Breadcrumb ================= */
+.app-content .header-container .breadcrumb {
+    background: linear-gradient(
+        180deg,
+        rgba(164, 190, 215, 0.76) 0%,
+        #f4f4f4 10.59%
+    );
+    padding: 1rem 1.5rem;
+}
+
+.app-content .header-container .content-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.app-content .header-container .content-header .left-content-header {
+    width: 70%;
+}
+
+.app-content
+    .header-container
+    .content-header
+    .left-content-header
+    .locations-steps {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.app-content
+    .header-container
+    .content-header
+    .left-content-header
+    .locations-steps
+    .steps {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.app-content
+    .header-container
+    .content-header
+    .left-content-header
+    .locations-steps
+    .steps
+    .step {
+    background-color: #e0e0e0;
+    padding: 5px 7px;
+    font-size: 12px;
+}
+
+.app-content
+    .header-container
+    .content-header
+    .left-content-header
+    .locations-steps
+    .steps
+    .step.active {
+    color: #cc9321;
+}
+
+.app-content
+    .header-container
+    .content-header
+    .left-content-header
+    .content-title {
+    font-size: 1.7rem;
+    font-weight: semi-bold;
+}
+
+.app-content
+    .header-container
+    .content-header
+    .left-content-header
+    .description {
+    font-weight: 200;
+}
+
+.app-content .header-container .content-header .right-content-button {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: var(--primaryColor);
+    padding: 0.8rem 1rem;
+    border: none;
+    outline: none;
+    color: var(--fadeWhite);
+    cursor: pointer;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+@media screen and (max-width: 1040px) {
+    .app-content .header-container .breadcrumb {
+        padding: 1rem 0.6rem;
+    }
+
+    .app-content .header-container .content-header {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: start;
+    }
+
+    .app-content .header-container .content-header .left-content-header {
+        width: 100%;
+    }
+
+    .app-content
+        .header-container
+        .content-header
+        .left-content-header
+        .content-title {
+        font-size: 1.4rem;
+        font-weight: semi-bold;
+    }
+
+    .app-content
+        .header-container
+        .content-header
+        .left-content-header
+        .description {
+        font-weight: 300;
+        font-size: 13px;
+        margin-bottom: 1rem;
+    }
+}
+
+/* =======================App Layout || App Content================= */
 .app-content .app-content-container {
     display: flex;
     flex-direction: column;
     height: 100%;
     overflow-y: scroll;
-    background-color: red;
+    padding: 0.8rem 1.5rem;
 }
 
 .app-content .app-content-container::-webkit-scrollbar {
