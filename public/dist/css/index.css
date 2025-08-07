@@ -17,6 +17,7 @@
     --lightBlue: #137699;
     --darkBlue: #14546f;
     --greenColor: #3aaf4b;
+    --textColor: #4d4d4d;
 }
 
 * {
@@ -352,4 +353,69 @@
 
 .app-content .app-content-container::-webkit-scrollbar-thumb {
     background-color: var(--labelColor);
+}
+
+@media screen and (max-width: 1040px) {
+    .app-content .app-content-container {
+        padding: 0.8rem 0.6rem;
+    }
+}
+
+/* ========================== App Content || Admin-Dashboard ================= */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.card-container .card {
+    background-color: #fafafa;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--fadeWhite);
+}
+
+.card-container .card .top-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid var(--fadeWhite);
+    margin-bottom: 1rem;
+}
+
+.card-container .card .top-card .left-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-container .card .top-card .left-content h1 {
+    font-size: 13px;
+    color: var(--labelColor);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.card-container .card .top-card .left-content span {
+    color: var(--textColor);
+    font-size: 35px;
+}
+
+.card-container .card .top-card .right-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff5e5;
+    padding: 0.7rem;
+    border-radius: 10px;
+}
+
+.card-container .card a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: fit-content;
+    font-size: 12px;
+    text-decoration: none;
+    color: var(--thickOrange);
 }
