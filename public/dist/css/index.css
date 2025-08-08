@@ -366,10 +366,11 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
+    margin-bottom: 2rem;
 }
 
 .card-container .card {
-    background-color: #fafafa;
+    background-color: var(--whiteColor);
     padding: 1rem;
     border-radius: 12px;
     border: 1px solid var(--fadeWhite);
@@ -418,4 +419,460 @@
     font-size: 12px;
     text-decoration: none;
     color: var(--thickOrange);
+}
+
+.section {
+    display: flex;
+    /* align-items: center; */
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.section .graph-container {
+    width: 75%;
+    display: flex;
+    gap: 1rem;
+}
+
+.section .graph-container .survey-graph {
+    width: 100%;
+}
+
+.section .graph-container .survey-graph header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.section .graph-container .survey-graph header h1 {
+    font-size: 15px;
+    color: var(--blackColor);
+    font-weight: 500;
+}
+
+.section .graph-container .survey-graph header a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: var(--thickOrange);
+    font-size: 12px;
+}
+
+.section .graph-container .survey-graph .chart {
+    background-color: #fafafa;
+    padding: 0.5rem;
+    border-radius: 12px;
+}
+
+.section .graph-container .survey-graph .chart .select {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+    border: 1px solid var(--fadeWhite);
+    background-color: var(--whiteColor);
+    width: fit-content;
+    margin-left: auto;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.section .graph-container .survey-graph .chart .select .period {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--blackColor);
+    font-size: 12px;
+}
+
+.section .graph-container .survey-graph .chart .select select {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: var(--blackColor);
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.section .graph-container .survey-graph .graph {
+    background-color: #fafafa;
+    border: 1px solid var(--fadeWhite);
+    padding: 0.5rem;
+    border-radius: 10px;
+    /* height: 220px; */
+}
+
+canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+.section .recent-activity {
+    width: 25%;
+}
+
+.section .recent-activity header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.section .recent-activity header h1 {
+    font-size: 15px;
+    color: var(--blackColor);
+    font-weight: 500;
+}
+
+.section .recent-activity header a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: var(--thickOrange);
+    font-size: 12px;
+}
+
+.section .recent-activity .activity-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #fafafa;
+    padding: 10px;
+    border-radius: 12px;
+    max-height: 330px;
+    overflow-y: scroll;
+}
+
+.section .recent-activity .activity-container::-webkit-scrollbar {
+    height: 8px;
+    width: 5px;
+}
+
+.section .recent-activity .activity-container::-webkit-scrollbar-thumb {
+    background-color: var(--fadeWhite);
+}
+
+.section .recent-activity .activity-container .activity {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--borderColor);
+    padding: 0.5rem 0;
+}
+
+.section .recent-activity .activity-container .activity .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #dcfce7;
+    border-radius: 50%;
+    padding: 0.5rem;
+}
+
+.section .recent-activity .activity-container .activity-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.section .recent-activity .activity-container .activity-content p {
+    color: white/700;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 0.5rem;
+}
+
+.section .recent-activity .activity-container .activity-content p span {
+    color: var(--primaryColor);
+}
+
+.section .recent-activity .activity-container .activity-content .role {
+    color: #212529;
+    font-size: 12px;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+}
+
+.section .recent-activity .activity-container .activity-content .time {
+    color: #212529;
+    font-size: 10px;
+    font-weight: 300;
+}
+
+.section .table-container {
+    width: 75%;
+}
+
+.section .table-container header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.section .table-container header h1 {
+    font-size: 15px;
+    color: var(--blackColor);
+    font-weight: 500;
+}
+
+.section .table-container header a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: var(--thickOrange);
+    font-size: 12px;
+}
+
+.section .table-container table {
+    background-color: #ffffffa1;
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.section .table-container table th,
+.section .table-container table td {
+    padding: 1.2rem 10px;
+    text-align: left;
+    font-size: 12px;
+    color: #212529;
+    border-bottom: 1px solid var(--fadeWhite);
+}
+
+.section .table-container table th {
+    background: #dedede;
+    color: var(--textColor);
+    border-bottom: none;
+}
+
+.section .table-container table th p {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.section .table-container table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.section .table-container table tr .content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section .table-container table tr .content .profile {
+    border-radius: 50%;
+}
+
+.section .table-container table tr .content .name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem;
+    border-radius: 50%;
+    background-color: #fef3c7;
+    border: none;
+    color: var(--thickOrange);
+    font-weight: 600;
+}
+
+.section .table-container table tr .content .info p {
+    font-weight: 600;
+}
+
+.section .table-container table tr .content .info span {
+    font-weight: 300;
+    font-size: 11px;
+}
+
+.section .table-container table tr .town {
+    background: #ececec;
+    border-radius: 10px;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+}
+
+.section .table-container table tr .actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.section .table-container table tr .actions button {
+    padding: 7px 12px;
+    border: none;
+    border-radius: 20px;
+    gap: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section .table-container table tr .actions button.view-btn {
+    background-color: #137699;
+    color: var(--whiteColor);
+}
+
+.section .table-container table tr .actions button.edit-btn {
+    background-color: #296caa12;
+    border: 1px solid #137699;
+    color: #137699;
+}
+
+.section .table-container .pagination {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.section .table-container .pagination button {
+    padding: 6px 12px;
+    margin: 5px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #ddd;
+}
+
+.section .table-container .pagination button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.section .ongoing-surveys {
+    width: 25%;
+}
+
+.section .survey-container {
+    background-color: #137699;
+    border-radius: 12px;
+    padding: 0.3rem;
+}
+
+.section .survey-container .survey-card {
+    background: white;
+    border-radius: 10px;
+    padding: 0.5rem;
+    margin-bottom: 0.3rem;
+}
+
+.section .survey-container .survey-card .survey-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.section .survey-container .survey-card .survey-header p {
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.section .survey-container .survey-card .survey-header span {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 0.5rem;
+    border-radius: 14px;
+    width: fit-content;
+}
+
+.section .survey-container .survey-card .survey-header span.green {
+    background: #ecfdf3;
+    color: #027a48;
+}
+
+.section .survey-container .survey-card .survey-header span.blue {
+    color: #2c9ee2;
+    background: #e6f6ffd9;
+}
+
+.section .survey-container .survey-card .survey-header span.orange {
+    color: var(--primaryColor);
+    background: #ffcc001c;
+}
+
+.section .survey-container .survey-card .compliance {
+    font-size: 11px;
+    color: #212529;
+}
+
+.section .survey-container .survey-card .progress-bar {
+    position: relative;
+    background: #e0e0e0;
+    border-radius: 10px;
+    height: 10px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.section .survey-container .survey-card .progress-fill {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.section .survey-container .survey-card .dates {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.section .survey-container .survey-card .dates span {
+    font-size: 12px;
+    margin-bottom: 0.5rem;
+}
+
+.section .survey-container .survey-card .buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.section .survey-container .survey-card .btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.section .survey-container .survey-card .btn-reminder {
+    background: #e1f3ff;
+    color: #007b9e;
+    border: 1px solid #007b9e;
+}
+
+.section .survey-container .survey-card .btn-view {
+    background: var(--primaryColor);
+    color: white;
+}
+
+/* Individual progress bar colors */
+.section .survey-container .survey-card .green {
+    background: linear-gradient(90deg, #0ac66c, #00bf63);
+    width: 65%;
+}
+.section .survey-container .survey-card .orange {
+    background: linear-gradient(90deg, #ffb400, #ffa500);
+    width: 42%;
+}
+.section .survey-container .survey-card .blue {
+    background: linear-gradient(90deg, #00b7ff, #009bd6);
+    width: 18%;
 }
