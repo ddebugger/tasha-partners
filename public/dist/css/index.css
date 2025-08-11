@@ -1079,3 +1079,279 @@ canvas {
 }
 
 /* ========================== App Content || Admin-Client-Management ================= */
+.modal-content .info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.modal-content .info-container h2 {
+    color: var(--blackColor);
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.modal-content .info-container .info-content {
+    background-color: #fafafa;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    gap: 1rem;
+}
+
+.modal-content .info-container .info-content .company-logo {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content .info-container .info-content .company-logo > span {
+    color: var(--textColor);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.modal-content .info-container .info-content .company-logo .upload-circle {
+    width: 120px;
+    height: 120px;
+    background-color: #dee5ee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.modal-content .info-container .info-content .company-logo .upload-circle img {
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.modal-content .info-container .info-content .company-logo .upload-text {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 1rem;
+    color: gray;
+}
+
+.modal-content .info-container .info-content .company-logo input[type="file"] {
+    display: none;
+}
+
+.modal-content .info-container .info-content .company-inputs {
+    width: 75%;
+}
+
+.modal-content .info-container .info-content .company-inputs.except {
+    width: 100%;
+}
+
+.modal-content .info-container .info-content .input-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.modal-content .info-container .info-content .input-container .input {
+    display: block;
+    width: 100%;
+}
+
+.modal-content .info-container .info-content .input-container .input label {
+    color: var(--textColor);
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.modal-content .info-container .info-content .input-container .input input {
+    width: 100%;
+    outline: none;
+    border: 1px solid #545f71;
+    border-radius: 8px;
+    padding: 0.6rem;
+    background-color: transparent;
+}
+
+.modal-content .info-container .info-content .input label {
+    color: var(--textColor);
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.modal-content .info-container .info-content .input input {
+    width: 100%;
+    outline: none;
+    border: 1px solid #545f71;
+    border-radius: 8px;
+    padding: 0.6rem;
+    background-color: transparent;
+}
+
+.modal-content .info-container .info-content .input textarea {
+    width: 100%;
+    outline: none;
+    border: 1px solid #545f71;
+    border-radius: 8px;
+    padding: 0.6rem;
+    height: 100px;
+    resize: none;
+    background-color: transparent;
+}
+
+.modal-content .info-container .info-content .company-inputs .file-upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.modal-content
+    .info-container
+    .info-content
+    .company-inputs
+    .file-upload
+    .upload-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #f6f6f6;
+    border: 1px solid #545f71;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.modal-content
+    .info-container
+    .info-content
+    .company-inputs
+    .file-upload
+    .upload-btn
+    span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#fileName {
+    font-size: 14px;
+}
+
+.modal-content
+    .info-container
+    .info-content
+    .company-inputs
+    .download-template
+    a {
+    color: #d9822b;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.modal-content
+    .info-container
+    .info-content
+    .company-inputs
+    .download-template
+    a:hover {
+    text-decoration: underline;
+}
+
+.modal-content .info-container .info-content .company-inputs .active-client {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-content
+    .info-container
+    .info-content
+    .company-inputs
+    .active-client
+    span {
+    font-weight: bold;
+    color: #333;
+}
+
+.modal-content
+    .info-container
+    .info-content
+    .company-inputs
+    .active-client
+    input[type="checkbox"] {
+    accent-color: orange;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.modal-content .info-container .info-content .company-inputs .active-client p {
+    font-size: 12px;
+    color: #666;
+}
+
+.customer-block {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    gap: 5px;
+    margin-bottom: 1.5rem;
+}
+
+.inputs {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.title-input,
+.desc-input {
+    border: 1px solid #545f71;
+    background-color: var(--whiteColor);
+    border-radius: 6px;
+    padding: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+.title-input:focus,
+.desc-input:focus {
+    border-color: #888;
+}
+
+.desc-input {
+    resize: none;
+    min-height: 100px;
+}
+
+.delete-btn {
+    background: #fce4e4;
+    border: none;
+    color: red;
+    cursor: pointer;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.delete-btn:hover {
+    background: #f8d4d4;
+}

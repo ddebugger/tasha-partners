@@ -495,11 +495,10 @@
 
     {{-- modal || create new client --}}
     <div id="myModal" class="modal">
-        <div class="modal-content">
+        <form class="modal-content">
             <div class="modal-header">
                 <div class="headings">
-                    <h2>Response Rate Analysis</h2>
-                    <p>Detailed breakdown of survey response rates by client company, showing participation trends over time.</p>
+                    <h2>Create New Client</h2>
                 </div>
 
                 <svg width="29" height="30" id="closeModal" class="close" viewBox="0 0 29 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -507,10 +506,167 @@
                 </svg>
             </div>
 
+            <div class="info-container">
+                <h2>Basic Information</h2>
+                <div class="info-content">
+                    <div class="company-logo">
+                        <span>Company Logo</span>
+                        <label for="fileInput" class="upload-circle" id="uploadCircle">
+                            <div class="upload-icon">
+                                <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g opacity="0.2">
+                                        <path d="M20.2137 5.37988C18.6825 5.37988 17.2534 6.20106 16.4825 7.52294L14.3732 11.1397H10.6402C7.19966 11.1397 4.40039 13.939 4.40039 17.3795V35.6189C4.40039 39.0595 7.19966 41.8588 10.6402 41.8588H36.5594C39.9999 41.8588 42.7992 39.0595 42.7992 35.6189V17.3795C42.7992 13.939 39.9999 11.1397 36.5594 11.1397H32.8264L30.7171 7.52294C29.9462 6.20106 28.5171 5.37988 26.9859 5.37988H20.2137ZM23.5998 16.8995C28.3632 16.8995 32.2395 20.7749 32.2395 25.5393C32.2395 30.3036 28.3632 34.179 23.5998 34.179C18.8364 34.179 14.9601 30.3036 14.9601 25.5393C14.9601 20.7749 18.8364 16.8995 23.5998 16.8995ZM23.5998 19.7794C22.0722 19.7794 20.6072 20.3863 19.527 21.4664C18.4468 22.5466 17.84 24.0117 17.84 25.5393C17.84 27.0669 18.4468 28.5319 19.527 29.6121C20.6072 30.6922 22.0722 31.2991 23.5998 31.2991C25.1274 31.2991 26.5924 30.6922 27.6726 29.6121C28.7528 28.5319 29.3596 27.0669 29.3596 25.5393C29.3596 24.0117 28.7528 22.5466 27.6726 21.4664C26.5924 20.3863 25.1274 19.7794 23.5998 19.7794Z" fill="#999999"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <input type="file" id="fileInput" accept="image/*">
+                        </label>
+                        <div class="upload-text">Please upload a passport-sized photo (4x4)</div>
+                    </div>
 
+                    <div class="company-inputs">
+                        <div class="input-container">
+                            <div class="input">
+                                <label for="">Company Name *</label>
+                                <input type="text">
+                            </div>
+                            <div class="input">
+                                <label for="">Company Name *</label>
+                                <input type="text">
+                            </div>
+                        </div>
 
+                        <div class="input">
+                            <label for="">Company Name *</label>
+                            <textarea name="" id="" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        </div>
+            <div class="info-container">
+                <h2>Manager Information</h2>
+                <div class="info-content">
+                    <div class="company-inputs except">
+                        <div class="input-container">
+                            <div class="input">
+                                <label for="">Full Name *</label>
+                                <input type="text">
+                            </div>
+                            <div class="input">
+                                <label for="">Position *</label>
+                                <input type="text">
+                            </div>
+                        </div>
+
+                        <div class="input-container">
+                            <div class="input">
+                                <label for="">Email *</label>
+                                <input type="text">
+                            </div>
+                            <div class="input">
+                                <label for="">Phone *</label>
+                                <input type="number">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-container">
+                <h2>Initial Staff Upload</h2>
+                <div class="info-content">
+                    <div class="company-inputs except">
+                        <div class="file-upload">
+                            <label class="upload-btn">
+                                <input type="file" id="staffList" hidden onchange="showFileName(this)">
+                                <span>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.396 13.096L3.396 13.9117C3.396 15.2633 4.49162 16.3589 5.84314 16.3589L14.0003 16.3589C15.3518 16.3589 16.4474 15.2633 16.4474 13.9117L16.4474 13.096M13.1846 6.5703L9.92172 3.30744M9.92172 3.30744L6.65886 6.5703M9.92172 3.30744L9.92172 13.096" stroke="#666666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Upload Staff List
+                                </span>
+                            </label>
+                            <span id="fileName">No file selected</span>
+                        </div>
+
+                        <div class="download-template">
+                            <a href="#" download>
+                                Download Excel Template
+                                <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.87598 10.125L6.47081 10.5302L6.87598 10.9353L7.28115 10.5302L6.87598 10.125ZM7.44897 3.24902C7.44897 2.93257 7.19243 2.67603 6.87598 2.67603C6.55952 2.67603 6.30298 2.93257 6.30298 3.24902L6.87598 3.24902L7.44897 3.24902ZM3.43799 6.68701L3.03282 7.09218L6.47081 10.5302L6.87598 10.125L7.28115 9.71983L3.84316 6.28184L3.43799 6.68701ZM6.87598 10.125L7.28115 10.5302L10.7191 7.09218L10.314 6.68701L9.90879 6.28184L6.47081 9.71983L6.87598 10.125ZM6.87598 10.125L7.44897 10.125L7.44897 3.24902L6.87598 3.24902L6.30298 3.24902L6.30298 10.125L6.87598 10.125Z" fill="#AF720A"/>
+                                    <path d="M2.86523 12.9902L10.8872 12.9902" stroke="#AF720A" stroke-width="1.146"/>
+                                </svg>
+                            </a>
+                        </div>
+
+                        <div class="active-client">
+                            <input type="checkbox" id="activeClient" checked>
+                            <div>
+                                <span>Set as Active Client</span>
+                                <p>Active clients can receive surveys and access their reports.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-container">
+                <h2>Company Values</h2>
+                <div class="info-content">
+                    <div class="company-inputs except">
+                       <div class="customer-block">
+                            <div class="inputs">
+                                <input type="text" class="title-input" value="Customer Focus">
+                                <textarea class="desc-input">Placing customers at the center of everything we do</textarea>
+                            </div>
+                            <button class="delete-btn" onclick="deleteBlock(this)">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15.6072 6.32799L14.9124 16.054C14.8526 16.8924 14.155 17.5419 13.3145 17.5419H6.6859C5.84544 17.5419 5.14787 16.8924 5.08799 16.054L4.39328 6.32799M8.39823 9.53196V14.3379M11.6022 9.53196V14.3379M12.4032 6.32799V3.92501C12.4032 3.48264 12.0446 3.12402 11.6022 3.12402H8.39823C7.95586 3.12402 7.59724 3.48264 7.59724 3.92501V6.32799M3.59229 6.32799H16.4081" stroke="#FF383C" stroke-width="0.96119" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="customer-block">
+                            <div class="inputs">
+                                <input type="text" class="title-input" value="Customer Focus">
+                                <textarea class="desc-input">Placing customers at the center of everything we do</textarea>
+                            </div>
+                            <button class="delete-btn" onclick="deleteBlock(this)">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15.6072 6.32799L14.9124 16.054C14.8526 16.8924 14.155 17.5419 13.3145 17.5419H6.6859C5.84544 17.5419 5.14787 16.8924 5.08799 16.054L4.39328 6.32799M8.39823 9.53196V14.3379M11.6022 9.53196V14.3379M12.4032 6.32799V3.92501C12.4032 3.48264 12.0446 3.12402 11.6022 3.12402H8.39823C7.95586 3.12402 7.59724 3.48264 7.59724 3.92501V6.32799M3.59229 6.32799H16.4081" stroke="#FF383C" stroke-width="0.96119" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="customer-block">
+                            <div class="inputs">
+                                <input type="text" class="title-input" value="Customer Focus">
+                                <textarea class="desc-input">Placing customers at the center of everything we do</textarea>
+                            </div>
+                            <button class="delete-btn" onclick="deleteBlock(this)">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15.6072 6.32799L14.9124 16.054C14.8526 16.8924 14.155 17.5419 13.3145 17.5419H6.6859C5.84544 17.5419 5.14787 16.8924 5.08799 16.054L4.39328 6.32799M8.39823 9.53196V14.3379M11.6022 9.53196V14.3379M12.4032 6.32799V3.92501C12.4032 3.48264 12.0446 3.12402 11.6022 3.12402H8.39823C7.95586 3.12402 7.59724 3.48264 7.59724 3.92501V6.32799M3.59229 6.32799H16.4081" stroke="#FF383C" stroke-width="0.96119" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="customer-block">
+                            <div class="inputs">
+                                <input type="text" class="title-input" value="Customer Focus">
+                                <textarea class="desc-input">Placing customers at the center of everything we do</textarea>
+                            </div>
+                            <button class="delete-btn" onclick="deleteBlock(this)">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15.6072 6.32799L14.9124 16.054C14.8526 16.8924 14.155 17.5419 13.3145 17.5419H6.6859C5.84544 17.5419 5.14787 16.8924 5.08799 16.054L4.39328 6.32799M8.39823 9.53196V14.3379M11.6022 9.53196V14.3379M12.4032 6.32799V3.92501C12.4032 3.48264 12.0446 3.12402 11.6022 3.12402H8.39823C7.95586 3.12402 7.59724 3.48264 7.59724 3.92501V6.32799M3.59229 6.32799H16.4081" stroke="#FF383C" stroke-width="0.96119" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
     </div>
 
 
