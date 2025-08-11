@@ -588,10 +588,7 @@
                 </tbody>
             </table>
 
-            <div class="pagination">
-                <button id="prevBtn" onclick="handlePrev()">Previous</button>
-                <button id="nextBtn" onclick="handleNext()">Next</button>
-            </div>
+
         </div>
 
         <div class="ongoing-surveys table-container">
@@ -671,24 +668,42 @@
             <div class="modal-header">
                 <div class="headings">
                     <h2>Response Rate Analysis</h2>
-                    <p>Detailed breakdown of survey response rates by client company, showing participation trends over time.</p>
+                    <p>Detailed breakdown of survey response rates by client company.</p>
                 </div>
 
                 <svg width="29" height="30" id="closeModal" class="close" viewBox="0 0 29 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M7.25 22.6504L21.75 8.15039M7.25 8.15039L21.75 22.6504" stroke="black" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-
             </div>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos soluta reprehenderit sunt sint unde adipisci voluptatem dicta aut ex. Vel numquam beatae facilis ut ratione. Suscipit sapiente et distinctio aut.
-            Aliquam saepe id ipsam tempora tempore, repellat dolor, unde libero dicta odit facere, reiciendis porro voluptatibus natus? Temporibus reiciendis pariatur, deserunt consequuntur doloremque modi assumenda inventore? Porro necessitatibus vitae id.
-            Inventore velit soluta veritatis, maiores assumenda dolor eum, aliquam voluptates ex nesciunt sunt ab ad tempore cupiditate obcaecati, nisi ea dicta. Quia commodi consequatur minus, id laborum repellat corporis laudantium.
-            Repudiandae, illum ipsa ipsum eius iusto enim itaque sint, alias sit optio aliquam accusantium eligendi magnam? Aut harum odio, magni fugit sequi molestiae iste aperiam, explicabo nisi omnis adipisci perferendis.
-            Consequatur nesciunt nostrum laborum ratione non iste tenetur quasi minus temporibus distinctio necessitatibus ipsum animi odio, repellendus sint eius praesentium accusantium id, porro quam cum aliquam perferendis! Saepe, soluta doloribus.
-            Necessitatibus quas magnam dolorum minima animi incidunt similique veritatis et aspernatur maiores placeat, cupiditate earum, vel, ab molestias cumque. Libero perferendis sed reprehenderit mollitia tempora, modi laudantium dolorem error facere.
-            Laudantium cupiditate itaque nihil doloribus aut. Laborum nemo a aliquam neque, dolorem fugiat unde suscipit dignissimos corrupti itaque cum ullam facilis alias doloremque officia dicta quasi fugit soluta voluptas odio!
-            Vitae, eligendi earum expedita rerum fugiat nostrum unde nemo repudiandae nisi deserunt, sint harum inventore temporibus consequuntur optio, ab veniam impedit repellendus tempora? Nihil blanditiis neque repellendus, laudantium enim assumenda?
-            Soluta earum amet quidem repellat ipsa optio ex eaque labore dolorem vero accusantium distinctio veritatis unde velit id nostrum sit voluptatum dolore, magnam incidunt deserunt eligendi impedit molestiae modi! Quidem.
-            Esse placeat ea, officia molestiae est itaque voluptates, reprehenderit perspiciatis repellendus consequuntur obcaecati facilis quae dolorem, saepe consectetur corrupti dicta numquam dolorum et at deserunt commodi? Commodi possimus dolores odio.
+
+            <div class="chart">
+                <canvas id="comboChart" height="200"></canvas>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-title">Highest Response Rate</div>
+                    <div class="stat-value">MTN Cameroon</div>
+                    <div class="stat-subtext">92% average across 12 surveys</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Lowest Response Rate</div>
+                    <div class="stat-value">Canal+ International</div>
+                    <div class="stat-subtext">68% average across 3 surveys</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Overall Average</div>
+                    <div class="stat-value">84.5%</div>
+                    <div class="stat-subtext">across all clients and surveys</div>
+                </div>
+            </div>
+
+            <div class="notes-container">
+                <h3>Completion by Department</h3>
+                <div class="note-item">Consider implementing additional reminder strategies for clients with response rates below 75%</div>
+                <div class="note-item">Review survey timing for Canal+ International – their lowest response was during holiday season</div>
+                <div class="note-item">MTN Cameroon’s high response rate could be studied as a best practice for other clients</div>
+            </div>
         </div>
     </div>
 

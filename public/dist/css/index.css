@@ -377,11 +377,9 @@
 
 .modal-content {
     background: linear-gradient(180deg, #c1e1ff 0%, #f4f4f4 13.39%);
-
     padding: 20px;
     border-radius: 10px;
     width: 60%;
-    max-width: 80%;
     position: absolute;
     max-height: 95%;
     overflow-y: scroll;
@@ -417,6 +415,100 @@
     color: var(--labelColor);
     font-weight: 400;
     font-size: 13px;
+}
+
+.modal-content .chart {
+    margin-bottom: 2rem;
+}
+
+.modal-content .stats-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.modal-content .stats-container .stat-card {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    flex: 1;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border: 2px solid #dbe8f5;
+}
+
+.modal-content .stats-container .stat-title {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.modal-content .stats-container .stat-value {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0077b6;
+}
+
+.modal-content .stats-container .stat-subtext {
+    font-size: 13px;
+    color: #777;
+}
+
+/* Notes section */
+.modal-content .notes-container {
+    background: #fff8e1;
+    border-radius: 6px;
+    padding: 15px;
+    border-top: 3px solid #b45309;
+}
+
+.modal-content .notes-container h3 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    color: #b45309;
+}
+
+.modal-content .note-item {
+    display: flex;
+    align-items: start;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #b45309;
+}
+
+.modal-content .note-item::before {
+    content: "⚑";
+    font-size: 14px;
+    color: #b45309;
+}
+
+@media screen and (max-width: 1040px) {
+    .modal-content {
+        background: linear-gradient(180deg, #c1e1ff 0%, #f4f4f4 13.39%);
+        padding: 14px;
+        width: 95%;
+        max-height: 95%;
+    }
+
+    .modal-header h2 {
+        color: var(--lightBlue);
+        font-weight: 600;
+        font-size: 15px;
+    }
+
+    .modal-header p {
+        color: var(--labelColor);
+        font-weight: 400;
+        font-size: 11px;
+    }
+
+    .modal-content .stats-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
 }
 
 /* ========================== App Content || Admin-Dashboard ================= */
@@ -481,13 +573,18 @@
 
 .section {
     display: flex;
-    /* align-items: center; */
     gap: 1rem;
     margin-bottom: 2rem;
 }
 
 .section .graph-container {
     width: 75%;
+    display: flex;
+    gap: 1rem;
+}
+
+.section .graph-container.except {
+    width: 100%;
     display: flex;
     gap: 1rem;
 }
@@ -561,7 +658,10 @@
     border: 1px solid var(--fadeWhite);
     padding: 0.5rem;
     border-radius: 10px;
-    /* height: 220px; */
+}
+
+.section .graph-container.except .survey-graph .graph {
+    height: 300px;
 }
 
 canvas {
@@ -663,6 +763,11 @@ canvas {
 
 .section .table-container {
     width: 75%;
+    overflow-x: scroll;
+}
+
+.section .table-container.except {
+    width: 100%;
 }
 
 .section .table-container header {
@@ -691,9 +796,10 @@ canvas {
 .section .table-container table {
     background-color: #ffffffa1;
     width: 100%;
+    max-width: 100%;
     border-collapse: collapse;
     border-radius: 10px;
-    overflow: hidden;
+    overflow-x: scroll;
 }
 
 .section .table-container table th,
@@ -702,6 +808,7 @@ canvas {
     text-align: left;
     font-size: 12px;
     color: #212529;
+    white-space: nowrap; /* Prevents text wrapping */
     border-bottom: 1px solid var(--fadeWhite);
 }
 
@@ -934,3 +1041,41 @@ canvas {
     background: linear-gradient(90deg, #00b7ff, #009bd6);
     width: 18%;
 }
+
+@media screen and (max-width: 1040px) {
+    .section {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .section .graph-container {
+        width: 100%;
+        display: flex;
+        gap: 1rem;
+    }
+
+    .section .table-container {
+        width: 100%;
+    }
+
+    .section .recent-activity {
+        width: 100%;
+    }
+
+    .section .ongoing-surveys {
+        width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .section .graph-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* ========================== App Content || Admin-Client-Management ================= */

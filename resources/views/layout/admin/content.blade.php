@@ -61,7 +61,7 @@
         </div>
     </div>
 
-    <button class="right-content-button">
+    <button class="right-content-button" @if(!empty($button_onclick)) onclick="{{ $button_onclick }}" @endif>
         <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M9.50234 7.26328V9.51308M9.50234 9.51308V11.7629M9.50234 9.51308H11.7521M9.50234 9.51308H7.25254M16.2517 9.51308C16.2517 13.2407 13.2299 16.2625 9.50234 16.2625C5.77474 16.2625 2.75293 13.2407 2.75293 9.51308C2.75293 5.78548 5.77474 2.76367 9.50234 2.76367C13.2299 2.76367 16.2517 5.78548 16.2517 9.51308Z" stroke="white" stroke-width="1.49987" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
