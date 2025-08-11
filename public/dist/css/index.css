@@ -361,6 +361,64 @@
     }
 }
 
+/* ==============================CUSTOM MODALS=================== */
+/* Modal background */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background: linear-gradient(180deg, #c1e1ff 0%, #f4f4f4 13.39%);
+
+    padding: 20px;
+    border-radius: 10px;
+    width: 60%;
+    max-width: 80%;
+    position: absolute;
+    max-height: 95%;
+    overflow-y: scroll;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal-content::-webkit-scrollbar {
+    height: 8px;
+    width: 5px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background-color: var(--fadeWhite);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    justify-content: space-between;
+}
+
+.modal-header h2 {
+    color: var(--lightBlue);
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.modal-header p {
+    color: var(--labelColor);
+    font-weight: 400;
+    font-size: 13px;
+}
+
 /* ========================== App Content || Admin-Dashboard ================= */
 .card-container {
     display: grid;
