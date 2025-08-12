@@ -51,3 +51,45 @@ function showFileName(input) {
 function deleteBlock(btn) {
     btn.parentElement.remove();
 }
+
+// ============= modal to view client details================
+function viewCLientDetails() {
+    document.getElementById("viewCLient").style.display = "block";
+}
+
+function hideCLientDetails() {
+    document.getElementById("viewCLient").style.display = "none";
+}
+
+// Event listeners
+document
+    .getElementById("closeModalClientDetails")
+    .addEventListener("click", hideCLientDetails);
+
+// Close modal if clicking outside of it
+window.addEventListener("click", function (event) {
+    if (event.target === document.getElementById("viewCLient")) {
+        hideCLientDetails();
+    }
+});
+
+// ============= modal to edit clients================
+function editCLientModal() {
+    document.getElementById("editClient").style.display = "block";
+}
+
+function hideEditCLient() {
+    document.getElementById("editClient").style.display = "none";
+}
+
+// Event listeners
+document
+    .getElementById("editClientModal")
+    .addEventListener("click", hideEditCLient);
+
+// Close modal if clicking outside of it
+window.addEventListener("click", function (event) {
+    if (event.target === document.getElementById("editClient")) {
+        hideEditCLient();
+    }
+});

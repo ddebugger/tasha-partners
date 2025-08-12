@@ -1079,6 +1079,7 @@ canvas {
 }
 
 /* ========================== App Content || Admin-Client-Management ================= */
+/* Create client modal */
 .modal-content .info-container {
     display: flex;
     flex-direction: column;
@@ -1304,7 +1305,7 @@ canvas {
     color: #666;
 }
 
-.customer-block {
+.modal-content .info-container .info-content .company-inputs .customer-block {
     display: flex;
     align-items: stretch;
     width: 100%;
@@ -1312,15 +1313,15 @@ canvas {
     margin-bottom: 1.5rem;
 }
 
-.inputs {
+.modal-content .info-container .info-content .company-inputs .inputs {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.title-input,
-.desc-input {
+.modal-content .info-container .info-content .company-inputs .title-input,
+.modal-content .info-container .info-content .company-inputs .desc-input {
     border: 1px solid #545f71;
     background-color: var(--whiteColor);
     border-radius: 6px;
@@ -1329,17 +1330,17 @@ canvas {
     outline: none;
 }
 
-.title-input:focus,
-.desc-input:focus {
+.modal-content .info-container .info-content .company-inputs .title-input:focus,
+.modal-content .info-container .info-content .company-inputs .desc-input:focus {
     border-color: #888;
 }
 
-.desc-input {
+.modal-content .info-container .info-content .company-inputs .desc-input {
     resize: none;
     min-height: 100px;
 }
 
-.delete-btn {
+.modal-content .info-container .info-content .company-inputs .delete-btn {
     background: #fce4e4;
     border: none;
     color: red;
@@ -1352,6 +1353,8 @@ canvas {
     font-size: 18px;
 }
 
-.delete-btn:hover {
+.modal-content .info-container .info-content .company-inputs .delete-btn:hover {
     background: #f8d4d4;
 }
+
+/* View client details modal */
