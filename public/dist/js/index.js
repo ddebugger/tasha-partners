@@ -93,3 +93,24 @@ window.addEventListener("click", function (event) {
         hideEditCLient();
     }
 });
+
+// ============= modal to edit clients================
+function deleteClientModal() {
+    document.getElementById("deleteClient").style.display = "block";
+}
+
+function hideDeleteClient() {
+    document.getElementById("deleteClient").style.display = "none";
+}
+
+// Event listeners
+document
+    .getElementById("deleteClientModal")
+    .addEventListener("click", hideDeleteClient);
+
+// Close modal if clicking outside of it
+window.addEventListener("click", function (event) {
+    if (event.target === document.getElementById("deleteClient")) {
+        hideDeleteClient();
+    }
+});

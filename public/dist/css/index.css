@@ -388,6 +388,11 @@
     transform: translate(-50%, -50%);
 }
 
+.modal-content.except {
+    background: linear-gradient(0deg, #f5f0f0, #f5f0f0),
+        linear-gradient(180deg, #f8e0df 0%, #f4f4f4 13.39%);
+}
+
 .modal-content::-webkit-scrollbar {
     height: 8px;
     width: 5px;
@@ -409,6 +414,10 @@
     color: var(--lightBlue);
     font-weight: 600;
     font-size: 20px;
+}
+
+.modal-header.except h2 {
+    color: #ec4e45;
 }
 
 .modal-header p {
@@ -901,6 +910,12 @@ canvas {
     color: #137699;
 }
 
+.section .table-container table tr .actions button.delete-btn {
+    background-color: #e5191912;
+    border: 1px solid #ff383c;
+    color: #ff383c;
+}
+
 .section .table-container .pagination {
     margin-top: 10px;
     text-align: right;
@@ -1358,3 +1373,220 @@ canvas {
 }
 
 /* View client details modal */
+.modal-content .company-card .company-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--borderColor);
+    padding: 1rem;
+    border-radius: 13px;
+    background-color: white;
+    margin-bottom: 1rem;
+}
+
+.modal-content .company-card .company-header .company-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.modal-content .company-card .company-header .company-details {
+    flex: 1;
+    margin-left: 15px;
+}
+
+.modal-content .company-card .company-header .company-details h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #1a1a1a;
+}
+
+.modal-content .company-card .company-header .company-details p {
+    margin: 0;
+    color: #666666;
+    font-size: 12px;
+}
+
+.modal-content .company-card .company-header .status {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.modal-content .company-card .company-header .status.active {
+    color: green;
+    background: #e6f8ed;
+}
+
+.modal-content .company-card .company-body {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.modal-content .company-card .company-body .info-box {
+    flex: 1;
+    border: 1px solid var(--borderColor);
+    padding: 1rem;
+    border-radius: 13px;
+    background-color: white;
+    padding: 0.5rem;
+}
+
+.modal-content .company-card .company-body .info-box h3 {
+    margin-top: 0;
+    font-size: 16px;
+    margin-bottom: 1rem;
+    color: #444;
+    background-color: #f0f3f7;
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+
+.modal-content .company-card .company-body .info-box p {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background-color: #f0f3f7;
+    padding: 0.5rem;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.modal-content .company-card .company-body .info-box p strong {
+    color: var(--textColor);
+    font-weight: 300;
+}
+
+.modal-content .company-card .company-body .info-box a {
+    color: var(--lightBlue);
+    text-decoration: none;
+    font-weight: 600;
+    text-align: end;
+    font-size: 12px;
+}
+
+.modal-content .company-card .company-body .highlight {
+    color: var(--lightBlue);
+    text-decoration: none;
+    font-weight: 600;
+    text-align: end;
+    font-size: 12px;
+}
+
+.modal-content .company-card .company-body .view-btn {
+    background: orange;
+    color: white;
+    border: none;
+    padding: 3px 8px;
+    font-size: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-content .company-card .company-body .view-btn:hover {
+    background: darkorange;
+}
+
+.modal-content .info-container .info-content .survey-list {
+    width: 100%;
+}
+
+.modal-content .info-container .info-content .survey-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--whiteColor);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.modal-content .info-container .info-content .survey-item:last-child {
+    border-bottom: none;
+}
+
+.modal-content .info-container .info-content .survey-info strong {
+    font-size: 14px;
+    color: #333;
+}
+
+.modal-content .info-container .info-content .survey-info p {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: #777;
+}
+
+.modal-content .info-container .info-content .badge {
+    background: #fff6e6;
+    color: #f4a000;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+}
+
+.warning-box {
+    background-color: #ffe6e6;
+    padding: 15px;
+    border-radius: 6px;
+    color: #cc0000;
+    font-size: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 20px;
+    border-left: 6px solid #cc0000;
+    border-radius: 10px;
+}
+
+.warning-box svg {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    fill: #cc0000;
+    margin-top: 2px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-cancel {
+    background-color: #98a0ab;
+    color: white;
+}
+
+.btn-remove {
+    background-color: #e53935;
+    color: white;
+}
+
+.btn-remove svg {
+    width: 16px;
+    height: 16px;
+    fill: white;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}

@@ -1,6 +1,6 @@
 @extends('layout.admin.app')
 
-{{-- @section('breadcrumb')
+@section('breadcrumb')
 @include(
     'layout.admin.content',
     [
@@ -10,7 +10,7 @@
         'button_onclick' => "showModal()",
         'end_text' => "Manage all client companies and their staff members"
     ])
-@endsection --}}
+@endsection
 
 @section('content')
 
@@ -251,6 +251,12 @@
                                         <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </button>
+                                <button class="delete-btn" onclick="deleteClientModal()">
+                                    Delete
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                             </div>
                         </td>
                     </tr>
@@ -306,6 +312,12 @@
                                     Edit
                                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button class="delete-btn" >
+                                    Delete
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </button>
                             </div>
@@ -365,61 +377,10 @@
                                         <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="content">
-                                <div class="profile">
-                                    <img src="{{asset('images/mtn.png')}}" alt="">
-                                </div>
-                                <div class="info">
-                                    <p>MTN Cameroon</p>
-                                    <span>Telecommunications</span>
-                                </div>
-                            </div>
-                        </td>
-
-                        <td>
-                            <div class="content">
-                                <div class=" name">
-                                    TB
-                                </div>
-                                <div class="info">
-                                    <p>Teneng Brandon</p>
-                                    <span>teneng.brandon@iclan.cm</span>
-                                </div>
-                            </div>
-                        </td>
-
-                        <td>
-                            <div class="town">
-                                Douala
-                            </div>
-                        </td>
-
-                        <td>
-                            12 (3 ongoing)
-                        </td>
-
-                        <td>
-                            May 28, 2025
-                        </td>
-
-                        <td>
-                            <div class="actions">
-                                <button class="view-btn">
-                                    View
+                                <button class="delete-btn" >
+                                    Delete
                                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                                <button class="edit-btn">
-                                    Edit
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </button>
                             </div>
@@ -477,6 +438,75 @@
                                     Edit
                                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button class="delete-btn" >
+                                    Delete
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="content">
+                                <div class="profile">
+                                    <img src="{{asset('images/mtn.png')}}" alt="">
+                                </div>
+                                <div class="info">
+                                    <p>MTN Cameroon</p>
+                                    <span>Telecommunications</span>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="content">
+                                <div class=" name">
+                                    TB
+                                </div>
+                                <div class="info">
+                                    <p>Teneng Brandon</p>
+                                    <span>teneng.brandon@iclan.cm</span>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="town">
+                                Douala
+                            </div>
+                        </td>
+
+                        <td>
+                            12 (3 ongoing)
+                        </td>
+
+                        <td>
+                            May 28, 2025
+                        </td>
+
+                        <td>
+                            <div class="actions">
+                                <button class="view-btn">
+                                    View
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button class="edit-btn">
+                                    Edit
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button class="delete-btn" >
+                                    Delete
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </button>
                             </div>
@@ -682,7 +712,96 @@
                 </svg>
             </div>
 
+            <div class="company-card">
+                <div class="company-header">
+                    <img src="{{asset('images/mtn.png')}}" alt="Company Logo" class="company-logo">
+                    <div class="company-details">
+                        <h2>MTN Cameroon</h2>
+                        <p>Telecommunications</p>
+                    </div>
+                    <span class="status active">● Active</span>
+                </div>
 
+                <div class="company-body">
+                    <!-- Left Section -->
+                    <div class="info-box">
+                        <h3>Company Information</h3>
+                        <p><strong>Address:</strong> <a href="#">Immeuble MTN, Boulevard de la Liberté, Douala</a></p>
+                        <p><strong>Industry:</strong> <a href="#">Telecommunications</a></p>
+                        <p><strong>Staff Count:</strong> <a href="#">120 employees</a> <button class="view-btn">View Staff List</button></p>
+                        <p><strong>Joined:</strong> <span class="highlight">January 15, 2024</span></p>
+                    </div>
+
+                    <!-- Right Section -->
+                    <div class="info-box">
+                        <h3>Primary Contact</h3>
+                        <p><strong>Manager:</strong> <a href="#">Etienne Shey</a></p>
+                        <p><strong>Email:</strong> <a href="mailto:etienne.shey@mtn.cm">etienne.shey@mtn.cm</a></p>
+                        <p><strong>Phone:</strong> <a href="tel:+237699543210">+237 6 99 54 32 10</a></p>
+                        <p><strong>Last Active:</strong> <span class="highlight">May 28, 2025</span></p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="info-container">
+                <h2>Company Values</h2>
+                <div class="info-content">
+                    <div class="survey-list">
+                        <div class="survey-item">
+                            <div class="survey-info">
+                            <strong>Customer Focus</strong>
+                            <p>Placing customers at the center of everything we do</p>
+                            </div>
+                            <span class="badge">5 surveys</span>
+                        </div>
+
+                        <div class="survey-item">
+                            <div class="survey-info">
+                            <strong>Innovation</strong>
+                            <p>Encouraging creative thinking and new ideas</p>
+                            </div>
+                            <span class="badge">3 surveys</span>
+                        </div>
+
+                        <div class="survey-item">
+                            <div class="survey-info">
+                            <strong>Integrity</strong>
+                            <p>Doing the right thing, even when no one is watching</p>
+                            </div>
+                            <span class="badge">4 surveys</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="info-container">
+                <h2>Survey Statistics</h2>
+                <div class="info-content">
+                    <div class="chart">
+                        <canvas id="comboChart" height="200"></canvas>
+                    </div>
+
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <div class="stat-title">Highest Response Rate</div>
+                            <div class="stat-value">MTN Cameroon</div>
+                            <div class="stat-subtext">92% average across 12 surveys</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-title">Lowest Response Rate</div>
+                            <div class="stat-value">Canal+ International</div>
+                            <div class="stat-subtext">68% average across 3 surveys</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-title">Overall Average</div>
+                            <div class="stat-value">84.5%</div>
+                            <div class="stat-subtext">across all clients and surveys</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </form>
     </div>
@@ -858,6 +977,47 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+        </form>
+    </div>
+
+    {{-- modal || edit client --}}
+    <div id="deleteClient" class="modal">
+        <form class="modal-content except">
+            <div class="modal-header except">
+                <div class="headings">
+                    <h2>Remove Staff</h2>
+                    <p>Are you sure you want to remove Ettiene Shey from this client's staff list?</p>
+                </div>
+
+                <svg width="29" height="30" id="deleteClientModal" class="close" viewBox="0 0 29 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.25 22.6504L21.75 8.15039M7.25 8.15039L21.75 22.6504" stroke="black" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <div class="warning-box">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10
+                    10-4.48 10-10S17.52 2 12 2zm0
+                    15h-1v-1h1v1zm0-3h-1V7h1v7z"/>
+                </svg>
+                <p>
+                    This will also delete all survey responses associated with this staff member.
+                    Please confirm this is what you intend to do.
+                </p>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-cancel">Cancel</button>
+                <button class="btn btn-remove">
+                    Remove
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M3 6h18v2H3V6zm2 3h14l-1.5
+                        12.5c-.1.8-.8 1.5-1.6 1.5H8.1c-.8
+                        0-1.5-.7-1.6-1.5L5 9zm5-5V2h4v2h5v2H5V4h5z"/>
+                    </svg>
+                </button>
             </div>
 
         </form>

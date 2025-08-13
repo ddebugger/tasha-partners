@@ -1,6 +1,6 @@
 @extends('layout.admin.app')
 
-{{-- @section('breadcrumb')
+@section('breadcrumb')
 @include(
     'layout.admin.content',
     [
@@ -10,7 +10,7 @@
         'end_text' => "Here's what's happening with your surveys today. You have 3 ongoing surveys with 42% average completion rate.
 "
     ])
-@endsection --}}
+@endsection
 
 @section('content')
 
