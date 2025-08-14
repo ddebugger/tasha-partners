@@ -285,6 +285,12 @@
     font-weight: 200;
 }
 
+.app-content .header-container .content-header .right-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .app-content .header-container .content-header .right-content-button {
     width: fit-content;
     display: flex;

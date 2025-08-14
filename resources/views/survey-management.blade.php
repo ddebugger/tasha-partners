@@ -1,16 +1,16 @@
 @extends('layout.admin.app')
 
-{{-- @section('breadcrumb')
+@section('breadcrumb')
 @include(
     'layout.admin.content',
     [
-        'title' => "Client Management",
-        'breadcrumbs' => ['Home', 'Client Management'],
-        'button' => "Add New Client",
+        'title' => "Survey Management",
+        'breadcrumbs' => ['Home', 'Survey Management'],
+        'button' => "Create Survey",
         'button_onclick' => "showModal()",
-        'end_text' => "Manage all client companies and their staff members"
+        'end_text' => "Create, manage, and track all surveys for your clients in Cameroon."
     ])
-@endsection --}}
+@endsection
 
 @section('content')
 
@@ -18,7 +18,7 @@
         <div class="card">
             <div class="top-card">
                 <div class="left-content">
-                    <h1>Total Clients</h1>
+                    <h1>Total Surveys</h1>
                     <span>24</span>
                 </div>
                 <div class="right-content">
@@ -38,7 +38,7 @@
         <div class="card">
             <div class="top-card">
                 <div class="left-content">
-                    <h1>Active Clients</h1>
+                    <h1>Onging Surveys</h1>
                     <span>28</span>
                 </div>
                 <div class="right-content">
@@ -58,7 +58,7 @@
         <div class="card">
             <div class="top-card">
                 <div class="left-content">
-                    <h1>Inactive Clients</h1>
+                    <h1>Completed Surveys</h1>
                     <span>19</span>
                 </div>
                 <div class="right-content">
@@ -78,7 +78,7 @@
         <div class="card">
             <div class="top-card">
                 <div class="left-content">
-                    <h1>Total Stuff</h1>
+                    <h1>Draft Surveys</h1>
                     <span>21</span>
                 </div>
                 <div class="right-content">
@@ -93,36 +93,6 @@
                     <path d="M0.999855 12.0889L6.57617 6.51255L0.999854 0.936235" stroke="#AF720A" stroke-width="1.21853"/>
                 </svg>
             </a>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="graph-container except">
-            <div class="survey-graph">
-                <header>
-                    <h1>Client Growth</h1>
-                </header>
-
-                <div class="chart">
-                    <div class="select">
-                        <div class="period">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.96701 5.46912V2.62402M11.6572 5.46912V2.62402M5.25574 8.31421H12.3685M3.83319 15.4269H13.791C14.5767 15.4269 15.2136 14.79 15.2136 14.0044V5.46912C15.2136 4.68347 14.5767 4.04657 13.791 4.04657H3.83319C3.04754 4.04657 2.41064 4.68347 2.41064 5.46912V14.0044C2.41064 14.79 3.04754 15.4269 3.83319 15.4269Z" stroke="#344054" stroke-width="1.42539" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Period:
-                        </div>
-                        <select name="" id="">
-                            <option value="">this month</option>
-                            <option value="">last month</option>
-                            <option value="">next month</option>
-                            <option value="">this month</option>
-                        </select>
-                    </div>
-                    <div class="graph">
-                        <canvas id="areaChart"></canvas>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -519,6 +489,36 @@
             <div class="pagination">
                 <button id="prevBtn" onclick="handlePrev()">Previous</button>
                 <button id="nextBtn" onclick="handleNext()">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="graph-container except">
+            <div class="survey-graph">
+                <header>
+                    <h1>Client Growth</h1>
+                </header>
+
+                <div class="chart">
+                    <div class="select">
+                        <div class="period">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.96701 5.46912V2.62402M11.6572 5.46912V2.62402M5.25574 8.31421H12.3685M3.83319 15.4269H13.791C14.5767 15.4269 15.2136 14.79 15.2136 14.0044V5.46912C15.2136 4.68347 14.5767 4.04657 13.791 4.04657H3.83319C3.04754 4.04657 2.41064 4.68347 2.41064 5.46912V14.0044C2.41064 14.79 3.04754 15.4269 3.83319 15.4269Z" stroke="#344054" stroke-width="1.42539" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Period:
+                        </div>
+                        <select name="" id="">
+                            <option value="">this month</option>
+                            <option value="">last month</option>
+                            <option value="">next month</option>
+                            <option value="">this month</option>
+                        </select>
+                    </div>
+                    <div class="graph">
+                        <canvas id="areaChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
