@@ -114,3 +114,50 @@ window.addEventListener("click", function (event) {
         hideDeleteClient();
     }
 });
+
+// =========================== switch tab ===================
+function switchTab(evt, tabId) {
+    // Hide all contents
+    document
+        .querySelectorAll(".content")
+        .forEach((c) => c.classList.remove("active"));
+    // Remove active state from tabs
+    document
+        .querySelectorAll(".tab")
+        .forEach((t) => t.classList.remove("active"));
+    // Show selected content
+    document.getElementById(tabId).classList.add("active");
+    // Mark tab as active
+    evt.currentTarget.classList.add("active");
+}
+
+// ==================== add company value=================
+function showInput() {
+    document.getElementById("newValueInput").style.display = "block";
+    document.getElementById("valueName").focus();
+}
+
+function saveValue() {
+    var name = document.getElementById("valueName").value.trim();
+    if (name === "") return;
+
+    var grid = document.getElementById("valuesGrid");
+
+    var newLabel = document.createElement("label");
+    newLabel.className = "value";
+
+    var input = document.createElement("input");
+    input.type = "checkbox";
+
+    var span = document.createElement("span");
+    span.textContent = name;
+
+    newLabel.appendChild(input);
+    newLabel.appendChild(span);
+
+    grid.appendChild(newLabel);
+
+    // Reset input
+    document.getElementById("valueName").value = "";
+    document.getElementById("newValueInput").style.display = "none";
+}

@@ -307,6 +307,22 @@
     font-weight: 500;
 }
 
+.app-content .header-container .content-header .right-content-button.button2 {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1rem;
+    background-color: transparent;
+    border: 1.12px solid #137699;
+    outline: none;
+    color: #137699;
+    cursor: pointer;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
 @media screen and (max-width: 1040px) {
     .app-content .header-container .breadcrumb {
         padding: 1rem 0.6rem;
@@ -445,6 +461,7 @@
 .modal-content .stats-container .stat-card {
     background: white;
     padding: 15px 20px;
+    padding: 1rem;
     border-radius: 8px;
     flex: 1;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
@@ -679,9 +696,40 @@
     height: 300px;
 }
 
+.section .graph-container.except .survey-graph .graph.doughnut {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
 canvas {
     width: 100% !important;
     height: auto !important;
+}
+
+#statusChart {
+    height: 250px !important;
+    width: 250px !important;
+}
+
+.legend {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    border-radius: 4px;
 }
 
 .section .recent-activity {
@@ -783,6 +831,9 @@ canvas {
 
 .section .table-container.except {
     width: 100%;
+    background-color: #fafafa;
+    padding: 1rem;
+    border-radius: 12px;
 }
 
 .section .table-container header {
@@ -790,7 +841,7 @@ canvas {
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
 .section .table-container header h1 {
@@ -806,6 +857,52 @@ canvas {
     text-decoration: none;
     color: var(--thickOrange);
     font-size: 12px;
+}
+
+.section .table-container header .search-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--whiteColor);
+    padding: 10px;
+    border-radius: 10px;
+    width: 40%;
+}
+
+.section .table-container header .search-input input {
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+.section .table-container header .action-btns {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section .table-container header .action-btns .btn {
+    border: 0.57px solid #cccccc;
+    background-color: var(--whiteColor);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--textColor);
+    font-weight: 500;
+}
+
+.section .table-container header .action-btns .btn .icon {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.section .table-container header .action-btns .btn select {
+    border: none;
+    outline: none;
+    background-color: transparent;
 }
 
 .section .table-container table {
@@ -867,6 +964,18 @@ canvas {
     font-weight: 600;
 }
 
+.section .table-container table tr .content .survey {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem;
+    border-radius: 8px;
+    background-color: #fff5e5;
+    border: none;
+    color: var(--thickOrange);
+    font-weight: 600;
+}
+
 .section .table-container table tr .content .info p {
     font-weight: 600;
 }
@@ -884,6 +993,60 @@ canvas {
     align-items: center;
     justify-content: center;
     width: fit-content;
+}
+
+.section .table-container table tr .status {
+    border-radius: 30px;
+    padding: 10px 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+}
+
+.section .table-container table tr .status.ongoing {
+    background: #e6f6ffd9;
+    color: #2c9ee2;
+}
+
+.section .table-container table tr .status.complete {
+    background: #ecfdf3;
+    color: #027a48;
+}
+
+.section .table-container table tr .status.draft {
+    background: #ffcc001c;
+    color: #f59e0b;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.progress-bar {
+    position: relative;
+    width: 150px;
+    height: 13px;
+    background: #e5e9f0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 65%; /* Change dynamically */
+    background: repeating-linear-gradient(
+        -45deg,
+        #22c55e,
+        #22c55e 10px,
+        #16a34a 10px,
+        #16a34a 20px
+    );
+    border-radius: 10px;
+    transition: width 0.3s ease-in-out;
 }
 
 .section .table-container table tr .actions {
@@ -1122,6 +1285,11 @@ canvas {
     gap: 1rem;
 }
 
+.modal-content .info-container .info-content.except {
+    display: flex;
+    flex-direction: column;
+}
+
 .modal-content .info-container .info-content .company-logo {
     width: 25%;
     display: flex;
@@ -1192,6 +1360,14 @@ canvas {
     width: 100%;
 }
 
+.modal-content .info-container .info-content .input-container .input.except {
+    margin-bottom: 1rem;
+}
+
+.modal-content .info-container .info-content .input.except {
+    margin-bottom: 1rem;
+}
+
 .modal-content .info-container .info-content .input-container .input label {
     color: var(--textColor);
     font-size: 13px;
@@ -1199,6 +1375,24 @@ canvas {
 }
 
 .modal-content .info-container .info-content .input-container .input input {
+    width: 100%;
+    outline: none;
+    border: 1px solid #545f71;
+    border-radius: 8px;
+    padding: 0.6rem;
+    background-color: transparent;
+}
+
+.modal-content .info-container .info-content .input-container .input select {
+    width: 100%;
+    outline: none;
+    border: 1px solid #545f71;
+    border-radius: 8px;
+    padding: 0.6rem;
+    background-color: transparent;
+}
+
+.modal-content .info-container .info-content .input select {
     width: 100%;
     outline: none;
     border: 1px solid #545f71;
@@ -1595,4 +1789,295 @@ canvas {
 
 .btn:hover {
     opacity: 0.9;
+}
+
+/* ========================== App Content || Survey Management ================= */
+.tab-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 15px;
+}
+
+.tabs {
+    display: flex;
+    gap: 20px;
+}
+
+.tab {
+    padding: 8px 0;
+    cursor: pointer;
+    color: #666;
+    font-weight: 500;
+    position: relative;
+}
+
+.tab.active {
+    color: #0066cc;
+    font-weight: bold;
+}
+
+.tab.active::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #0066cc;
+    border-radius: 2px;
+}
+
+.content {
+    display: none;
+    padding: 15px 0;
+}
+
+.content.active {
+    display: block;
+}
+
+.activity-container {
+    background: #fff;
+    border-radius: 10px;
+}
+
+.activity-header {
+    font-size: 16px;
+    color: #333333;
+    font-weight: 500;
+    padding: 16px;
+}
+
+.activity-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.activity-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 14px 16px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.activity-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.activity-content {
+    flex: 1;
+}
+
+.activity-title {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.activity-title span {
+    font-weight: bold;
+    color: #f59e0b;
+}
+
+.activity-sub {
+    font-size: 12px;
+    color: #212529;
+}
+
+.activity-time {
+    font-size: 12px;
+    color: #212529;
+    white-space: nowrap;
+    margin-left: 12px;
+}
+
+/* modal */
+.modal-content .info-container .info-content.except .option-container {
+    display: flex;
+    gap: 10px;
+}
+
+.modal-content .info-container .info-content.except .option {
+    display: flex;
+    align-items: center;
+    border: 2px solid #d9e2ec;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    width: 100%;
+    cursor: pointer;
+    background: #fff;
+    transition: all 0.2s ease-in-out;
+}
+
+.modal-content .info-container .info-content.except .option input {
+    margin-right: 6px;
+    accent-color: #f59e0b; /* checkbox color */
+    cursor: pointer;
+}
+
+.modal-content .info-container .info-content.except .option:hover {
+    border-color: #f59e0b;
+}
+
+/* Warning box */
+.modal-content .info-container .info-content.except .warning {
+    display: flex;
+    align-items: center;
+    background: #fef3c766;
+    border-left: 4px solid #f59e0b;
+    padding: 10px 14px;
+    color: #af720a;
+    font-size: 14px;
+}
+
+.modal-content .info-container .info-content.except .warning-icon {
+    color: #f59e0b;
+    font-size: 18px;
+    margin-right: 8px;
+}
+
+.modal-content .info-container .info-content .company-inputs.except .label {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #444;
+}
+
+/* Grid for options */
+.modal-content
+    .info-container
+    .info-content
+    .company-inputs.except
+    .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.modal-content
+    .info-container
+    .info-content
+    .company-inputs.except
+    .values-grid
+    .value {
+    display: flex;
+    align-items: center;
+    border: 2px solid #d9e2ec;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    background: #fff;
+    transition: all 0.2s ease-in-out;
+    font-size: 14px;
+    gap: 10px;
+}
+
+.modal-content
+    .info-container
+    .info-content
+    .company-inputs.except
+    .values-grid
+    .value
+    input[type="checkbox"] {
+    accent-color: var(--primaryColor);
+}
+
+/* Highlight text + background when checked */
+.modal-content
+    .info-container
+    .info-content
+    .company-inputs.except
+    .values-grid
+    .value
+    input:checked
+    + span {
+    font-weight: bold;
+    background: #f0f9ff;
+    border-radius: 4px;
+    padding: 2px 6px;
+}
+
+/* Add button */
+.modal-content .info-container .info-content .company-inputs.except .add-btn {
+    display: inline-flex;
+    align-items: center;
+    background: #0369a1;
+    color: #fff;
+    font-size: 14px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.modal-content
+    .info-container
+    .info-content
+    .company-inputs.except
+    .add-btn:hover {
+    background: #025c8c;
+}
+
+.modal-content
+    .info-container
+    .info-content
+    .company-inputs.except
+    .add-btn::before {
+    content: "+";
+    font-weight: bold;
+    margin-right: 6px;
+}
+
+/* Input field styling */
+.modal-content
+    .info-container
+    .info-content
+    .company-inputs.except
+    .new-value-input {
+    margin-top: 10px;
+    display: none;
+}
+
+.modal-content
+    .info-container
+    .info-content
+    .company-inputs.except
+    .new-value-input
+    input {
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 2px solid #d9e2ec;
+    border-radius: 6px;
+    outline: none;
+}
+
+.modal-content
+    .info-container
+    .info-content
+    .company-inputs.except
+    .new-value-input
+    button {
+    margin-left: 6px;
+    padding: 6px 12px;
+    font-size: 14px;
+    background: #0369a1;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
 }

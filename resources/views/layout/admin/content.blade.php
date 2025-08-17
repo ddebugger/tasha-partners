@@ -63,24 +63,23 @@
 
 
     <div class="right-content">
-        <button class="right-content-button" @if(!empty($button_onclick)) onclick="{{ $button_onclick }}" @endif>
-            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9.50234 7.26328V9.51308M9.50234 9.51308V11.7629M9.50234 9.51308H11.7521M9.50234 9.51308H7.25254M16.2517 9.51308C16.2517 13.2407 13.2299 16.2625 9.50234 16.2625C5.77474 16.2625 2.75293 13.2407 2.75293 9.51308C2.75293 5.78548 5.77474 2.76367 9.50234 2.76367C13.2299 2.76367 16.2517 5.78548 16.2517 9.51308Z" stroke="white" stroke-width="1.49987" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            {{$button}}
-        </button>
-        {{-- <button class="right-content-button" @if(!empty($button_onclick)) onclick="{{ $button_onclick }}" @endif>
-            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9.50234 7.26328V9.51308M9.50234 9.51308V11.7629M9.50234 9.51308H11.7521M9.50234 9.51308H7.25254M16.2517 9.51308C16.2517 13.2407 13.2299 16.2625 9.50234 16.2625C5.77474 16.2625 2.75293 13.2407 2.75293 9.51308C2.75293 5.78548 5.77474 2.76367 9.50234 2.76367C13.2299 2.76367 16.2517 5.78548 16.2517 9.51308Z" stroke="white" stroke-width="1.49987" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            {{$button}}
-        </button> --}}
-    </div>
 
-    {{-- <button class="right-content-button" @if(!empty($button_onclick)) onclick="{{ $button_onclick }}" @endif>
-        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9.50234 7.26328V9.51308M9.50234 9.51308V11.7629M9.50234 9.51308H11.7521M9.50234 9.51308H7.25254M16.2517 9.51308C16.2517 13.2407 13.2299 16.2625 9.50234 16.2625C5.77474 16.2625 2.75293 13.2407 2.75293 9.51308C2.75293 5.78548 5.77474 2.76367 9.50234 2.76367C13.2299 2.76367 16.2517 5.78548 16.2517 9.51308Z" stroke="white" stroke-width="1.49987" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        {{$button}}
-    </button> --}}
+        @if(!empty($button))
+            <button class="right-content-button" @if(!empty($button_onclick)) onclick="{{ $button_onclick }}" @endif>
+                <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9.50234 7.26328V9.51308M9.50234 9.51308V11.7629M9.50234 9.51308H11.7521M9.50234 9.51308H7.25254M16.2517 9.51308C16.2517 13.2407 13.2299 16.2625 9.50234 16.2625C5.77474 16.2625 2.75293 13.2407 2.75293 9.51308C2.75293 5.78548 5.77474 2.76367 9.50234 2.76367C13.2299 2.76367 16.2517 5.78548 16.2517 9.51308Z" stroke="white" stroke-width="1.49987" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                {{$button}}
+            </button>
+        @endif
+        @if(!empty($button2))
+            <button class="right-content-button button2" @if(!empty($button2_onclick)) onclick="{{ $button2_onclick }}" @endif>
+                <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9.5026 4.47998L8.97232 3.9497L9.5026 3.41941L10.0329 3.9497L9.5026 4.47998ZM10.2525 11.2294C10.2525 11.6436 9.91678 11.9793 9.5026 11.9793C9.08842 11.9793 8.75267 11.6436 8.75267 11.2294L9.5026 11.2294L10.2525 11.2294ZM5.75293 8.22965L5.22265 7.69937L8.97232 3.9497L9.5026 4.47998L10.0329 5.01026L6.28321 8.75994L5.75293 8.22965ZM9.5026 4.47998L10.0329 3.9497L13.7826 7.69937L13.2523 8.22965L12.722 8.75993L8.97232 5.01026L9.5026 4.47998ZM9.5026 4.47998L10.2525 4.47998L10.2525 11.2294L9.5026 11.2294L8.75267 11.2294L8.75267 4.47998L9.5026 4.47998Z" fill="#137699"/>
+                    <path d="M4.25293 12.729L4.25293 13.4789C4.25293 14.3073 4.92444 14.9788 5.7528 14.9788L13.2521 14.9788C14.0805 14.9788 14.752 14.3073 14.752 13.4789V12.729" stroke="#137699" stroke-width="1.49987"/>
+                </svg>
+                {{$button2}}
+            </button>
+        @endif
+    </div>
 </div>

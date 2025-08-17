@@ -236,5 +236,33 @@
         });
 
     </script>
+
+    <script>
+        const ctx3 = document.getElementById('statusChart').getContext('2d');
+        const statusChart = new Chart(ctx3, {
+        type: 'doughnut',
+        data: {
+            labels: ['Invited', 'Confirmed',  'Pending'],
+            datasets: [{
+            data: [50, 30, 20],
+            backgroundColor: [
+                '#4B9CD3', // Invited (blue)
+                '#5DD39E', // Confirmed (green)
+                '#F7C948'  // Pending (yellow)
+            ],
+            borderWidth: 0,
+            }]
+        },
+        options: {
+            cutout: '70%',
+            responsive: true,
+            plugins: {
+            legend: {
+                display: false
+            }
+            }
+        }
+        });
+    </script>
 </body>
 </html>

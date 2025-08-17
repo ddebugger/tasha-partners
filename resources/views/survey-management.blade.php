@@ -1,6 +1,6 @@
 @extends('layout.admin.app')
 
-@section('breadcrumb')
+{{-- @section('breadcrumb')
 @include(
     'layout.admin.content',
     [
@@ -8,9 +8,11 @@
         'breadcrumbs' => ['Home', 'Survey Management'],
         'button' => "Create Survey",
         'button_onclick' => "showModal()",
+        'button2' => "Export",
+        'button2_onclick' => "exportData()",
         'end_text' => "Create, manage, and track all surveys for your clients in Cameroon."
     ])
-@endsection
+@endsection --}}
 
 @section('content')
 
@@ -96,399 +98,1541 @@
         </div>
     </div>
 
-    <div class="section">
-        <div class="table-container except">
-            <header>
-                <h1>Recent Activity</h1>
-                <a href="">
-                    View All Activity
-                    <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.999855 12.0889L6.57617 6.51255L0.999854 0.936235" stroke="#AF720A" stroke-width="1.21853"/>
-                    </svg>
-                </a>
-            </header>
+    {{-- tab switch --}}
+    <div class="tab-header">
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab(event, 'all')">All Surveys</div>
+            <div class="tab" onclick="switchTab(event, 'ongoing')">Ongoing</div>
+            <div class="tab" onclick="switchTab(event, 'completed')">Completed</div>
+            <div class="tab" onclick="switchTab(event, 'drafts')">Drafts</div>
+        </div>
+        <div>dfad</div>
+    </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>
-                            <p>
-                                COMPANY
-                                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+    {{-- all surevrys --}}
+    <div id="all" class="content active">
+        <div class="section">
+            <div class="table-container except">
+                <header>
+                    <div class="search-input">
+                        <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.5039 13.8306L12.2123 11.5902L12.1586 11.5085C12.0587 11.409 11.9221 11.353 11.7796 11.353C11.6371 11.353 11.5005 11.409 11.4007 11.5085C9.45315 13.2952 6.45226 13.3923 4.38817 11.7354C2.32407 10.0786 1.83728 7.18185 3.25062 4.96638C4.66396 2.75092 7.53888 1.90417 9.96873 2.98769C12.3986 4.07122 13.6294 6.7488 12.8448 9.24467C12.7883 9.42497 12.8345 9.62105 12.966 9.75905C13.0975 9.89704 13.2942 9.95598 13.4822 9.91366C13.6702 9.87135 13.8208 9.7342 13.8773 9.5539C14.8151 6.59203 13.3987 3.40464 10.5442 2.05364C7.68982 0.702644 4.25406 1.59349 2.45953 4.14988C0.66501 6.70628 1.05028 10.161 3.36612 12.2793C5.68195 14.3975 9.23335 14.5435 11.7229 12.6229L13.7519 14.6066C13.9615 14.8106 14.3003 14.8106 14.5098 14.6066C14.7192 14.3997 14.7192 14.0667 14.5098 13.8598L14.5039 13.8306Z" fill="#667085"/>
+                        </svg>
+                        <input type="text" placeholder="Search Surveys...">
+                    </div>
+
+                    <div class="action-btns">
+                        <div class="btn">
+                            <div class="icon">
+                                <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.60449 3.08453C2.60449 2.66975 2.94074 2.3335 3.35552 2.3335H15.372C15.7868 2.3335 16.1231 2.66974 16.1231 3.08453V5.02654C16.1231 5.22572 16.044 5.41675 15.9031 5.5576L11.0858 10.3749C10.945 10.5157 10.8659 10.7068 10.8659 10.9059V12.848L7.86172 15.8521V10.9059C7.86172 10.7068 7.78259 10.5157 7.64175 10.3749L2.82446 5.5576C2.68362 5.41675 2.60449 5.22572 2.60449 5.02654V3.08453Z" stroke="#202020" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                            </p>
-                        </th>
+                                Status:
+                            </div>
+                            <select name="" id="">
+                                <option value="">ALl</option>
+                                <option value="">Ongoing</option>
+                                <option value="">Completed</option>
+                                <option value="">Draft</option>
+                            </select>
+                        </div>
 
-                        <th>
-                            <p>
-                                MANAGER
-                                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+                        <div class="btn">
+                            <div class="icon">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.79642 9.09283H13.3317M2.6626 4.8252H15.4655M6.93024 13.3605H11.1979" stroke="#344054" stroke-width="1.42539" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                            </p>
-                        </th>
+                                Sort By:
+                            </div>
+                            <select name="" id="">
+                                <option value="">Newest</option>
+                                <option value="">Oldest</option>
+                            </select>
+                        </div>
 
-                        <th>
-                            <p>
-                                LOCATION
-                                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+                        <div class="btn">
+                            <div class="icon">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.79642 9.09283H13.3317M2.6626 4.8252H15.4655M6.93024 13.3605H11.1979" stroke="#344054" stroke-width="1.42539" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                            </p>
-                        </th>
+                                Sort By:
+                            </div>
+                            <select name="" id="">
+                                <option value="">ALl</option>
+                                <option value="">Ongoing</option>
+                                <option value="">Completed</option>
+                                <option value="">Draft</option>
+                            </select>
+                        </div>
 
-                        <th>
-                            <p>
-                                SURVEYS
-                                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+                        <div class="btn">
+                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9.98779 4.58691L9.98779 13.5993" stroke="#33363F" stroke-width="1.50207" stroke-linecap="round"/>
+                                <path d="M14.4941 9.09277L5.48175 9.09277" stroke="#33363F" stroke-width="1.50207" stroke-linecap="round"/>
+                            </svg>
+                            Add Filter
+                        </div>
+                    </div>
+                </header>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                <p>
+                                    CLIENT
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </p>
+                            </th>
+
+                            <th>
+                                <p>
+                                    SURVEY TITLE
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </p>
+                            </th>
+
+                            <th>
+                                <p>
+                                    STATUS
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </p>
+                            </th>
+
+                            <th>
+                                <p>
+                                    RESPONSES
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </p>
+                            </th>
+
+                            <th>
+                                <p>
+                                    CREATED
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </p>
+                            </th>
+
+                            <th>
+                                <p>
+                                    ACTIONS
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </p>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="content">
+                                    <div class="profile">
+                                        <img src="{{asset('images/mtn.png')}}" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <p>MTN Cameroon</p>
+                                        <span>Telecommunications</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="content">
+                                    <div class="survey">
+                                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.36526 1.80322C4.47983 1.80322 3.75049 2.53256 3.75049 3.418V14.542C3.75049 15.4274 4.47983 16.1568 5.36526 16.1568H13.6185C14.504 16.1568 15.2333 15.4274 15.2333 14.542V7.00638C15.2333 6.86364 15.1766 6.72675 15.0756 6.62582L15.07 6.62021L10.4107 1.96092C10.3098 1.85997 10.1729 1.80325 10.0302 1.80322H5.36526ZM5.36526 2.87974H9.49191V5.92987C9.49191 6.8153 10.2212 7.54464 11.1067 7.54464H14.1568V14.542C14.1568 14.8457 13.9223 15.0802 13.6185 15.0802H5.36526C5.06151 15.0802 4.827 14.8457 4.827 14.542V3.418C4.827 3.11424 5.06151 2.87974 5.36526 2.87974ZM10.5684 3.64087L13.3957 6.46812H11.1067C10.8029 6.46812 10.5684 6.23362 10.5684 5.92987V3.64087ZM7.15945 9.33883C7.08813 9.33782 7.01731 9.351 6.95113 9.3776C6.88494 9.4042 6.82469 9.44368 6.7739 9.49376C6.7231 9.54385 6.68277 9.60352 6.65524 9.66933C6.62771 9.73514 6.61353 9.80576 6.61353 9.87709C6.61353 9.94842 6.62771 10.019 6.65524 10.0848C6.68277 10.1507 6.7231 10.2103 6.7739 10.2604C6.82469 10.3105 6.88494 10.35 6.95113 10.3766C7.01731 10.4032 7.08813 10.4164 7.15945 10.4153H11.8244C11.8957 10.4164 11.9665 10.4032 12.0327 10.3766C12.0989 10.35 12.1591 10.3105 12.2099 10.2604C12.2607 10.2103 12.301 10.1507 12.3286 10.0848C12.3561 10.019 12.3703 9.94842 12.3703 9.87709C12.3703 9.80576 12.3561 9.73514 12.3286 9.66933C12.301 9.60352 12.2607 9.54385 12.2099 9.49376C12.1591 9.44368 12.0989 9.4042 12.0327 9.3776C11.9665 9.351 11.8957 9.33782 11.8244 9.33883H7.15945ZM7.15945 11.8507C7.08813 11.8497 7.01731 11.8629 6.95113 11.8895C6.88494 11.9161 6.82469 11.9556 6.7739 12.0056C6.7231 12.0557 6.68277 12.1154 6.65524 12.1812C6.62771 12.247 6.61353 12.3176 6.61353 12.389C6.61353 12.4603 6.62771 12.5309 6.65524 12.5967C6.68277 12.6625 6.7231 12.7222 6.7739 12.7723C6.82469 12.8224 6.88494 12.8619 6.95113 12.8885C7.01731 12.915 7.08813 12.9282 7.15945 12.9272H10.389C10.4603 12.9282 10.5311 12.915 10.5973 12.8885C10.6635 12.8619 10.7238 12.8224 10.7746 12.7723C10.8254 12.7222 10.8657 12.6625 10.8932 12.5967C10.9207 12.5309 10.9349 12.4603 10.9349 12.389C10.9349 12.3176 10.9207 12.247 10.8932 12.1812C10.8657 12.1154 10.8254 12.0557 10.7746 12.0056C10.7238 11.9556 10.6635 11.9161 10.5973 11.8895C10.5311 11.8629 10.4603 11.8497 10.389 11.8507H7.15945Z" fill="#F59E0B"/>
+                                        </svg>
+                                    </div>
+                                    <div class="info">
+                                        <p>Leadership Development Assessment</p>
+                                        <span>5 values, 25 questions</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="status ongoing">
+                                    Ongoing
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 65%;"></div>
+                                    </div>
+                                    <span>78/120</span>
+                                </div>
+                            </td>
+
+                            <td>
+                                15 Jun 2025
+                            </td>
+
+                            <td>
+                                <div class="actions">
+                                    <button class="view-btn" onclick="viewCLientDetails()">
+                                        View
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="edit-btn" onclick="editCLientModal()">
+                                        Edit
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="delete-btn" onclick="deleteClientModal()">
+                                        Delete
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="content">
+                                    <div class="profile">
+                                        <img src="{{asset('images/eneo.png')}}" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <p>Eneo Cameroon S.A.</p>
+                                        <span>Energy</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="content">
+                                    <div class="survey">
+                                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.36526 1.80322C4.47983 1.80322 3.75049 2.53256 3.75049 3.418V14.542C3.75049 15.4274 4.47983 16.1568 5.36526 16.1568H13.6185C14.504 16.1568 15.2333 15.4274 15.2333 14.542V7.00638C15.2333 6.86364 15.1766 6.72675 15.0756 6.62582L15.07 6.62021L10.4107 1.96092C10.3098 1.85997 10.1729 1.80325 10.0302 1.80322H5.36526ZM5.36526 2.87974H9.49191V5.92987C9.49191 6.8153 10.2212 7.54464 11.1067 7.54464H14.1568V14.542C14.1568 14.8457 13.9223 15.0802 13.6185 15.0802H5.36526C5.06151 15.0802 4.827 14.8457 4.827 14.542V3.418C4.827 3.11424 5.06151 2.87974 5.36526 2.87974ZM10.5684 3.64087L13.3957 6.46812H11.1067C10.8029 6.46812 10.5684 6.23362 10.5684 5.92987V3.64087ZM7.15945 9.33883C7.08813 9.33782 7.01731 9.351 6.95113 9.3776C6.88494 9.4042 6.82469 9.44368 6.7739 9.49376C6.7231 9.54385 6.68277 9.60352 6.65524 9.66933C6.62771 9.73514 6.61353 9.80576 6.61353 9.87709C6.61353 9.94842 6.62771 10.019 6.65524 10.0848C6.68277 10.1507 6.7231 10.2103 6.7739 10.2604C6.82469 10.3105 6.88494 10.35 6.95113 10.3766C7.01731 10.4032 7.08813 10.4164 7.15945 10.4153H11.8244C11.8957 10.4164 11.9665 10.4032 12.0327 10.3766C12.0989 10.35 12.1591 10.3105 12.2099 10.2604C12.2607 10.2103 12.301 10.1507 12.3286 10.0848C12.3561 10.019 12.3703 9.94842 12.3703 9.87709C12.3703 9.80576 12.3561 9.73514 12.3286 9.66933C12.301 9.60352 12.2607 9.54385 12.2099 9.49376C12.1591 9.44368 12.0989 9.4042 12.0327 9.3776C11.9665 9.351 11.8957 9.33782 11.8244 9.33883H7.15945ZM7.15945 11.8507C7.08813 11.8497 7.01731 11.8629 6.95113 11.8895C6.88494 11.9161 6.82469 11.9556 6.7739 12.0056C6.7231 12.0557 6.68277 12.1154 6.65524 12.1812C6.62771 12.247 6.61353 12.3176 6.61353 12.389C6.61353 12.4603 6.62771 12.5309 6.65524 12.5967C6.68277 12.6625 6.7231 12.7222 6.7739 12.7723C6.82469 12.8224 6.88494 12.8619 6.95113 12.8885C7.01731 12.915 7.08813 12.9282 7.15945 12.9272H10.389C10.4603 12.9282 10.5311 12.915 10.5973 12.8885C10.6635 12.8619 10.7238 12.8224 10.7746 12.7723C10.8254 12.7222 10.8657 12.6625 10.8932 12.5967C10.9207 12.5309 10.9349 12.4603 10.9349 12.389C10.9349 12.3176 10.9207 12.247 10.8932 12.1812C10.8657 12.1154 10.8254 12.0557 10.7746 12.0056C10.7238 11.9556 10.6635 11.9161 10.5973 11.8895C10.5311 11.8629 10.4603 11.8497 10.389 11.8507H7.15945Z" fill="#F59E0B"/>
+                                        </svg>
+                                    </div>
+                                    <div class="info">
+                                        <p>Leadership Development Assessment</p>
+                                        <span>5 values, 25 questions</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="status complete">
+                                    Completed
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 65%;"></div>
+                                    </div>
+                                    <span>78/120</span>
+                                </div>
+                            </td>
+
+                            <td>
+                                15 Jun 2025
+                            </td>
+
+                            <td>
+                                <div class="actions">
+                                    <button class="view-btn">
+                                        View
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="edit-btn">
+                                        Edit
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="delete-btn" >
+                                        Delete
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="content">
+                                    <div class="profile">
+                                        <img src="{{asset('images/orange.png')}}" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <p>Orange Cameroon</p>
+                                        <span>Telecommunications</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="content">
+                                    <div class="survey">
+                                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.36526 1.80322C4.47983 1.80322 3.75049 2.53256 3.75049 3.418V14.542C3.75049 15.4274 4.47983 16.1568 5.36526 16.1568H13.6185C14.504 16.1568 15.2333 15.4274 15.2333 14.542V7.00638C15.2333 6.86364 15.1766 6.72675 15.0756 6.62582L15.07 6.62021L10.4107 1.96092C10.3098 1.85997 10.1729 1.80325 10.0302 1.80322H5.36526ZM5.36526 2.87974H9.49191V5.92987C9.49191 6.8153 10.2212 7.54464 11.1067 7.54464H14.1568V14.542C14.1568 14.8457 13.9223 15.0802 13.6185 15.0802H5.36526C5.06151 15.0802 4.827 14.8457 4.827 14.542V3.418C4.827 3.11424 5.06151 2.87974 5.36526 2.87974ZM10.5684 3.64087L13.3957 6.46812H11.1067C10.8029 6.46812 10.5684 6.23362 10.5684 5.92987V3.64087ZM7.15945 9.33883C7.08813 9.33782 7.01731 9.351 6.95113 9.3776C6.88494 9.4042 6.82469 9.44368 6.7739 9.49376C6.7231 9.54385 6.68277 9.60352 6.65524 9.66933C6.62771 9.73514 6.61353 9.80576 6.61353 9.87709C6.61353 9.94842 6.62771 10.019 6.65524 10.0848C6.68277 10.1507 6.7231 10.2103 6.7739 10.2604C6.82469 10.3105 6.88494 10.35 6.95113 10.3766C7.01731 10.4032 7.08813 10.4164 7.15945 10.4153H11.8244C11.8957 10.4164 11.9665 10.4032 12.0327 10.3766C12.0989 10.35 12.1591 10.3105 12.2099 10.2604C12.2607 10.2103 12.301 10.1507 12.3286 10.0848C12.3561 10.019 12.3703 9.94842 12.3703 9.87709C12.3703 9.80576 12.3561 9.73514 12.3286 9.66933C12.301 9.60352 12.2607 9.54385 12.2099 9.49376C12.1591 9.44368 12.0989 9.4042 12.0327 9.3776C11.9665 9.351 11.8957 9.33782 11.8244 9.33883H7.15945ZM7.15945 11.8507C7.08813 11.8497 7.01731 11.8629 6.95113 11.8895C6.88494 11.9161 6.82469 11.9556 6.7739 12.0056C6.7231 12.0557 6.68277 12.1154 6.65524 12.1812C6.62771 12.247 6.61353 12.3176 6.61353 12.389C6.61353 12.4603 6.62771 12.5309 6.65524 12.5967C6.68277 12.6625 6.7231 12.7222 6.7739 12.7723C6.82469 12.8224 6.88494 12.8619 6.95113 12.8885C7.01731 12.915 7.08813 12.9282 7.15945 12.9272H10.389C10.4603 12.9282 10.5311 12.915 10.5973 12.8885C10.6635 12.8619 10.7238 12.8224 10.7746 12.7723C10.8254 12.7222 10.8657 12.6625 10.8932 12.5967C10.9207 12.5309 10.9349 12.4603 10.9349 12.389C10.9349 12.3176 10.9207 12.247 10.8932 12.1812C10.8657 12.1154 10.8254 12.0557 10.7746 12.0056C10.7238 11.9556 10.6635 11.9161 10.5973 11.8895C10.5311 11.8629 10.4603 11.8497 10.389 11.8507H7.15945Z" fill="#F59E0B"/>
+                                        </svg>
+                                    </div>
+                                    <div class="info">
+                                        <p>Leadership Development Assessment</p>
+                                        <span>5 values, 25 questions</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="status ongoing">
+                                    Ongoing
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 65%;"></div>
+                                    </div>
+                                    <span>78/120</span>
+                                </div>
+                            </td>
+
+                            <td>
+                                15 Jun 2025
+                            </td>
+
+                            <td>
+                                <div class="actions">
+                                    <button class="view-btn">
+                                        View
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="edit-btn" >
+                                        Edit
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="delete-btn" >
+                                        Delete
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="content">
+                                    <div class="profile">
+                                        <img src="{{asset('images/mtn.png')}}" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <p>MTN Cameroon</p>
+                                        <span>Telecommunications</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="content">
+                                    <div class="survey">
+                                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.36526 1.80322C4.47983 1.80322 3.75049 2.53256 3.75049 3.418V14.542C3.75049 15.4274 4.47983 16.1568 5.36526 16.1568H13.6185C14.504 16.1568 15.2333 15.4274 15.2333 14.542V7.00638C15.2333 6.86364 15.1766 6.72675 15.0756 6.62582L15.07 6.62021L10.4107 1.96092C10.3098 1.85997 10.1729 1.80325 10.0302 1.80322H5.36526ZM5.36526 2.87974H9.49191V5.92987C9.49191 6.8153 10.2212 7.54464 11.1067 7.54464H14.1568V14.542C14.1568 14.8457 13.9223 15.0802 13.6185 15.0802H5.36526C5.06151 15.0802 4.827 14.8457 4.827 14.542V3.418C4.827 3.11424 5.06151 2.87974 5.36526 2.87974ZM10.5684 3.64087L13.3957 6.46812H11.1067C10.8029 6.46812 10.5684 6.23362 10.5684 5.92987V3.64087ZM7.15945 9.33883C7.08813 9.33782 7.01731 9.351 6.95113 9.3776C6.88494 9.4042 6.82469 9.44368 6.7739 9.49376C6.7231 9.54385 6.68277 9.60352 6.65524 9.66933C6.62771 9.73514 6.61353 9.80576 6.61353 9.87709C6.61353 9.94842 6.62771 10.019 6.65524 10.0848C6.68277 10.1507 6.7231 10.2103 6.7739 10.2604C6.82469 10.3105 6.88494 10.35 6.95113 10.3766C7.01731 10.4032 7.08813 10.4164 7.15945 10.4153H11.8244C11.8957 10.4164 11.9665 10.4032 12.0327 10.3766C12.0989 10.35 12.1591 10.3105 12.2099 10.2604C12.2607 10.2103 12.301 10.1507 12.3286 10.0848C12.3561 10.019 12.3703 9.94842 12.3703 9.87709C12.3703 9.80576 12.3561 9.73514 12.3286 9.66933C12.301 9.60352 12.2607 9.54385 12.2099 9.49376C12.1591 9.44368 12.0989 9.4042 12.0327 9.3776C11.9665 9.351 11.8957 9.33782 11.8244 9.33883H7.15945ZM7.15945 11.8507C7.08813 11.8497 7.01731 11.8629 6.95113 11.8895C6.88494 11.9161 6.82469 11.9556 6.7739 12.0056C6.7231 12.0557 6.68277 12.1154 6.65524 12.1812C6.62771 12.247 6.61353 12.3176 6.61353 12.389C6.61353 12.4603 6.62771 12.5309 6.65524 12.5967C6.68277 12.6625 6.7231 12.7222 6.7739 12.7723C6.82469 12.8224 6.88494 12.8619 6.95113 12.8885C7.01731 12.915 7.08813 12.9282 7.15945 12.9272H10.389C10.4603 12.9282 10.5311 12.915 10.5973 12.8885C10.6635 12.8619 10.7238 12.8224 10.7746 12.7723C10.8254 12.7222 10.8657 12.6625 10.8932 12.5967C10.9207 12.5309 10.9349 12.4603 10.9349 12.389C10.9349 12.3176 10.9207 12.247 10.8932 12.1812C10.8657 12.1154 10.8254 12.0557 10.7746 12.0056C10.7238 11.9556 10.6635 11.9161 10.5973 11.8895C10.5311 11.8629 10.4603 11.8497 10.389 11.8507H7.15945Z" fill="#F59E0B"/>
+                                        </svg>
+                                    </div>
+                                    <div class="info">
+                                        <p>Leadership Development Assessment</p>
+                                        <span>5 values, 25 questions</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="status ongoing">
+                                    Ongoing
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 65%;"></div>
+                                    </div>
+                                    <span>78/120</span>
+                                </div>
+                            </td>
+
+                            <td>
+                                15 Jun 2025
+                            </td>
+
+                            <td>
+                                <div class="actions">
+                                    <button class="view-btn">
+                                        View
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="edit-btn">
+                                        Edit
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="delete-btn" >
+                                        Delete
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="content">
+                                    <div class="profile">
+                                        <img src="{{asset('images/mtn.png')}}" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <p>MTN Cameroon</p>
+                                        <span>Telecommunications</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="content">
+                                    <div class="survey">
+                                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.36526 1.80322C4.47983 1.80322 3.75049 2.53256 3.75049 3.418V14.542C3.75049 15.4274 4.47983 16.1568 5.36526 16.1568H13.6185C14.504 16.1568 15.2333 15.4274 15.2333 14.542V7.00638C15.2333 6.86364 15.1766 6.72675 15.0756 6.62582L15.07 6.62021L10.4107 1.96092C10.3098 1.85997 10.1729 1.80325 10.0302 1.80322H5.36526ZM5.36526 2.87974H9.49191V5.92987C9.49191 6.8153 10.2212 7.54464 11.1067 7.54464H14.1568V14.542C14.1568 14.8457 13.9223 15.0802 13.6185 15.0802H5.36526C5.06151 15.0802 4.827 14.8457 4.827 14.542V3.418C4.827 3.11424 5.06151 2.87974 5.36526 2.87974ZM10.5684 3.64087L13.3957 6.46812H11.1067C10.8029 6.46812 10.5684 6.23362 10.5684 5.92987V3.64087ZM7.15945 9.33883C7.08813 9.33782 7.01731 9.351 6.95113 9.3776C6.88494 9.4042 6.82469 9.44368 6.7739 9.49376C6.7231 9.54385 6.68277 9.60352 6.65524 9.66933C6.62771 9.73514 6.61353 9.80576 6.61353 9.87709C6.61353 9.94842 6.62771 10.019 6.65524 10.0848C6.68277 10.1507 6.7231 10.2103 6.7739 10.2604C6.82469 10.3105 6.88494 10.35 6.95113 10.3766C7.01731 10.4032 7.08813 10.4164 7.15945 10.4153H11.8244C11.8957 10.4164 11.9665 10.4032 12.0327 10.3766C12.0989 10.35 12.1591 10.3105 12.2099 10.2604C12.2607 10.2103 12.301 10.1507 12.3286 10.0848C12.3561 10.019 12.3703 9.94842 12.3703 9.87709C12.3703 9.80576 12.3561 9.73514 12.3286 9.66933C12.301 9.60352 12.2607 9.54385 12.2099 9.49376C12.1591 9.44368 12.0989 9.4042 12.0327 9.3776C11.9665 9.351 11.8957 9.33782 11.8244 9.33883H7.15945ZM7.15945 11.8507C7.08813 11.8497 7.01731 11.8629 6.95113 11.8895C6.88494 11.9161 6.82469 11.9556 6.7739 12.0056C6.7231 12.0557 6.68277 12.1154 6.65524 12.1812C6.62771 12.247 6.61353 12.3176 6.61353 12.389C6.61353 12.4603 6.62771 12.5309 6.65524 12.5967C6.68277 12.6625 6.7231 12.7222 6.7739 12.7723C6.82469 12.8224 6.88494 12.8619 6.95113 12.8885C7.01731 12.915 7.08813 12.9282 7.15945 12.9272H10.389C10.4603 12.9282 10.5311 12.915 10.5973 12.8885C10.6635 12.8619 10.7238 12.8224 10.7746 12.7723C10.8254 12.7222 10.8657 12.6625 10.8932 12.5967C10.9207 12.5309 10.9349 12.4603 10.9349 12.389C10.9349 12.3176 10.9207 12.247 10.8932 12.1812C10.8657 12.1154 10.8254 12.0557 10.7746 12.0056C10.7238 11.9556 10.6635 11.9161 10.5973 11.8895C10.5311 11.8629 10.4603 11.8497 10.389 11.8507H7.15945Z" fill="#F59E0B"/>
+                                        </svg>
+                                    </div>
+                                    <div class="info">
+                                        <p>Leadership Development Assessment</p>
+                                        <span>5 values, 25 questions</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="status draft">
+                                    Draft
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 65%;"></div>
+                                    </div>
+                                    <span>78/120</span>
+                                </div>
+                            </td>
+
+                            <td>
+                                15 Jun 2025
+                            </td>
+
+                            <td>
+                                <div class="actions">
+                                    <button class="view-btn">
+                                        View
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="edit-btn">
+                                        Edit
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="delete-btn" >
+                                        Delete
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <div class="pagination">
+                    <button id="prevBtn" onclick="handlePrev()">Previous</button>
+                    <button id="nextBtn" onclick="handleNext()">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- on-going surveys --}}
+    <div id="ongoing" class="content">
+        <div class="section">
+            <div class="table-container except">
+                <header>
+                    <div class="search-input">
+                        <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.5039 13.8306L12.2123 11.5902L12.1586 11.5085C12.0587 11.409 11.9221 11.353 11.7796 11.353C11.6371 11.353 11.5005 11.409 11.4007 11.5085C9.45315 13.2952 6.45226 13.3923 4.38817 11.7354C2.32407 10.0786 1.83728 7.18185 3.25062 4.96638C4.66396 2.75092 7.53888 1.90417 9.96873 2.98769C12.3986 4.07122 13.6294 6.7488 12.8448 9.24467C12.7883 9.42497 12.8345 9.62105 12.966 9.75905C13.0975 9.89704 13.2942 9.95598 13.4822 9.91366C13.6702 9.87135 13.8208 9.7342 13.8773 9.5539C14.8151 6.59203 13.3987 3.40464 10.5442 2.05364C7.68982 0.702644 4.25406 1.59349 2.45953 4.14988C0.66501 6.70628 1.05028 10.161 3.36612 12.2793C5.68195 14.3975 9.23335 14.5435 11.7229 12.6229L13.7519 14.6066C13.9615 14.8106 14.3003 14.8106 14.5098 14.6066C14.7192 14.3997 14.7192 14.0667 14.5098 13.8598L14.5039 13.8306Z" fill="#667085"/>
+                        </svg>
+                        <input type="text" placeholder="Search Surveys...">
+                    </div>
+
+                    <div class="action-btns">
+                        <div class="btn">
+                            <div class="icon">
+                                <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.60449 3.08453C2.60449 2.66975 2.94074 2.3335 3.35552 2.3335H15.372C15.7868 2.3335 16.1231 2.66974 16.1231 3.08453V5.02654C16.1231 5.22572 16.044 5.41675 15.9031 5.5576L11.0858 10.3749C10.945 10.5157 10.8659 10.7068 10.8659 10.9059V12.848L7.86172 15.8521V10.9059C7.86172 10.7068 7.78259 10.5157 7.64175 10.3749L2.82446 5.5576C2.68362 5.41675 2.60449 5.22572 2.60449 5.02654V3.08453Z" stroke="#202020" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                            </p>
-                        </th>
+                                Status:
+                            </div>
+                            <select name="" id="">
+                                <option value="">ALl</option>
+                                <option value="">Ongoing</option>
+                                <option value="">Completed</option>
+                                <option value="">Draft</option>
+                            </select>
+                        </div>
 
-                        <th>
-                            <p>
-                                LAST ACTIVITY
-                                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+                        <div class="btn">
+                            <div class="icon">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.79642 9.09283H13.3317M2.6626 4.8252H15.4655M6.93024 13.3605H11.1979" stroke="#344054" stroke-width="1.42539" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                            </p>
-                        </th>
+                                Sort By:
+                            </div>
+                            <select name="" id="">
+                                <option value="">Newest</option>
+                                <option value="">Oldest</option>
+                            </select>
+                        </div>
 
-                        <th>
-                            <p>
-                                ACTIONS
-                                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+                        <div class="btn">
+                            <div class="icon">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.79642 9.09283H13.3317M2.6626 4.8252H15.4655M6.93024 13.3605H11.1979" stroke="#344054" stroke-width="1.42539" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                            </p>
-                        </th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="content">
-                                <div class="profile">
-                                    <img src="{{asset('images/mtn.png')}}" alt="">
-                                </div>
-                                <div class="info">
-                                    <p>MTN Cameroon</p>
-                                    <span>Telecommunications</span>
-                                </div>
+                                Sort By:
                             </div>
-                        </td>
+                            <select name="" id="">
+                                <option value="">ALl</option>
+                                <option value="">Ongoing</option>
+                                <option value="">Completed</option>
+                                <option value="">Draft</option>
+                            </select>
+                        </div>
 
-                        <td>
-                            <div class="content">
-                                <div class=" name">
-                                    TB
-                                </div>
-                                <div class="info">
-                                    <p>Teneng Brandon</p>
-                                    <span>teneng.brandon@iclan.cm</span>
-                                </div>
-                            </div>
-                        </td>
+                        <div class="btn">
+                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9.98779 4.58691L9.98779 13.5993" stroke="#33363F" stroke-width="1.50207" stroke-linecap="round"/>
+                                <path d="M14.4941 9.09277L5.48175 9.09277" stroke="#33363F" stroke-width="1.50207" stroke-linecap="round"/>
+                            </svg>
+                            Add Filter
+                        </div>
+                    </div>
+                </header>
 
-                        <td>
-                            <div class="town">
-                                Douala
-                            </div>
-                        </td>
-
-                        <td>
-                            12 (3 ongoing)
-                        </td>
-
-                        <td>
-                            May 28, 2025
-                        </td>
-
-                        <td>
-                            <div class="actions">
-                                <button class="view-btn" onclick="viewCLientDetails()">
-                                    View
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                <p>
+                                    CLIENT
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                </button>
-                                <button class="edit-btn" onclick="editCLientModal()">
-                                    Edit
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                </p>
+                            </th>
+
+                            <th>
+                                <p>
+                                    SURVEY TITLE
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                </button>
-                                <button class="delete-btn" onclick="deleteClientModal()">
-                                    Delete
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                </p>
+                            </th>
+
+                            <th>
+                                <p>
+                                    STATUS
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                                </p>
+                            </th>
 
-                    <tr>
-                        <td>
-                            <div class="content">
-                                <div class="profile">
-                                    <img src="{{asset('images/eneo.png')}}" alt="">
-                                </div>
-                                <div class="info">
-                                    <p>Eneo Cameroon S.A.</p>
-                                    <span>Energy</span>
-                                </div>
-                            </div>
-                        </td>
-
-                        <td>
-                            <div class="content">
-                                <div class=" name">
-                                    FN
-                                </div>
-                                <div class="info">
-                                    <p>Florence Njuh</p>
-                                    <span>florence.nju@eneo.cm</span>
-                                </div>
-                            </div>
-                        </td>
-
-                        <td>
-                            <div class="town">
-                                Yaounde
-                            </div>
-                        </td>
-
-                        <td>
-                            8 (3 ongoing)
-                        </td>
-
-                        <td>
-                            May 28, 2025
-                        </td>
-
-                        <td>
-                            <div class="actions">
-                                <button class="view-btn">
-                                    View
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                            <th>
+                                <p>
+                                    RESPONSES
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                </button>
-                                <button class="edit-btn">
-                                    Edit
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                </p>
+                            </th>
+
+                            <th>
+                                <p>
+                                    CREATED
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                </button>
-                                <button class="delete-btn" >
-                                    Delete
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                </p>
+                            </th>
+
+                            <th>
+                                <p>
+                                    ACTIONS
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                                </p>
+                            </th>
+                        </tr>
+                    </thead>
 
-                    <tr>
-                        <td>
-                            <div class="content">
-                                <div class="profile">
-                                    <img src="{{asset('images/orange.png')}}" alt="">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="content">
+                                    <div class="profile">
+                                        <img src="{{asset('images/mtn.png')}}" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <p>MTN Cameroon</p>
+                                        <span>Telecommunications</span>
+                                    </div>
                                 </div>
-                                <div class="info">
-                                    <p>Orange Cameroon</p>
-                                    <span>Telecommunications</span>
+                            </td>
+
+                            <td>
+                                <div class="content">
+                                    <div class="survey">
+                                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.36526 1.80322C4.47983 1.80322 3.75049 2.53256 3.75049 3.418V14.542C3.75049 15.4274 4.47983 16.1568 5.36526 16.1568H13.6185C14.504 16.1568 15.2333 15.4274 15.2333 14.542V7.00638C15.2333 6.86364 15.1766 6.72675 15.0756 6.62582L15.07 6.62021L10.4107 1.96092C10.3098 1.85997 10.1729 1.80325 10.0302 1.80322H5.36526ZM5.36526 2.87974H9.49191V5.92987C9.49191 6.8153 10.2212 7.54464 11.1067 7.54464H14.1568V14.542C14.1568 14.8457 13.9223 15.0802 13.6185 15.0802H5.36526C5.06151 15.0802 4.827 14.8457 4.827 14.542V3.418C4.827 3.11424 5.06151 2.87974 5.36526 2.87974ZM10.5684 3.64087L13.3957 6.46812H11.1067C10.8029 6.46812 10.5684 6.23362 10.5684 5.92987V3.64087ZM7.15945 9.33883C7.08813 9.33782 7.01731 9.351 6.95113 9.3776C6.88494 9.4042 6.82469 9.44368 6.7739 9.49376C6.7231 9.54385 6.68277 9.60352 6.65524 9.66933C6.62771 9.73514 6.61353 9.80576 6.61353 9.87709C6.61353 9.94842 6.62771 10.019 6.65524 10.0848C6.68277 10.1507 6.7231 10.2103 6.7739 10.2604C6.82469 10.3105 6.88494 10.35 6.95113 10.3766C7.01731 10.4032 7.08813 10.4164 7.15945 10.4153H11.8244C11.8957 10.4164 11.9665 10.4032 12.0327 10.3766C12.0989 10.35 12.1591 10.3105 12.2099 10.2604C12.2607 10.2103 12.301 10.1507 12.3286 10.0848C12.3561 10.019 12.3703 9.94842 12.3703 9.87709C12.3703 9.80576 12.3561 9.73514 12.3286 9.66933C12.301 9.60352 12.2607 9.54385 12.2099 9.49376C12.1591 9.44368 12.0989 9.4042 12.0327 9.3776C11.9665 9.351 11.8957 9.33782 11.8244 9.33883H7.15945ZM7.15945 11.8507C7.08813 11.8497 7.01731 11.8629 6.95113 11.8895C6.88494 11.9161 6.82469 11.9556 6.7739 12.0056C6.7231 12.0557 6.68277 12.1154 6.65524 12.1812C6.62771 12.247 6.61353 12.3176 6.61353 12.389C6.61353 12.4603 6.62771 12.5309 6.65524 12.5967C6.68277 12.6625 6.7231 12.7222 6.7739 12.7723C6.82469 12.8224 6.88494 12.8619 6.95113 12.8885C7.01731 12.915 7.08813 12.9282 7.15945 12.9272H10.389C10.4603 12.9282 10.5311 12.915 10.5973 12.8885C10.6635 12.8619 10.7238 12.8224 10.7746 12.7723C10.8254 12.7222 10.8657 12.6625 10.8932 12.5967C10.9207 12.5309 10.9349 12.4603 10.9349 12.389C10.9349 12.3176 10.9207 12.247 10.8932 12.1812C10.8657 12.1154 10.8254 12.0557 10.7746 12.0056C10.7238 11.9556 10.6635 11.9161 10.5973 11.8895C10.5311 11.8629 10.4603 11.8497 10.389 11.8507H7.15945Z" fill="#F59E0B"/>
+                                        </svg>
+                                    </div>
+                                    <div class="info">
+                                        <p>Leadership Development Assessment</p>
+                                        <span>5 values, 25 questions</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
+                            </td>
 
-                        <td>
-                            <div class="content">
-                                <div class=" name">
-                                    ES
+                            <td>
+                                <div class="status ongoing">
+                                    Ongoing
                                 </div>
-                                <div class="info">
-                                    <p>Etienne Shey</p>
-                                    <span>etienne.shey@orange.cm</span>
+                            </td>
+
+                            <td>
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 65%;"></div>
+                                    </div>
+                                    <span>78/120</span>
                                 </div>
+                            </td>
+
+                            <td>
+                                15 Jun 2025
+                            </td>
+
+                            <td>
+                                <div class="actions">
+                                    <button class="view-btn" onclick="viewCLientDetails()">
+                                        View
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="edit-btn" onclick="editCLientModal()">
+                                        Edit
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="delete-btn" onclick="deleteClientModal()">
+                                        Delete
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="content">
+                                    <div class="profile">
+                                        <img src="{{asset('images/mtn.png')}}" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <p>MTN Cameroon</p>
+                                        <span>Telecommunications</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="content">
+                                    <div class="survey">
+                                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.36526 1.80322C4.47983 1.80322 3.75049 2.53256 3.75049 3.418V14.542C3.75049 15.4274 4.47983 16.1568 5.36526 16.1568H13.6185C14.504 16.1568 15.2333 15.4274 15.2333 14.542V7.00638C15.2333 6.86364 15.1766 6.72675 15.0756 6.62582L15.07 6.62021L10.4107 1.96092C10.3098 1.85997 10.1729 1.80325 10.0302 1.80322H5.36526ZM5.36526 2.87974H9.49191V5.92987C9.49191 6.8153 10.2212 7.54464 11.1067 7.54464H14.1568V14.542C14.1568 14.8457 13.9223 15.0802 13.6185 15.0802H5.36526C5.06151 15.0802 4.827 14.8457 4.827 14.542V3.418C4.827 3.11424 5.06151 2.87974 5.36526 2.87974ZM10.5684 3.64087L13.3957 6.46812H11.1067C10.8029 6.46812 10.5684 6.23362 10.5684 5.92987V3.64087ZM7.15945 9.33883C7.08813 9.33782 7.01731 9.351 6.95113 9.3776C6.88494 9.4042 6.82469 9.44368 6.7739 9.49376C6.7231 9.54385 6.68277 9.60352 6.65524 9.66933C6.62771 9.73514 6.61353 9.80576 6.61353 9.87709C6.61353 9.94842 6.62771 10.019 6.65524 10.0848C6.68277 10.1507 6.7231 10.2103 6.7739 10.2604C6.82469 10.3105 6.88494 10.35 6.95113 10.3766C7.01731 10.4032 7.08813 10.4164 7.15945 10.4153H11.8244C11.8957 10.4164 11.9665 10.4032 12.0327 10.3766C12.0989 10.35 12.1591 10.3105 12.2099 10.2604C12.2607 10.2103 12.301 10.1507 12.3286 10.0848C12.3561 10.019 12.3703 9.94842 12.3703 9.87709C12.3703 9.80576 12.3561 9.73514 12.3286 9.66933C12.301 9.60352 12.2607 9.54385 12.2099 9.49376C12.1591 9.44368 12.0989 9.4042 12.0327 9.3776C11.9665 9.351 11.8957 9.33782 11.8244 9.33883H7.15945ZM7.15945 11.8507C7.08813 11.8497 7.01731 11.8629 6.95113 11.8895C6.88494 11.9161 6.82469 11.9556 6.7739 12.0056C6.7231 12.0557 6.68277 12.1154 6.65524 12.1812C6.62771 12.247 6.61353 12.3176 6.61353 12.389C6.61353 12.4603 6.62771 12.5309 6.65524 12.5967C6.68277 12.6625 6.7231 12.7222 6.7739 12.7723C6.82469 12.8224 6.88494 12.8619 6.95113 12.8885C7.01731 12.915 7.08813 12.9282 7.15945 12.9272H10.389C10.4603 12.9282 10.5311 12.915 10.5973 12.8885C10.6635 12.8619 10.7238 12.8224 10.7746 12.7723C10.8254 12.7222 10.8657 12.6625 10.8932 12.5967C10.9207 12.5309 10.9349 12.4603 10.9349 12.389C10.9349 12.3176 10.9207 12.247 10.8932 12.1812C10.8657 12.1154 10.8254 12.0557 10.7746 12.0056C10.7238 11.9556 10.6635 11.9161 10.5973 11.8895C10.5311 11.8629 10.4603 11.8497 10.389 11.8507H7.15945Z" fill="#F59E0B"/>
+                                        </svg>
+                                    </div>
+                                    <div class="info">
+                                        <p>Leadership Development Assessment</p>
+                                        <span>5 values, 25 questions</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="status ongoing">
+                                    Ongoing
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 65%;"></div>
+                                    </div>
+                                    <span>78/120</span>
+                                </div>
+                            </td>
+
+                            <td>
+                                15 Jun 2025
+                            </td>
+
+                            <td>
+                                <div class="actions">
+                                    <button class="view-btn" onclick="viewCLientDetails()">
+                                        View
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="edit-btn" onclick="editCLientModal()">
+                                        Edit
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="delete-btn" onclick="deleteClientModal()">
+                                        Delete
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="content">
+                                    <div class="profile">
+                                        <img src="{{asset('images/mtn.png')}}" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <p>MTN Cameroon</p>
+                                        <span>Telecommunications</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="content">
+                                    <div class="survey">
+                                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.36526 1.80322C4.47983 1.80322 3.75049 2.53256 3.75049 3.418V14.542C3.75049 15.4274 4.47983 16.1568 5.36526 16.1568H13.6185C14.504 16.1568 15.2333 15.4274 15.2333 14.542V7.00638C15.2333 6.86364 15.1766 6.72675 15.0756 6.62582L15.07 6.62021L10.4107 1.96092C10.3098 1.85997 10.1729 1.80325 10.0302 1.80322H5.36526ZM5.36526 2.87974H9.49191V5.92987C9.49191 6.8153 10.2212 7.54464 11.1067 7.54464H14.1568V14.542C14.1568 14.8457 13.9223 15.0802 13.6185 15.0802H5.36526C5.06151 15.0802 4.827 14.8457 4.827 14.542V3.418C4.827 3.11424 5.06151 2.87974 5.36526 2.87974ZM10.5684 3.64087L13.3957 6.46812H11.1067C10.8029 6.46812 10.5684 6.23362 10.5684 5.92987V3.64087ZM7.15945 9.33883C7.08813 9.33782 7.01731 9.351 6.95113 9.3776C6.88494 9.4042 6.82469 9.44368 6.7739 9.49376C6.7231 9.54385 6.68277 9.60352 6.65524 9.66933C6.62771 9.73514 6.61353 9.80576 6.61353 9.87709C6.61353 9.94842 6.62771 10.019 6.65524 10.0848C6.68277 10.1507 6.7231 10.2103 6.7739 10.2604C6.82469 10.3105 6.88494 10.35 6.95113 10.3766C7.01731 10.4032 7.08813 10.4164 7.15945 10.4153H11.8244C11.8957 10.4164 11.9665 10.4032 12.0327 10.3766C12.0989 10.35 12.1591 10.3105 12.2099 10.2604C12.2607 10.2103 12.301 10.1507 12.3286 10.0848C12.3561 10.019 12.3703 9.94842 12.3703 9.87709C12.3703 9.80576 12.3561 9.73514 12.3286 9.66933C12.301 9.60352 12.2607 9.54385 12.2099 9.49376C12.1591 9.44368 12.0989 9.4042 12.0327 9.3776C11.9665 9.351 11.8957 9.33782 11.8244 9.33883H7.15945ZM7.15945 11.8507C7.08813 11.8497 7.01731 11.8629 6.95113 11.8895C6.88494 11.9161 6.82469 11.9556 6.7739 12.0056C6.7231 12.0557 6.68277 12.1154 6.65524 12.1812C6.62771 12.247 6.61353 12.3176 6.61353 12.389C6.61353 12.4603 6.62771 12.5309 6.65524 12.5967C6.68277 12.6625 6.7231 12.7222 6.7739 12.7723C6.82469 12.8224 6.88494 12.8619 6.95113 12.8885C7.01731 12.915 7.08813 12.9282 7.15945 12.9272H10.389C10.4603 12.9282 10.5311 12.915 10.5973 12.8885C10.6635 12.8619 10.7238 12.8224 10.7746 12.7723C10.8254 12.7222 10.8657 12.6625 10.8932 12.5967C10.9207 12.5309 10.9349 12.4603 10.9349 12.389C10.9349 12.3176 10.9207 12.247 10.8932 12.1812C10.8657 12.1154 10.8254 12.0557 10.7746 12.0056C10.7238 11.9556 10.6635 11.9161 10.5973 11.8895C10.5311 11.8629 10.4603 11.8497 10.389 11.8507H7.15945Z" fill="#F59E0B"/>
+                                        </svg>
+                                    </div>
+                                    <div class="info">
+                                        <p>Leadership Development Assessment</p>
+                                        <span>5 values, 25 questions</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="status ongoing">
+                                    Ongoing
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 65%;"></div>
+                                    </div>
+                                    <span>78/120</span>
+                                </div>
+                            </td>
+
+                            <td>
+                                15 Jun 2025
+                            </td>
+
+                            <td>
+                                <div class="actions">
+                                    <button class="view-btn" onclick="viewCLientDetails()">
+                                        View
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="edit-btn" onclick="editCLientModal()">
+                                        Edit
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="delete-btn" onclick="deleteClientModal()">
+                                        Delete
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <div class="pagination">
+                    <button id="prevBtn" onclick="handlePrev()">Previous</button>
+                    <button id="nextBtn" onclick="handleNext()">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- completed surveys --}}
+    <div id="completed" class="content">
+        <div class="section">
+            <div class="table-container except">
+                <header>
+                    <div class="search-input">
+                        <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.5039 13.8306L12.2123 11.5902L12.1586 11.5085C12.0587 11.409 11.9221 11.353 11.7796 11.353C11.6371 11.353 11.5005 11.409 11.4007 11.5085C9.45315 13.2952 6.45226 13.3923 4.38817 11.7354C2.32407 10.0786 1.83728 7.18185 3.25062 4.96638C4.66396 2.75092 7.53888 1.90417 9.96873 2.98769C12.3986 4.07122 13.6294 6.7488 12.8448 9.24467C12.7883 9.42497 12.8345 9.62105 12.966 9.75905C13.0975 9.89704 13.2942 9.95598 13.4822 9.91366C13.6702 9.87135 13.8208 9.7342 13.8773 9.5539C14.8151 6.59203 13.3987 3.40464 10.5442 2.05364C7.68982 0.702644 4.25406 1.59349 2.45953 4.14988C0.66501 6.70628 1.05028 10.161 3.36612 12.2793C5.68195 14.3975 9.23335 14.5435 11.7229 12.6229L13.7519 14.6066C13.9615 14.8106 14.3003 14.8106 14.5098 14.6066C14.7192 14.3997 14.7192 14.0667 14.5098 13.8598L14.5039 13.8306Z" fill="#667085"/>
+                        </svg>
+                        <input type="text" placeholder="Search Surveys...">
+                    </div>
+
+                    <div class="action-btns">
+                        <div class="btn">
+                            <div class="icon">
+                                <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.60449 3.08453C2.60449 2.66975 2.94074 2.3335 3.35552 2.3335H15.372C15.7868 2.3335 16.1231 2.66974 16.1231 3.08453V5.02654C16.1231 5.22572 16.044 5.41675 15.9031 5.5576L11.0858 10.3749C10.945 10.5157 10.8659 10.7068 10.8659 10.9059V12.848L7.86172 15.8521V10.9059C7.86172 10.7068 7.78259 10.5157 7.64175 10.3749L2.82446 5.5576C2.68362 5.41675 2.60449 5.22572 2.60449 5.02654V3.08453Z" stroke="#202020" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Status:
                             </div>
-                        </td>
+                            <select name="" id="">
+                                <option value="">ALl</option>
+                                <option value="">Ongoing</option>
+                                <option value="">Completed</option>
+                                <option value="">Draft</option>
+                            </select>
+                        </div>
 
-                        <td>
-                            <div class="town">
-                                Kribi
+                        <div class="btn">
+                            <div class="icon">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.79642 9.09283H13.3317M2.6626 4.8252H15.4655M6.93024 13.3605H11.1979" stroke="#344054" stroke-width="1.42539" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Sort By:
                             </div>
-                        </td>
+                            <select name="" id="">
+                                <option value="">Newest</option>
+                                <option value="">Oldest</option>
+                            </select>
+                        </div>
 
-                        <td>
-                            10 (3 ongoing)
-                        </td>
+                        <div class="btn">
+                            <div class="icon">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.79642 9.09283H13.3317M2.6626 4.8252H15.4655M6.93024 13.3605H11.1979" stroke="#344054" stroke-width="1.42539" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Sort By:
+                            </div>
+                            <select name="" id="">
+                                <option value="">ALl</option>
+                                <option value="">Ongoing</option>
+                                <option value="">Completed</option>
+                                <option value="">Draft</option>
+                            </select>
+                        </div>
 
-                        <td>
-                            May 28, 2025
-                        </td>
+                        <div class="btn">
+                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9.98779 4.58691L9.98779 13.5993" stroke="#33363F" stroke-width="1.50207" stroke-linecap="round"/>
+                                <path d="M14.4941 9.09277L5.48175 9.09277" stroke="#33363F" stroke-width="1.50207" stroke-linecap="round"/>
+                            </svg>
+                            Add Filter
+                        </div>
+                    </div>
+                </header>
 
-                        <td>
-                            <div class="actions">
-                                <button class="view-btn">
-                                    View
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                <p>
+                                    CLIENT
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                </button>
-                                <button class="edit-btn" >
-                                    Edit
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                </p>
+                            </th>
+
+                            <th>
+                                <p>
+                                    SURVEY TITLE
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                </button>
-                                <button class="delete-btn" >
-                                    Delete
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                </p>
+                            </th>
+
+                            <th>
+                                <p>
+                                    STATUS
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                                </p>
+                            </th>
 
-                    <tr>
-                        <td>
-                            <div class="content">
-                                <div class="profile">
-                                    <img src="{{asset('images/mtn.png')}}" alt="">
-                                </div>
-                                <div class="info">
-                                    <p>MTN Cameroon</p>
-                                    <span>Telecommunications</span>
-                                </div>
-                            </div>
-                        </td>
-
-                        <td>
-                            <div class="content">
-                                <div class=" name">
-                                    TB
-                                </div>
-                                <div class="info">
-                                    <p>Teneng Brandon</p>
-                                    <span>teneng.brandon@iclan.cm</span>
-                                </div>
-                            </div>
-                        </td>
-
-                        <td>
-                            <div class="town">
-                                Douala
-                            </div>
-                        </td>
-
-                        <td>
-                            12 (3 ongoing)
-                        </td>
-
-                        <td>
-                            May 28, 2025
-                        </td>
-
-                        <td>
-                            <div class="actions">
-                                <button class="view-btn">
-                                    View
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                            <th>
+                                <p>
+                                    RESPONSES
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                </button>
-                                <button class="edit-btn">
-                                    Edit
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                                <button class="delete-btn" >
-                                    Delete
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                                </p>
+                            </th>
 
-                    <tr>
-                        <td>
-                            <div class="content">
-                                <div class="profile">
-                                    <img src="{{asset('images/mtn.png')}}" alt="">
+                            <th>
+                                <p>
+                                    CREATED
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </p>
+                            </th>
+
+                            <th>
+                                <p>
+                                    ACTIONS
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </p>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="content">
+                                    <div class="profile">
+                                        <img src="{{asset('images/eneo.png')}}" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <p>Eneo Cameroon S.A.</p>
+                                        <span>Energy</span>
+                                    </div>
                                 </div>
-                                <div class="info">
-                                    <p>MTN Cameroon</p>
-                                    <span>Telecommunications</span>
+                            </td>
+
+                            <td>
+                                <div class="content">
+                                    <div class="survey">
+                                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.36526 1.80322C4.47983 1.80322 3.75049 2.53256 3.75049 3.418V14.542C3.75049 15.4274 4.47983 16.1568 5.36526 16.1568H13.6185C14.504 16.1568 15.2333 15.4274 15.2333 14.542V7.00638C15.2333 6.86364 15.1766 6.72675 15.0756 6.62582L15.07 6.62021L10.4107 1.96092C10.3098 1.85997 10.1729 1.80325 10.0302 1.80322H5.36526ZM5.36526 2.87974H9.49191V5.92987C9.49191 6.8153 10.2212 7.54464 11.1067 7.54464H14.1568V14.542C14.1568 14.8457 13.9223 15.0802 13.6185 15.0802H5.36526C5.06151 15.0802 4.827 14.8457 4.827 14.542V3.418C4.827 3.11424 5.06151 2.87974 5.36526 2.87974ZM10.5684 3.64087L13.3957 6.46812H11.1067C10.8029 6.46812 10.5684 6.23362 10.5684 5.92987V3.64087ZM7.15945 9.33883C7.08813 9.33782 7.01731 9.351 6.95113 9.3776C6.88494 9.4042 6.82469 9.44368 6.7739 9.49376C6.7231 9.54385 6.68277 9.60352 6.65524 9.66933C6.62771 9.73514 6.61353 9.80576 6.61353 9.87709C6.61353 9.94842 6.62771 10.019 6.65524 10.0848C6.68277 10.1507 6.7231 10.2103 6.7739 10.2604C6.82469 10.3105 6.88494 10.35 6.95113 10.3766C7.01731 10.4032 7.08813 10.4164 7.15945 10.4153H11.8244C11.8957 10.4164 11.9665 10.4032 12.0327 10.3766C12.0989 10.35 12.1591 10.3105 12.2099 10.2604C12.2607 10.2103 12.301 10.1507 12.3286 10.0848C12.3561 10.019 12.3703 9.94842 12.3703 9.87709C12.3703 9.80576 12.3561 9.73514 12.3286 9.66933C12.301 9.60352 12.2607 9.54385 12.2099 9.49376C12.1591 9.44368 12.0989 9.4042 12.0327 9.3776C11.9665 9.351 11.8957 9.33782 11.8244 9.33883H7.15945ZM7.15945 11.8507C7.08813 11.8497 7.01731 11.8629 6.95113 11.8895C6.88494 11.9161 6.82469 11.9556 6.7739 12.0056C6.7231 12.0557 6.68277 12.1154 6.65524 12.1812C6.62771 12.247 6.61353 12.3176 6.61353 12.389C6.61353 12.4603 6.62771 12.5309 6.65524 12.5967C6.68277 12.6625 6.7231 12.7222 6.7739 12.7723C6.82469 12.8224 6.88494 12.8619 6.95113 12.8885C7.01731 12.915 7.08813 12.9282 7.15945 12.9272H10.389C10.4603 12.9282 10.5311 12.915 10.5973 12.8885C10.6635 12.8619 10.7238 12.8224 10.7746 12.7723C10.8254 12.7222 10.8657 12.6625 10.8932 12.5967C10.9207 12.5309 10.9349 12.4603 10.9349 12.389C10.9349 12.3176 10.9207 12.247 10.8932 12.1812C10.8657 12.1154 10.8254 12.0557 10.7746 12.0056C10.7238 11.9556 10.6635 11.9161 10.5973 11.8895C10.5311 11.8629 10.4603 11.8497 10.389 11.8507H7.15945Z" fill="#F59E0B"/>
+                                        </svg>
+                                    </div>
+                                    <div class="info">
+                                        <p>Leadership Development Assessment</p>
+                                        <span>5 values, 25 questions</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
+                            </td>
 
-                        <td>
-                            <div class="content">
-                                <div class=" name">
-                                    TB
+                            <td>
+                                <div class="status complete">
+                                    Completed
                                 </div>
-                                <div class="info">
-                                    <p>Teneng Brandon</p>
-                                    <span>teneng.brandon@iclan.cm</span>
+                            </td>
+
+                            <td>
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 65%;"></div>
+                                    </div>
+                                    <span>78/120</span>
                                 </div>
+                            </td>
+
+                            <td>
+                                15 Jun 2025
+                            </td>
+
+                            <td>
+                                <div class="actions">
+                                    <button class="view-btn">
+                                        View
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="edit-btn">
+                                        Edit
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="delete-btn" >
+                                        Delete
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="content">
+                                    <div class="profile">
+                                        <img src="{{asset('images/eneo.png')}}" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <p>Eneo Cameroon S.A.</p>
+                                        <span>Energy</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="content">
+                                    <div class="survey">
+                                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.36526 1.80322C4.47983 1.80322 3.75049 2.53256 3.75049 3.418V14.542C3.75049 15.4274 4.47983 16.1568 5.36526 16.1568H13.6185C14.504 16.1568 15.2333 15.4274 15.2333 14.542V7.00638C15.2333 6.86364 15.1766 6.72675 15.0756 6.62582L15.07 6.62021L10.4107 1.96092C10.3098 1.85997 10.1729 1.80325 10.0302 1.80322H5.36526ZM5.36526 2.87974H9.49191V5.92987C9.49191 6.8153 10.2212 7.54464 11.1067 7.54464H14.1568V14.542C14.1568 14.8457 13.9223 15.0802 13.6185 15.0802H5.36526C5.06151 15.0802 4.827 14.8457 4.827 14.542V3.418C4.827 3.11424 5.06151 2.87974 5.36526 2.87974ZM10.5684 3.64087L13.3957 6.46812H11.1067C10.8029 6.46812 10.5684 6.23362 10.5684 5.92987V3.64087ZM7.15945 9.33883C7.08813 9.33782 7.01731 9.351 6.95113 9.3776C6.88494 9.4042 6.82469 9.44368 6.7739 9.49376C6.7231 9.54385 6.68277 9.60352 6.65524 9.66933C6.62771 9.73514 6.61353 9.80576 6.61353 9.87709C6.61353 9.94842 6.62771 10.019 6.65524 10.0848C6.68277 10.1507 6.7231 10.2103 6.7739 10.2604C6.82469 10.3105 6.88494 10.35 6.95113 10.3766C7.01731 10.4032 7.08813 10.4164 7.15945 10.4153H11.8244C11.8957 10.4164 11.9665 10.4032 12.0327 10.3766C12.0989 10.35 12.1591 10.3105 12.2099 10.2604C12.2607 10.2103 12.301 10.1507 12.3286 10.0848C12.3561 10.019 12.3703 9.94842 12.3703 9.87709C12.3703 9.80576 12.3561 9.73514 12.3286 9.66933C12.301 9.60352 12.2607 9.54385 12.2099 9.49376C12.1591 9.44368 12.0989 9.4042 12.0327 9.3776C11.9665 9.351 11.8957 9.33782 11.8244 9.33883H7.15945ZM7.15945 11.8507C7.08813 11.8497 7.01731 11.8629 6.95113 11.8895C6.88494 11.9161 6.82469 11.9556 6.7739 12.0056C6.7231 12.0557 6.68277 12.1154 6.65524 12.1812C6.62771 12.247 6.61353 12.3176 6.61353 12.389C6.61353 12.4603 6.62771 12.5309 6.65524 12.5967C6.68277 12.6625 6.7231 12.7222 6.7739 12.7723C6.82469 12.8224 6.88494 12.8619 6.95113 12.8885C7.01731 12.915 7.08813 12.9282 7.15945 12.9272H10.389C10.4603 12.9282 10.5311 12.915 10.5973 12.8885C10.6635 12.8619 10.7238 12.8224 10.7746 12.7723C10.8254 12.7222 10.8657 12.6625 10.8932 12.5967C10.9207 12.5309 10.9349 12.4603 10.9349 12.389C10.9349 12.3176 10.9207 12.247 10.8932 12.1812C10.8657 12.1154 10.8254 12.0557 10.7746 12.0056C10.7238 11.9556 10.6635 11.9161 10.5973 11.8895C10.5311 11.8629 10.4603 11.8497 10.389 11.8507H7.15945Z" fill="#F59E0B"/>
+                                        </svg>
+                                    </div>
+                                    <div class="info">
+                                        <p>Leadership Development Assessment</p>
+                                        <span>5 values, 25 questions</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="status complete">
+                                    Completed
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 65%;"></div>
+                                    </div>
+                                    <span>78/120</span>
+                                </div>
+                            </td>
+
+                            <td>
+                                15 Jun 2025
+                            </td>
+
+                            <td>
+                                <div class="actions">
+                                    <button class="view-btn">
+                                        View
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="edit-btn">
+                                        Edit
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="delete-btn" >
+                                        Delete
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="content">
+                                    <div class="profile">
+                                        <img src="{{asset('images/eneo.png')}}" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <p>Eneo Cameroon S.A.</p>
+                                        <span>Energy</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="content">
+                                    <div class="survey">
+                                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.36526 1.80322C4.47983 1.80322 3.75049 2.53256 3.75049 3.418V14.542C3.75049 15.4274 4.47983 16.1568 5.36526 16.1568H13.6185C14.504 16.1568 15.2333 15.4274 15.2333 14.542V7.00638C15.2333 6.86364 15.1766 6.72675 15.0756 6.62582L15.07 6.62021L10.4107 1.96092C10.3098 1.85997 10.1729 1.80325 10.0302 1.80322H5.36526ZM5.36526 2.87974H9.49191V5.92987C9.49191 6.8153 10.2212 7.54464 11.1067 7.54464H14.1568V14.542C14.1568 14.8457 13.9223 15.0802 13.6185 15.0802H5.36526C5.06151 15.0802 4.827 14.8457 4.827 14.542V3.418C4.827 3.11424 5.06151 2.87974 5.36526 2.87974ZM10.5684 3.64087L13.3957 6.46812H11.1067C10.8029 6.46812 10.5684 6.23362 10.5684 5.92987V3.64087ZM7.15945 9.33883C7.08813 9.33782 7.01731 9.351 6.95113 9.3776C6.88494 9.4042 6.82469 9.44368 6.7739 9.49376C6.7231 9.54385 6.68277 9.60352 6.65524 9.66933C6.62771 9.73514 6.61353 9.80576 6.61353 9.87709C6.61353 9.94842 6.62771 10.019 6.65524 10.0848C6.68277 10.1507 6.7231 10.2103 6.7739 10.2604C6.82469 10.3105 6.88494 10.35 6.95113 10.3766C7.01731 10.4032 7.08813 10.4164 7.15945 10.4153H11.8244C11.8957 10.4164 11.9665 10.4032 12.0327 10.3766C12.0989 10.35 12.1591 10.3105 12.2099 10.2604C12.2607 10.2103 12.301 10.1507 12.3286 10.0848C12.3561 10.019 12.3703 9.94842 12.3703 9.87709C12.3703 9.80576 12.3561 9.73514 12.3286 9.66933C12.301 9.60352 12.2607 9.54385 12.2099 9.49376C12.1591 9.44368 12.0989 9.4042 12.0327 9.3776C11.9665 9.351 11.8957 9.33782 11.8244 9.33883H7.15945ZM7.15945 11.8507C7.08813 11.8497 7.01731 11.8629 6.95113 11.8895C6.88494 11.9161 6.82469 11.9556 6.7739 12.0056C6.7231 12.0557 6.68277 12.1154 6.65524 12.1812C6.62771 12.247 6.61353 12.3176 6.61353 12.389C6.61353 12.4603 6.62771 12.5309 6.65524 12.5967C6.68277 12.6625 6.7231 12.7222 6.7739 12.7723C6.82469 12.8224 6.88494 12.8619 6.95113 12.8885C7.01731 12.915 7.08813 12.9282 7.15945 12.9272H10.389C10.4603 12.9282 10.5311 12.915 10.5973 12.8885C10.6635 12.8619 10.7238 12.8224 10.7746 12.7723C10.8254 12.7222 10.8657 12.6625 10.8932 12.5967C10.9207 12.5309 10.9349 12.4603 10.9349 12.389C10.9349 12.3176 10.9207 12.247 10.8932 12.1812C10.8657 12.1154 10.8254 12.0557 10.7746 12.0056C10.7238 11.9556 10.6635 11.9161 10.5973 11.8895C10.5311 11.8629 10.4603 11.8497 10.389 11.8507H7.15945Z" fill="#F59E0B"/>
+                                        </svg>
+                                    </div>
+                                    <div class="info">
+                                        <p>Leadership Development Assessment</p>
+                                        <span>5 values, 25 questions</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="status complete">
+                                    Completed
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 65%;"></div>
+                                    </div>
+                                    <span>78/120</span>
+                                </div>
+                            </td>
+
+                            <td>
+                                15 Jun 2025
+                            </td>
+
+                            <td>
+                                <div class="actions">
+                                    <button class="view-btn">
+                                        View
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="edit-btn">
+                                        Edit
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="delete-btn" >
+                                        Delete
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <div class="pagination">
+                    <button id="prevBtn" onclick="handlePrev()">Previous</button>
+                    <button id="nextBtn" onclick="handleNext()">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- draft surveys --}}
+    <div id="drafts" class="content">
+        <div class="section">
+            <div class="table-container except">
+                <header>
+                    <div class="search-input">
+                        <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.5039 13.8306L12.2123 11.5902L12.1586 11.5085C12.0587 11.409 11.9221 11.353 11.7796 11.353C11.6371 11.353 11.5005 11.409 11.4007 11.5085C9.45315 13.2952 6.45226 13.3923 4.38817 11.7354C2.32407 10.0786 1.83728 7.18185 3.25062 4.96638C4.66396 2.75092 7.53888 1.90417 9.96873 2.98769C12.3986 4.07122 13.6294 6.7488 12.8448 9.24467C12.7883 9.42497 12.8345 9.62105 12.966 9.75905C13.0975 9.89704 13.2942 9.95598 13.4822 9.91366C13.6702 9.87135 13.8208 9.7342 13.8773 9.5539C14.8151 6.59203 13.3987 3.40464 10.5442 2.05364C7.68982 0.702644 4.25406 1.59349 2.45953 4.14988C0.66501 6.70628 1.05028 10.161 3.36612 12.2793C5.68195 14.3975 9.23335 14.5435 11.7229 12.6229L13.7519 14.6066C13.9615 14.8106 14.3003 14.8106 14.5098 14.6066C14.7192 14.3997 14.7192 14.0667 14.5098 13.8598L14.5039 13.8306Z" fill="#667085"/>
+                        </svg>
+                        <input type="text" placeholder="Search Surveys...">
+                    </div>
+
+                    <div class="action-btns">
+                        <div class="btn">
+                            <div class="icon">
+                                <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.60449 3.08453C2.60449 2.66975 2.94074 2.3335 3.35552 2.3335H15.372C15.7868 2.3335 16.1231 2.66974 16.1231 3.08453V5.02654C16.1231 5.22572 16.044 5.41675 15.9031 5.5576L11.0858 10.3749C10.945 10.5157 10.8659 10.7068 10.8659 10.9059V12.848L7.86172 15.8521V10.9059C7.86172 10.7068 7.78259 10.5157 7.64175 10.3749L2.82446 5.5576C2.68362 5.41675 2.60449 5.22572 2.60449 5.02654V3.08453Z" stroke="#202020" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Status:
                             </div>
-                        </td>
+                            <select name="" id="">
+                                <option value="">ALl</option>
+                                <option value="">Ongoing</option>
+                                <option value="">Completed</option>
+                                <option value="">Draft</option>
+                            </select>
+                        </div>
 
-                        <td>
-                            <div class="town">
-                                Douala
+                        <div class="btn">
+                            <div class="icon">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.79642 9.09283H13.3317M2.6626 4.8252H15.4655M6.93024 13.3605H11.1979" stroke="#344054" stroke-width="1.42539" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Sort By:
                             </div>
-                        </td>
+                            <select name="" id="">
+                                <option value="">Newest</option>
+                                <option value="">Oldest</option>
+                            </select>
+                        </div>
 
-                        <td>
-                            12 (3 ongoing)
-                        </td>
-
-                        <td>
-                            May 28, 2025
-                        </td>
-
-                        <td>
-                            <div class="actions">
-                                <button class="view-btn">
-                                    View
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                                <button class="edit-btn">
-                                    Edit
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                                <button class="delete-btn" >
-                                    Delete
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
+                        <div class="btn">
+                            <div class="icon">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.79642 9.09283H13.3317M2.6626 4.8252H15.4655M6.93024 13.3605H11.1979" stroke="#344054" stroke-width="1.42539" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Sort By:
                             </div>
-                        </td>
-                    </tr>
+                            <select name="" id="">
+                                <option value="">ALl</option>
+                                <option value="">Ongoing</option>
+                                <option value="">Completed</option>
+                                <option value="">Draft</option>
+                            </select>
+                        </div>
 
-                </tbody>
-            </table>
+                        <div class="btn">
+                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9.98779 4.58691L9.98779 13.5993" stroke="#33363F" stroke-width="1.50207" stroke-linecap="round"/>
+                                <path d="M14.4941 9.09277L5.48175 9.09277" stroke="#33363F" stroke-width="1.50207" stroke-linecap="round"/>
+                            </svg>
+                            Add Filter
+                        </div>
+                    </div>
+                </header>
 
-            <div class="pagination">
-                <button id="prevBtn" onclick="handlePrev()">Previous</button>
-                <button id="nextBtn" onclick="handleNext()">Next</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                <p>
+                                    CLIENT
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </p>
+                            </th>
+
+                            <th>
+                                <p>
+                                    SURVEY TITLE
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </p>
+                            </th>
+
+                            <th>
+                                <p>
+                                    STATUS
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </p>
+                            </th>
+
+                            <th>
+                                <p>
+                                    RESPONSES
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </p>
+                            </th>
+
+                            <th>
+                                <p>
+                                    CREATED
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </p>
+                            </th>
+
+                            <th>
+                                <p>
+                                    ACTIONS
+                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56994 2.81934V10.26M6.56994 10.26L10.2903 6.53966M6.56994 10.26L2.84961 6.53966" stroke="#667085" stroke-width="1.06295" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </p>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="content">
+                                    <div class="profile">
+                                        <img src="{{asset('images/mtn.png')}}" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <p>MTN Cameroon</p>
+                                        <span>Telecommunications</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="content">
+                                    <div class="survey">
+                                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.36526 1.80322C4.47983 1.80322 3.75049 2.53256 3.75049 3.418V14.542C3.75049 15.4274 4.47983 16.1568 5.36526 16.1568H13.6185C14.504 16.1568 15.2333 15.4274 15.2333 14.542V7.00638C15.2333 6.86364 15.1766 6.72675 15.0756 6.62582L15.07 6.62021L10.4107 1.96092C10.3098 1.85997 10.1729 1.80325 10.0302 1.80322H5.36526ZM5.36526 2.87974H9.49191V5.92987C9.49191 6.8153 10.2212 7.54464 11.1067 7.54464H14.1568V14.542C14.1568 14.8457 13.9223 15.0802 13.6185 15.0802H5.36526C5.06151 15.0802 4.827 14.8457 4.827 14.542V3.418C4.827 3.11424 5.06151 2.87974 5.36526 2.87974ZM10.5684 3.64087L13.3957 6.46812H11.1067C10.8029 6.46812 10.5684 6.23362 10.5684 5.92987V3.64087ZM7.15945 9.33883C7.08813 9.33782 7.01731 9.351 6.95113 9.3776C6.88494 9.4042 6.82469 9.44368 6.7739 9.49376C6.7231 9.54385 6.68277 9.60352 6.65524 9.66933C6.62771 9.73514 6.61353 9.80576 6.61353 9.87709C6.61353 9.94842 6.62771 10.019 6.65524 10.0848C6.68277 10.1507 6.7231 10.2103 6.7739 10.2604C6.82469 10.3105 6.88494 10.35 6.95113 10.3766C7.01731 10.4032 7.08813 10.4164 7.15945 10.4153H11.8244C11.8957 10.4164 11.9665 10.4032 12.0327 10.3766C12.0989 10.35 12.1591 10.3105 12.2099 10.2604C12.2607 10.2103 12.301 10.1507 12.3286 10.0848C12.3561 10.019 12.3703 9.94842 12.3703 9.87709C12.3703 9.80576 12.3561 9.73514 12.3286 9.66933C12.301 9.60352 12.2607 9.54385 12.2099 9.49376C12.1591 9.44368 12.0989 9.4042 12.0327 9.3776C11.9665 9.351 11.8957 9.33782 11.8244 9.33883H7.15945ZM7.15945 11.8507C7.08813 11.8497 7.01731 11.8629 6.95113 11.8895C6.88494 11.9161 6.82469 11.9556 6.7739 12.0056C6.7231 12.0557 6.68277 12.1154 6.65524 12.1812C6.62771 12.247 6.61353 12.3176 6.61353 12.389C6.61353 12.4603 6.62771 12.5309 6.65524 12.5967C6.68277 12.6625 6.7231 12.7222 6.7739 12.7723C6.82469 12.8224 6.88494 12.8619 6.95113 12.8885C7.01731 12.915 7.08813 12.9282 7.15945 12.9272H10.389C10.4603 12.9282 10.5311 12.915 10.5973 12.8885C10.6635 12.8619 10.7238 12.8224 10.7746 12.7723C10.8254 12.7222 10.8657 12.6625 10.8932 12.5967C10.9207 12.5309 10.9349 12.4603 10.9349 12.389C10.9349 12.3176 10.9207 12.247 10.8932 12.1812C10.8657 12.1154 10.8254 12.0557 10.7746 12.0056C10.7238 11.9556 10.6635 11.9161 10.5973 11.8895C10.5311 11.8629 10.4603 11.8497 10.389 11.8507H7.15945Z" fill="#F59E0B"/>
+                                        </svg>
+                                    </div>
+                                    <div class="info">
+                                        <p>Leadership Development Assessment</p>
+                                        <span>5 values, 25 questions</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="status draft">
+                                    Draft
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 65%;"></div>
+                                    </div>
+                                    <span>78/120</span>
+                                </div>
+                            </td>
+
+                            <td>
+                                15 Jun 2025
+                            </td>
+
+                            <td>
+                                <div class="actions">
+                                    <button class="view-btn">
+                                        View
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="edit-btn">
+                                        Edit
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="delete-btn" >
+                                        Delete
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="content">
+                                    <div class="profile">
+                                        <img src="{{asset('images/mtn.png')}}" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <p>MTN Cameroon</p>
+                                        <span>Telecommunications</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="content">
+                                    <div class="survey">
+                                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.36526 1.80322C4.47983 1.80322 3.75049 2.53256 3.75049 3.418V14.542C3.75049 15.4274 4.47983 16.1568 5.36526 16.1568H13.6185C14.504 16.1568 15.2333 15.4274 15.2333 14.542V7.00638C15.2333 6.86364 15.1766 6.72675 15.0756 6.62582L15.07 6.62021L10.4107 1.96092C10.3098 1.85997 10.1729 1.80325 10.0302 1.80322H5.36526ZM5.36526 2.87974H9.49191V5.92987C9.49191 6.8153 10.2212 7.54464 11.1067 7.54464H14.1568V14.542C14.1568 14.8457 13.9223 15.0802 13.6185 15.0802H5.36526C5.06151 15.0802 4.827 14.8457 4.827 14.542V3.418C4.827 3.11424 5.06151 2.87974 5.36526 2.87974ZM10.5684 3.64087L13.3957 6.46812H11.1067C10.8029 6.46812 10.5684 6.23362 10.5684 5.92987V3.64087ZM7.15945 9.33883C7.08813 9.33782 7.01731 9.351 6.95113 9.3776C6.88494 9.4042 6.82469 9.44368 6.7739 9.49376C6.7231 9.54385 6.68277 9.60352 6.65524 9.66933C6.62771 9.73514 6.61353 9.80576 6.61353 9.87709C6.61353 9.94842 6.62771 10.019 6.65524 10.0848C6.68277 10.1507 6.7231 10.2103 6.7739 10.2604C6.82469 10.3105 6.88494 10.35 6.95113 10.3766C7.01731 10.4032 7.08813 10.4164 7.15945 10.4153H11.8244C11.8957 10.4164 11.9665 10.4032 12.0327 10.3766C12.0989 10.35 12.1591 10.3105 12.2099 10.2604C12.2607 10.2103 12.301 10.1507 12.3286 10.0848C12.3561 10.019 12.3703 9.94842 12.3703 9.87709C12.3703 9.80576 12.3561 9.73514 12.3286 9.66933C12.301 9.60352 12.2607 9.54385 12.2099 9.49376C12.1591 9.44368 12.0989 9.4042 12.0327 9.3776C11.9665 9.351 11.8957 9.33782 11.8244 9.33883H7.15945ZM7.15945 11.8507C7.08813 11.8497 7.01731 11.8629 6.95113 11.8895C6.88494 11.9161 6.82469 11.9556 6.7739 12.0056C6.7231 12.0557 6.68277 12.1154 6.65524 12.1812C6.62771 12.247 6.61353 12.3176 6.61353 12.389C6.61353 12.4603 6.62771 12.5309 6.65524 12.5967C6.68277 12.6625 6.7231 12.7222 6.7739 12.7723C6.82469 12.8224 6.88494 12.8619 6.95113 12.8885C7.01731 12.915 7.08813 12.9282 7.15945 12.9272H10.389C10.4603 12.9282 10.5311 12.915 10.5973 12.8885C10.6635 12.8619 10.7238 12.8224 10.7746 12.7723C10.8254 12.7222 10.8657 12.6625 10.8932 12.5967C10.9207 12.5309 10.9349 12.4603 10.9349 12.389C10.9349 12.3176 10.9207 12.247 10.8932 12.1812C10.8657 12.1154 10.8254 12.0557 10.7746 12.0056C10.7238 11.9556 10.6635 11.9161 10.5973 11.8895C10.5311 11.8629 10.4603 11.8497 10.389 11.8507H7.15945Z" fill="#F59E0B"/>
+                                        </svg>
+                                    </div>
+                                    <div class="info">
+                                        <p>Leadership Development Assessment</p>
+                                        <span>5 values, 25 questions</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="status draft">
+                                    Draft
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 65%;"></div>
+                                    </div>
+                                    <span>78/120</span>
+                                </div>
+                            </td>
+
+                            <td>
+                                15 Jun 2025
+                            </td>
+
+                            <td>
+                                <div class="actions">
+                                    <button class="view-btn">
+                                        View
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="edit-btn">
+                                        Edit
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="delete-btn" >
+                                        Delete
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="content">
+                                    <div class="profile">
+                                        <img src="{{asset('images/mtn.png')}}" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <p>MTN Cameroon</p>
+                                        <span>Telecommunications</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="content">
+                                    <div class="survey">
+                                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.36526 1.80322C4.47983 1.80322 3.75049 2.53256 3.75049 3.418V14.542C3.75049 15.4274 4.47983 16.1568 5.36526 16.1568H13.6185C14.504 16.1568 15.2333 15.4274 15.2333 14.542V7.00638C15.2333 6.86364 15.1766 6.72675 15.0756 6.62582L15.07 6.62021L10.4107 1.96092C10.3098 1.85997 10.1729 1.80325 10.0302 1.80322H5.36526ZM5.36526 2.87974H9.49191V5.92987C9.49191 6.8153 10.2212 7.54464 11.1067 7.54464H14.1568V14.542C14.1568 14.8457 13.9223 15.0802 13.6185 15.0802H5.36526C5.06151 15.0802 4.827 14.8457 4.827 14.542V3.418C4.827 3.11424 5.06151 2.87974 5.36526 2.87974ZM10.5684 3.64087L13.3957 6.46812H11.1067C10.8029 6.46812 10.5684 6.23362 10.5684 5.92987V3.64087ZM7.15945 9.33883C7.08813 9.33782 7.01731 9.351 6.95113 9.3776C6.88494 9.4042 6.82469 9.44368 6.7739 9.49376C6.7231 9.54385 6.68277 9.60352 6.65524 9.66933C6.62771 9.73514 6.61353 9.80576 6.61353 9.87709C6.61353 9.94842 6.62771 10.019 6.65524 10.0848C6.68277 10.1507 6.7231 10.2103 6.7739 10.2604C6.82469 10.3105 6.88494 10.35 6.95113 10.3766C7.01731 10.4032 7.08813 10.4164 7.15945 10.4153H11.8244C11.8957 10.4164 11.9665 10.4032 12.0327 10.3766C12.0989 10.35 12.1591 10.3105 12.2099 10.2604C12.2607 10.2103 12.301 10.1507 12.3286 10.0848C12.3561 10.019 12.3703 9.94842 12.3703 9.87709C12.3703 9.80576 12.3561 9.73514 12.3286 9.66933C12.301 9.60352 12.2607 9.54385 12.2099 9.49376C12.1591 9.44368 12.0989 9.4042 12.0327 9.3776C11.9665 9.351 11.8957 9.33782 11.8244 9.33883H7.15945ZM7.15945 11.8507C7.08813 11.8497 7.01731 11.8629 6.95113 11.8895C6.88494 11.9161 6.82469 11.9556 6.7739 12.0056C6.7231 12.0557 6.68277 12.1154 6.65524 12.1812C6.62771 12.247 6.61353 12.3176 6.61353 12.389C6.61353 12.4603 6.62771 12.5309 6.65524 12.5967C6.68277 12.6625 6.7231 12.7222 6.7739 12.7723C6.82469 12.8224 6.88494 12.8619 6.95113 12.8885C7.01731 12.915 7.08813 12.9282 7.15945 12.9272H10.389C10.4603 12.9282 10.5311 12.915 10.5973 12.8885C10.6635 12.8619 10.7238 12.8224 10.7746 12.7723C10.8254 12.7222 10.8657 12.6625 10.8932 12.5967C10.9207 12.5309 10.9349 12.4603 10.9349 12.389C10.9349 12.3176 10.9207 12.247 10.8932 12.1812C10.8657 12.1154 10.8254 12.0557 10.7746 12.0056C10.7238 11.9556 10.6635 11.9161 10.5973 11.8895C10.5311 11.8629 10.4603 11.8497 10.389 11.8507H7.15945Z" fill="#F59E0B"/>
+                                        </svg>
+                                    </div>
+                                    <div class="info">
+                                        <p>Leadership Development Assessment</p>
+                                        <span>5 values, 25 questions</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="status draft">
+                                    Draft
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 65%;"></div>
+                                    </div>
+                                    <span>78/120</span>
+                                </div>
+                            </td>
+
+                            <td>
+                                15 Jun 2025
+                            </td>
+
+                            <td>
+                                <div class="actions">
+                                    <button class="view-btn">
+                                        View
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.35826 3.16602L12.168 6.97572M12.168 6.97572L8.35826 10.7854M12.168 6.97572L2.37158 6.97572" stroke="white" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="edit-btn">
+                                        Edit
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.91127 3.16564H4.19005C3.58889 3.16564 3.10156 3.65297 3.10156 4.25412V10.2408C3.10156 10.842 3.58889 11.3293 4.19005 11.3293H10.1767C10.7779 11.3293 11.2652 10.842 11.2652 10.2408V7.51959M10.4955 2.39596C10.9206 1.97088 11.6098 1.97088 12.0349 2.39596C12.46 2.82104 12.46 3.51023 12.0349 3.93531L7.36213 8.60807H5.82278L5.82278 7.06872L10.4955 2.39596Z" stroke="#137699" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="delete-btn" >
+                                        Delete
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.608 4.09983L10.136 10.7083C10.0953 11.2779 9.6213 11.7192 9.05023 11.7192H4.54633C3.97527 11.7192 3.5013 11.2779 3.46061 10.7083L2.98858 4.09983M5.7098 6.2768V9.54226M7.88677 6.2768V9.54226M8.43102 4.09983V2.4671C8.43102 2.16652 8.18735 1.92285 7.88677 1.92285H5.7098C5.40922 1.92285 5.16555 2.16652 5.16555 2.4671V4.09983M2.44434 4.09983H11.1522" stroke="#FF383C" stroke-width="0.653092" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <div class="pagination">
+                    <button id="prevBtn" onclick="handlePrev()">Previous</button>
+                    <button id="nextBtn" onclick="handleNext()">Next</button>
+                </div>
             </div>
         </div>
     </div>
@@ -497,7 +1641,7 @@
         <div class="graph-container except">
             <div class="survey-graph">
                 <header>
-                    <h1>Client Growth</h1>
+                    <h1>Survey Completion Rate</h1>
                 </header>
 
                 <div class="chart">
@@ -520,7 +1664,137 @@
                     </div>
                 </div>
             </div>
+
+            <div class="survey-graph">
+                <header>
+                    <h1>Survey Status Distribution</h1>
+                </header>
+
+                <div class="chart">
+                    <div class="select">
+                        <div class="period">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.96701 5.46912V2.62402M11.6572 5.46912V2.62402M5.25574 8.31421H12.3685M3.83319 15.4269H13.791C14.5767 15.4269 15.2136 14.79 15.2136 14.0044V5.46912C15.2136 4.68347 14.5767 4.04657 13.791 4.04657H3.83319C3.04754 4.04657 2.41064 4.68347 2.41064 5.46912V14.0044C2.41064 14.79 3.04754 15.4269 3.83319 15.4269Z" stroke="#344054" stroke-width="1.42539" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Period:
+                        </div>
+                        <select name="" id="">
+                            <option value="">this month</option>
+                            <option value="">last month</option>
+                            <option value="">next month</option>
+                            <option value="">this month</option>
+                        </select>
+                    </div>
+                    <div class="graph doughnut">
+                        <canvas id="statusChart"></canvas>
+
+                        <div class="legend">
+                            <div class="legend-item"><div class="legend-color" style="background-color:#4B9CD3;"></div>Ongoing</div>
+                            <div class="legend-item"><div class="legend-color" style="background-color:#5DD39E;"></div>Completed</div>
+                            <div class="legend-item"><div class="legend-color" style="background-color:#F7C948;"></div>Draft</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+
+    <div class="activity-container">
+        <div class="activity-header">Recent Survey Activity</div>
+        <ul class="activity-list">
+
+            <li class="activity-item">
+                <div class="activity-icon" style="background:#e3f9e5;">
+                    <svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.99429 3.31287C8.4564 3.31991 7.93181 3.61186 7.66821 4.12148L7.02845 5.35812C7.00979 5.39423 6.97475 5.41478 6.93353 5.41287L5.54266 5.34899H5.54175C4.66864 5.30895 3.92958 6.04734 3.97017 6.92057L4.03497 8.31144C4.03692 8.35359 4.01688 8.38832 3.98021 8.40727L2.74357 9.04612C2.74327 9.04612 2.74297 9.04612 2.74266 9.04612C1.96667 9.44794 1.69587 10.4573 2.16769 11.1936L2.9188 12.3654C2.94123 12.4004 2.94123 12.4408 2.9188 12.4758L2.16769 13.6477C1.69608 14.3836 1.96609 15.3935 2.74266 15.7951C2.74297 15.7951 2.74327 15.7951 2.74357 15.7951L3.98021 16.434C4.01633 16.4527 4.03688 16.4886 4.03497 16.5298L3.97017 17.9207C3.92956 18.7942 4.66913 19.5329 5.54266 19.4923L6.93353 19.4284C6.97568 19.4264 7.0095 19.4465 7.02845 19.4831L7.66821 20.7198C7.66821 20.7201 7.66821 20.7204 7.66821 20.7207C8.07004 21.4967 9.07851 21.7666 9.81476 21.2947L10.9875 20.5436C11.0225 20.5212 11.062 20.5212 11.097 20.5436L12.2698 21.2947C13.0057 21.7664 14.0146 21.4963 14.4163 20.7198L15.0561 19.4831C15.0748 19.447 15.1098 19.4265 15.151 19.4284L16.5428 19.4923C17.4159 19.5323 18.155 18.7939 18.1144 17.9207L18.0496 16.5298C18.0476 16.4877 18.0677 16.4529 18.1043 16.434L19.341 15.7951C19.3413 15.7951 19.3416 15.7951 19.3419 15.7951C20.1179 15.3933 20.3887 14.3839 19.9168 13.6477L19.1657 12.4758C19.1433 12.4408 19.1433 12.4004 19.1657 12.3654L19.9168 11.1936C20.3885 10.4577 20.1184 9.44779 19.3419 9.04612C19.3416 9.04612 19.3413 9.04612 19.341 9.04612L18.1043 8.40727C18.0682 8.3886 18.0477 8.35265 18.0496 8.31144L18.1144 6.92057C18.155 6.04734 17.4159 5.30895 16.5428 5.34899H16.5419L15.151 5.41287C15.1089 5.41482 15.075 5.39478 15.0561 5.35812L14.4163 4.12148C14.0145 3.34548 13.006 3.07469 12.2698 3.54651L11.097 4.29762C11.062 4.32004 11.0225 4.32004 10.9875 4.29762L9.81476 3.54651C9.63078 3.42861 9.42958 3.35634 9.22519 3.32748C9.14854 3.31665 9.07113 3.31187 8.99429 3.31287ZM8.97512 4.7074C8.99975 4.70093 9.02802 4.70724 9.05818 4.72656L10.2309 5.47767C10.7239 5.79356 11.3606 5.79356 11.8536 5.47767L13.0264 4.72656C13.0863 4.68812 13.1387 4.70258 13.1715 4.76581L13.8103 6.00244C14.0793 6.52241 14.6311 6.8408 15.2158 6.81379L16.6076 6.74899C16.6789 6.74567 16.7168 6.78447 16.7135 6.85577L16.6496 8.24664C16.6225 8.83157 16.94 9.38294 17.4609 9.65212L18.6975 10.2919C18.7602 10.3248 18.7752 10.377 18.7368 10.437L17.9848 11.6088C17.9848 11.6091 17.9848 11.6094 17.9848 11.6097C17.6689 12.1028 17.6689 12.7385 17.9848 13.2315C17.9848 13.2318 17.9848 13.2321 17.9848 13.2324L18.7368 14.4043C18.775 14.4639 18.7598 14.5166 18.6975 14.5494L17.4609 15.1891C16.9406 15.458 16.6225 16.0097 16.6496 16.5946L16.7135 17.9855C16.7168 18.0568 16.6789 18.0956 16.6076 18.0923L15.2158 18.0275C14.6309 18.0004 14.0795 18.3189 13.8103 18.8397L13.1715 20.0764C13.1386 20.14 13.0867 20.1533 13.0264 20.1147L11.8536 19.3636C11.3606 19.0477 10.7239 19.0477 10.2309 19.3636L9.05818 20.1147C8.99819 20.1531 8.94581 20.1387 8.91306 20.0755L8.27421 18.8397C8.00532 18.3194 7.45367 18.0004 6.86874 18.0275L5.47695 18.0923C5.40565 18.0956 5.36777 18.0568 5.37108 17.9855L5.43497 16.5946C5.46203 16.0097 5.1445 15.4583 4.62363 15.1891L3.38699 14.5494C3.32435 14.5165 3.30932 14.4642 3.34775 14.4043L4.09977 13.2324C4.09977 13.2321 4.09977 13.2318 4.09977 13.2315C4.41565 12.7385 4.41565 12.1028 4.09977 11.6097C4.09977 11.6094 4.09977 11.6091 4.09977 11.6088L3.34775 10.437C3.30953 10.3774 3.32469 10.3247 3.38699 10.2919L4.62363 9.65212C5.14395 9.38327 5.46199 8.83158 5.43497 8.24664L5.37108 6.85577C5.36777 6.78447 5.40565 6.74567 5.47695 6.74899L6.86874 6.81379C7.45344 6.84084 8.00492 6.52296 8.27421 6.00244V6.00153L8.91306 4.7649C8.92951 4.7331 8.9505 4.71386 8.97512 4.7074ZM14.6783 9.37741C14.5206 9.37364 14.3662 9.42316 14.2402 9.51796C12.696 10.6494 11.292 12.0689 9.98634 13.6833C9.37013 12.95 8.73266 12.3022 8.03327 11.837C7.95678 11.7825 7.87013 11.744 7.77846 11.7237C7.6868 11.7034 7.59199 11.7017 7.49965 11.7187C7.40732 11.7358 7.31935 11.7712 7.24096 11.8228C7.16258 11.8745 7.09537 11.9414 7.04333 12.0196C6.99129 12.0977 6.95548 12.1855 6.93803 12.2778C6.92058 12.37 6.92183 12.4649 6.94173 12.5566C6.96162 12.6484 6.99974 12.7352 7.05383 12.8119C7.10792 12.8887 7.17688 12.9538 7.25661 13.0034C7.98524 13.488 8.70505 14.2149 9.41867 15.1745C9.48361 15.2619 9.56799 15.3329 9.66514 15.382C9.76228 15.431 9.86952 15.4568 9.97835 15.4573C10.0872 15.4577 10.1946 15.4328 10.2922 15.3845C10.3897 15.3362 10.4747 15.2659 10.5403 15.1791C11.9184 13.358 13.428 11.8519 15.0689 10.6496C15.189 10.5643 15.2791 10.4433 15.3265 10.3038C15.374 10.1642 15.3762 10.0133 15.3329 9.87248C15.2897 9.73162 15.2032 9.60797 15.0856 9.5191C14.9681 9.43023 14.8256 9.38065 14.6783 9.37741Z" fill="#23A954"/>
+                    </svg>
+                </div>
+                <div class="activity-content">
+                <div class="activity-title">Employee Engagement Survey completed by <span>Eneo Cameroon S.A.</span></div>
+                <div class="activity-sub">150 responses collected. Closed on 28 Jun 2025 at 11:45 AM</div>
+                </div>
+                <div class="activity-time">10 minutes ago</div>
+            </li>
+
+            <li class="activity-item">
+                <div class="activity-icon" style="background:#e0f0ff;">
+                    <svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.99429 3.31287C8.4564 3.31991 7.93181 3.61186 7.66821 4.12148L7.02845 5.35812C7.00979 5.39423 6.97475 5.41478 6.93353 5.41287L5.54266 5.34899H5.54175C4.66864 5.30895 3.92958 6.04734 3.97017 6.92057L4.03497 8.31144C4.03692 8.35359 4.01688 8.38832 3.98021 8.40727L2.74357 9.04612C2.74327 9.04612 2.74297 9.04612 2.74266 9.04612C1.96667 9.44794 1.69587 10.4573 2.16769 11.1936L2.9188 12.3654C2.94123 12.4004 2.94123 12.4408 2.9188 12.4758L2.16769 13.6477C1.69608 14.3836 1.96609 15.3935 2.74266 15.7951C2.74297 15.7951 2.74327 15.7951 2.74357 15.7951L3.98021 16.434C4.01633 16.4527 4.03688 16.4886 4.03497 16.5298L3.97017 17.9207C3.92956 18.7942 4.66913 19.5329 5.54266 19.4923L6.93353 19.4284C6.97568 19.4264 7.0095 19.4465 7.02845 19.4831L7.66821 20.7198C7.66821 20.7201 7.66821 20.7204 7.66821 20.7207C8.07004 21.4967 9.07851 21.7666 9.81476 21.2947L10.9875 20.5436C11.0225 20.5212 11.062 20.5212 11.097 20.5436L12.2698 21.2947C13.0057 21.7664 14.0146 21.4963 14.4163 20.7198L15.0561 19.4831C15.0748 19.447 15.1098 19.4265 15.151 19.4284L16.5428 19.4923C17.4159 19.5323 18.155 18.7939 18.1144 17.9207L18.0496 16.5298C18.0476 16.4877 18.0677 16.4529 18.1043 16.434L19.341 15.7951C19.3413 15.7951 19.3416 15.7951 19.3419 15.7951C20.1179 15.3933 20.3887 14.3839 19.9168 13.6477L19.1657 12.4758C19.1433 12.4408 19.1433 12.4004 19.1657 12.3654L19.9168 11.1936C20.3885 10.4577 20.1184 9.44779 19.3419 9.04612C19.3416 9.04612 19.3413 9.04612 19.341 9.04612L18.1043 8.40727C18.0682 8.3886 18.0477 8.35265 18.0496 8.31144L18.1144 6.92057C18.155 6.04734 17.4159 5.30895 16.5428 5.34899H16.5419L15.151 5.41287C15.1089 5.41482 15.075 5.39478 15.0561 5.35812L14.4163 4.12148C14.0145 3.34548 13.006 3.07469 12.2698 3.54651L11.097 4.29762C11.062 4.32004 11.0225 4.32004 10.9875 4.29762L9.81476 3.54651C9.63078 3.42861 9.42958 3.35634 9.22519 3.32748C9.14854 3.31665 9.07113 3.31187 8.99429 3.31287ZM8.97512 4.7074C8.99975 4.70093 9.02802 4.70724 9.05818 4.72656L10.2309 5.47767C10.7239 5.79356 11.3606 5.79356 11.8536 5.47767L13.0264 4.72656C13.0863 4.68812 13.1387 4.70258 13.1715 4.76581L13.8103 6.00244C14.0793 6.52241 14.6311 6.8408 15.2158 6.81379L16.6076 6.74899C16.6789 6.74567 16.7168 6.78447 16.7135 6.85577L16.6496 8.24664C16.6225 8.83157 16.94 9.38294 17.4609 9.65212L18.6975 10.2919C18.7602 10.3248 18.7752 10.377 18.7368 10.437L17.9848 11.6088C17.9848 11.6091 17.9848 11.6094 17.9848 11.6097C17.6689 12.1028 17.6689 12.7385 17.9848 13.2315C17.9848 13.2318 17.9848 13.2321 17.9848 13.2324L18.7368 14.4043C18.775 14.4639 18.7598 14.5166 18.6975 14.5494L17.4609 15.1891C16.9406 15.458 16.6225 16.0097 16.6496 16.5946L16.7135 17.9855C16.7168 18.0568 16.6789 18.0956 16.6076 18.0923L15.2158 18.0275C14.6309 18.0004 14.0795 18.3189 13.8103 18.8397L13.1715 20.0764C13.1386 20.14 13.0867 20.1533 13.0264 20.1147L11.8536 19.3636C11.3606 19.0477 10.7239 19.0477 10.2309 19.3636L9.05818 20.1147C8.99819 20.1531 8.94581 20.1387 8.91306 20.0755L8.27421 18.8397C8.00532 18.3194 7.45367 18.0004 6.86874 18.0275L5.47695 18.0923C5.40565 18.0956 5.36777 18.0568 5.37108 17.9855L5.43497 16.5946C5.46203 16.0097 5.1445 15.4583 4.62363 15.1891L3.38699 14.5494C3.32435 14.5165 3.30932 14.4642 3.34775 14.4043L4.09977 13.2324C4.09977 13.2321 4.09977 13.2318 4.09977 13.2315C4.41565 12.7385 4.41565 12.1028 4.09977 11.6097C4.09977 11.6094 4.09977 11.6091 4.09977 11.6088L3.34775 10.437C3.30953 10.3774 3.32469 10.3247 3.38699 10.2919L4.62363 9.65212C5.14395 9.38327 5.46199 8.83158 5.43497 8.24664L5.37108 6.85577C5.36777 6.78447 5.40565 6.74567 5.47695 6.74899L6.86874 6.81379C7.45344 6.84084 8.00492 6.52296 8.27421 6.00244V6.00153L8.91306 4.7649C8.92951 4.7331 8.9505 4.71386 8.97512 4.7074ZM14.6783 9.37741C14.5206 9.37364 14.3662 9.42316 14.2402 9.51796C12.696 10.6494 11.292 12.0689 9.98634 13.6833C9.37013 12.95 8.73266 12.3022 8.03327 11.837C7.95678 11.7825 7.87013 11.744 7.77846 11.7237C7.6868 11.7034 7.59199 11.7017 7.49965 11.7187C7.40732 11.7358 7.31935 11.7712 7.24096 11.8228C7.16258 11.8745 7.09537 11.9414 7.04333 12.0196C6.99129 12.0977 6.95548 12.1855 6.93803 12.2778C6.92058 12.37 6.92183 12.4649 6.94173 12.5566C6.96162 12.6484 6.99974 12.7352 7.05383 12.8119C7.10792 12.8887 7.17688 12.9538 7.25661 13.0034C7.98524 13.488 8.70505 14.2149 9.41867 15.1745C9.48361 15.2619 9.56799 15.3329 9.66514 15.382C9.76228 15.431 9.86952 15.4568 9.97835 15.4573C10.0872 15.4577 10.1946 15.4328 10.2922 15.3845C10.3897 15.3362 10.4747 15.2659 10.5403 15.1791C11.9184 13.358 13.428 11.8519 15.0689 10.6496C15.189 10.5643 15.2791 10.4433 15.3265 10.3038C15.374 10.1642 15.3762 10.0133 15.3329 9.87248C15.2897 9.73162 15.2032 9.60797 15.0856 9.5191C14.9681 9.43023 14.8256 9.38065 14.6783 9.37741Z" fill="#23A954"/>
+                    </svg>
+                </div>
+                <div class="activity-content">
+                <div class="activity-title">Survey completed by <span>Jean Dupont (MTN Cameroon)</span></div>
+                <div class="activity-sub">Leadership Development Survey</div>
+                </div>
+                <div class="activity-time">10 minutes ago</div>
+            </li>
+
+            <li class="activity-item">
+                <div class="activity-icon" style="background:#DBEAFE;">
+                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.23405 3.0564C5.41938 3.0564 4.74507 3.73071 4.74507 4.54538V5.38876L2.70352 6.60355C2.12373 6.94823 1.76709 7.57467 1.76709 8.24874V8.35926V14.7556C1.76709 16.2752 3.01276 17.5209 4.53235 17.5209H16.0188C17.5384 17.5209 18.7841 16.2752 18.7841 14.7556V8.47309C18.7955 8.40404 18.7955 8.33358 18.7841 8.26453V8.24958C18.7841 7.5751 18.4276 6.94905 17.8485 6.60438L17.8477 6.60355L15.8061 5.38959V4.54538C15.8061 3.73071 15.1318 3.0564 14.3171 3.0564H6.23405ZM6.23405 4.33267H14.3171C14.4427 4.33267 14.5298 4.41987 14.5298 4.54538V9.42365L10.2756 11.4934L6.02134 9.42365V5.85074C6.0326 5.78224 6.0326 5.71235 6.02134 5.64385V4.54538C6.02134 4.41987 6.10853 4.33267 6.23405 4.33267ZM7.93576 5.60895C7.85119 5.60775 7.76724 5.62337 7.68877 5.65491C7.6103 5.68644 7.53888 5.73325 7.47866 5.79263C7.41844 5.852 7.37062 5.92276 7.33798 6.00077C7.30534 6.07879 7.28853 6.16252 7.28853 6.24709C7.28853 6.33166 7.30534 6.41538 7.33798 6.4934C7.37062 6.57141 7.41844 6.64217 7.47866 6.70154C7.53888 6.76092 7.6103 6.80773 7.68877 6.83926C7.76724 6.8708 7.85119 6.88642 7.93576 6.88522H12.6154C12.7 6.88642 12.7839 6.8708 12.8624 6.83926C12.9409 6.80773 13.0123 6.76092 13.0725 6.70154C13.1328 6.64217 13.1806 6.57141 13.2132 6.4934C13.2459 6.41538 13.2627 6.33166 13.2627 6.24709C13.2627 6.16252 13.2459 6.07879 13.2132 6.00077C13.1806 5.92276 13.1328 5.852 13.0725 5.79263C13.0123 5.73325 12.9409 5.68644 12.8624 5.65491C12.7839 5.62337 12.7 5.60775 12.6154 5.60895H7.93576ZM4.74507 6.87442V8.80296L3.09821 8.00196C3.15032 7.87887 3.23635 7.77135 3.35579 7.70035L4.74507 6.87442ZM15.8061 6.87525L17.1954 7.70118C17.3142 7.77206 17.3999 7.87927 17.4522 8.00196L15.8061 8.80296V6.87525ZM7.93576 8.1615C7.85119 8.1603 7.76724 8.17593 7.68877 8.20746C7.6103 8.23899 7.53888 8.28581 7.47866 8.34518C7.41844 8.40456 7.37062 8.47531 7.33798 8.55332C7.30534 8.63134 7.28853 8.71507 7.28853 8.79964C7.28853 8.88421 7.30534 8.96793 7.33798 9.04595C7.37062 9.12397 7.41844 9.19472 7.47866 9.25409C7.53888 9.31347 7.6103 9.36028 7.68877 9.39182C7.76724 9.42335 7.85119 9.43897 7.93576 9.43778H10.9137C10.9983 9.43897 11.0822 9.42335 11.1607 9.39182C11.2392 9.36028 11.3106 9.31347 11.3708 9.25409C11.4311 9.19472 11.4789 9.12397 11.5115 9.04595C11.5442 8.96793 11.561 8.88421 11.561 8.79964C11.561 8.71507 11.5442 8.63134 11.5115 8.55332C11.4789 8.47531 11.4311 8.40456 11.3708 8.34518C11.3106 8.28581 11.2392 8.23899 11.1607 8.20746C11.0822 8.17593 10.9983 8.1603 10.9137 8.1615H7.93576ZM3.04337 9.39457L9.99641 12.7772C10.0834 12.8195 10.1789 12.8415 10.2756 12.8415C10.3723 12.8415 10.4678 12.8195 10.5548 12.7772L17.5078 9.39457V14.7556C17.5078 15.5852 16.8484 16.2446 16.0188 16.2446H4.53235C3.70275 16.2446 3.04337 15.5852 3.04337 14.7556V9.39457Z" fill="#2563EB"/>
+                    </svg>
+                </div>
+                <div class="activity-content">
+                <div class="activity-title">Reminder sent for Leadership Development Assessment</div>
+                <div class="activity-sub">Sent to 42 staff members at MTN Cameroon who haven’t responded yet</div>
+                </div>
+                <div class="activity-time">25 minutes ago</div>
+            </li>
+
+            <li class="activity-item">
+                <div class="activity-icon" style="background:#DBEAFE;">
+                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.23405 3.0564C5.41938 3.0564 4.74507 3.73071 4.74507 4.54538V5.38876L2.70352 6.60355C2.12373 6.94823 1.76709 7.57467 1.76709 8.24874V8.35926V14.7556C1.76709 16.2752 3.01276 17.5209 4.53235 17.5209H16.0188C17.5384 17.5209 18.7841 16.2752 18.7841 14.7556V8.47309C18.7955 8.40404 18.7955 8.33358 18.7841 8.26453V8.24958C18.7841 7.5751 18.4276 6.94905 17.8485 6.60438L17.8477 6.60355L15.8061 5.38959V4.54538C15.8061 3.73071 15.1318 3.0564 14.3171 3.0564H6.23405ZM6.23405 4.33267H14.3171C14.4427 4.33267 14.5298 4.41987 14.5298 4.54538V9.42365L10.2756 11.4934L6.02134 9.42365V5.85074C6.0326 5.78224 6.0326 5.71235 6.02134 5.64385V4.54538C6.02134 4.41987 6.10853 4.33267 6.23405 4.33267ZM7.93576 5.60895C7.85119 5.60775 7.76724 5.62337 7.68877 5.65491C7.6103 5.68644 7.53888 5.73325 7.47866 5.79263C7.41844 5.852 7.37062 5.92276 7.33798 6.00077C7.30534 6.07879 7.28853 6.16252 7.28853 6.24709C7.28853 6.33166 7.30534 6.41538 7.33798 6.4934C7.37062 6.57141 7.41844 6.64217 7.47866 6.70154C7.53888 6.76092 7.6103 6.80773 7.68877 6.83926C7.76724 6.8708 7.85119 6.88642 7.93576 6.88522H12.6154C12.7 6.88642 12.7839 6.8708 12.8624 6.83926C12.9409 6.80773 13.0123 6.76092 13.0725 6.70154C13.1328 6.64217 13.1806 6.57141 13.2132 6.4934C13.2459 6.41538 13.2627 6.33166 13.2627 6.24709C13.2627 6.16252 13.2459 6.07879 13.2132 6.00077C13.1806 5.92276 13.1328 5.852 13.0725 5.79263C13.0123 5.73325 12.9409 5.68644 12.8624 5.65491C12.7839 5.62337 12.7 5.60775 12.6154 5.60895H7.93576ZM4.74507 6.87442V8.80296L3.09821 8.00196C3.15032 7.87887 3.23635 7.77135 3.35579 7.70035L4.74507 6.87442ZM15.8061 6.87525L17.1954 7.70118C17.3142 7.77206 17.3999 7.87927 17.4522 8.00196L15.8061 8.80296V6.87525ZM7.93576 8.1615C7.85119 8.1603 7.76724 8.17593 7.68877 8.20746C7.6103 8.23899 7.53888 8.28581 7.47866 8.34518C7.41844 8.40456 7.37062 8.47531 7.33798 8.55332C7.30534 8.63134 7.28853 8.71507 7.28853 8.79964C7.28853 8.88421 7.30534 8.96793 7.33798 9.04595C7.37062 9.12397 7.41844 9.19472 7.47866 9.25409C7.53888 9.31347 7.6103 9.36028 7.68877 9.39182C7.76724 9.42335 7.85119 9.43897 7.93576 9.43778H10.9137C10.9983 9.43897 11.0822 9.42335 11.1607 9.39182C11.2392 9.36028 11.3106 9.31347 11.3708 9.25409C11.4311 9.19472 11.4789 9.12397 11.5115 9.04595C11.5442 8.96793 11.561 8.88421 11.561 8.79964C11.561 8.71507 11.5442 8.63134 11.5115 8.55332C11.4789 8.47531 11.4311 8.40456 11.3708 8.34518C11.3106 8.28581 11.2392 8.23899 11.1607 8.20746C11.0822 8.17593 10.9983 8.1603 10.9137 8.1615H7.93576ZM3.04337 9.39457L9.99641 12.7772C10.0834 12.8195 10.1789 12.8415 10.2756 12.8415C10.3723 12.8415 10.4678 12.8195 10.5548 12.7772L17.5078 9.39457V14.7556C17.5078 15.5852 16.8484 16.2446 16.0188 16.2446H4.53235C3.70275 16.2446 3.04337 15.5852 3.04337 14.7556V9.39457Z" fill="#2563EB"/>
+                    </svg>
+                </div>
+                <div class="activity-content">
+                <div class="activity-title">Survey reminder sent to <span>12 staff (Eneo Cameroon)</span></div>
+                <div class="activity-sub">Customer Service Assessment</div>
+                </div>
+                <div class="activity-time">25 minutes ago</div>
+            </li>
+
+            <li class="activity-item">
+                <div class="activity-icon" style="background:#F3E8FF;">
+                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.38316 1.88257C4.32811 1.88257 3.46875 2.74193 3.46875 3.79698V16.9852C3.46875 18.0402 4.32811 18.8996 5.38316 18.8996H10.9694C10.6035 18.5252 10.2971 18.0955 10.0504 17.6233H5.38316C5.03006 17.6233 4.74503 17.3383 4.74503 16.9852V3.79698C4.74503 3.44388 5.03006 3.15884 5.38316 3.15884H10.2756V6.77496C10.2756 7.83001 11.1349 8.68937 12.19 8.68937H15.8061V9.6042C16.2485 9.67652 16.6782 9.79548 17.0824 9.96565V8.05123C17.0824 7.87468 17.0108 7.71545 16.8954 7.60005L11.3649 2.06952C11.2495 1.95413 11.0902 1.88257 10.9137 1.88257H5.38316ZM11.5518 4.06121L14.9037 7.4131H12.19C11.8369 7.4131 11.5518 7.12806 11.5518 6.77496V4.06121ZM14.9552 10.3911C12.3708 10.3911 10.2756 12.4863 10.2756 15.0707C10.2756 17.6552 12.3708 19.7504 14.9552 19.7504C17.5397 19.7504 19.6349 17.6552 19.6349 15.0707C19.6349 12.4863 17.5397 10.3911 14.9552 10.3911ZM7.51029 10.8165C7.15719 10.8165 6.87215 11.1015 6.87215 11.4546C6.87215 11.8077 7.15719 12.0928 7.51029 12.0928H10.2972C10.6035 11.612 10.9857 11.1781 11.4239 10.8165H7.51029ZM14.9552 11.6673C15.1901 11.6673 15.3807 11.8579 15.3807 12.0928V14.6453H17.9332C18.168 14.6453 18.3586 14.8359 18.3586 15.0707C18.3586 15.3056 18.168 15.4962 17.9332 15.4962H15.3807V18.0487C15.3807 18.2836 15.1901 18.4742 14.9552 18.4742C14.7204 18.4742 14.5298 18.2836 14.5298 18.0487V15.4962H11.9773C11.7424 15.4962 11.5518 15.3056 11.5518 15.0707C11.5518 14.8359 11.7424 14.6453 11.9773 14.6453H14.5298V12.0928C14.5298 11.8579 14.7204 11.6673 14.9552 11.6673ZM7.51029 13.7945C7.15719 13.7945 6.87215 14.0795 6.87215 14.4326C6.87215 14.7857 7.15719 15.0707 7.51029 15.0707H9.4247C9.4247 14.6326 9.47559 14.2029 9.57344 13.7945H7.51029Z" fill="#9333EA"/>
+                    </svg>
+                </div>
+                <div class="activity-content">
+                <div class="activity-title">New survey created for <span>Orange Cameroon</span></div>
+                <div class="activity-sub">Employee Engagement Survey</div>
+                </div>
+                <div class="activity-time">1 hour ago</div>
+            </li>
+
+            <li class="activity-item">
+                <div class="activity-icon" style="background:#F3E8FF;">
+                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.38316 1.88257C4.32811 1.88257 3.46875 2.74193 3.46875 3.79698V16.9852C3.46875 18.0402 4.32811 18.8996 5.38316 18.8996H10.9694C10.6035 18.5252 10.2971 18.0955 10.0504 17.6233H5.38316C5.03006 17.6233 4.74503 17.3383 4.74503 16.9852V3.79698C4.74503 3.44388 5.03006 3.15884 5.38316 3.15884H10.2756V6.77496C10.2756 7.83001 11.1349 8.68937 12.19 8.68937H15.8061V9.6042C16.2485 9.67652 16.6782 9.79548 17.0824 9.96565V8.05123C17.0824 7.87468 17.0108 7.71545 16.8954 7.60005L11.3649 2.06952C11.2495 1.95413 11.0902 1.88257 10.9137 1.88257H5.38316ZM11.5518 4.06121L14.9037 7.4131H12.19C11.8369 7.4131 11.5518 7.12806 11.5518 6.77496V4.06121ZM14.9552 10.3911C12.3708 10.3911 10.2756 12.4863 10.2756 15.0707C10.2756 17.6552 12.3708 19.7504 14.9552 19.7504C17.5397 19.7504 19.6349 17.6552 19.6349 15.0707C19.6349 12.4863 17.5397 10.3911 14.9552 10.3911ZM7.51029 10.8165C7.15719 10.8165 6.87215 11.1015 6.87215 11.4546C6.87215 11.8077 7.15719 12.0928 7.51029 12.0928H10.2972C10.6035 11.612 10.9857 11.1781 11.4239 10.8165H7.51029ZM14.9552 11.6673C15.1901 11.6673 15.3807 11.8579 15.3807 12.0928V14.6453H17.9332C18.168 14.6453 18.3586 14.8359 18.3586 15.0707C18.3586 15.3056 18.168 15.4962 17.9332 15.4962H15.3807V18.0487C15.3807 18.2836 15.1901 18.4742 14.9552 18.4742C14.7204 18.4742 14.5298 18.2836 14.5298 18.0487V15.4962H11.9773C11.7424 15.4962 11.5518 15.3056 11.5518 15.0707C11.5518 14.8359 11.7424 14.6453 11.9773 14.6453H14.5298V12.0928C14.5298 11.8579 14.7204 11.6673 14.9552 11.6673ZM7.51029 13.7945C7.15719 13.7945 6.87215 14.0795 6.87215 14.4326C6.87215 14.7857 7.15719 15.0707 7.51029 15.0707H9.4247C9.4247 14.6326 9.47559 14.2029 9.57344 13.7945H7.51029Z" fill="#9333EA"/>
+                    </svg>
+                </div>
+                <div class="activity-content">
+                <div class="activity-title">New survey created for <span>Orange Cameroon</span></div>
+                <div class="activity-sub">"Training Needs Analysis" with 3 values and 15 questions</div>
+                </div>
+                <div class="activity-time">1 hour ago</div>
+            </li>
+
+            <li class="activity-item">
+                <div class="activity-icon" style="background:#F59E0B26;">
+                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.38316 1.98511C4.32811 1.98511 3.46875 2.84447 3.46875 3.89952V17.0877C3.46875 18.1428 4.32811 19.0021 5.38316 19.0021H10.9694C10.6035 18.6277 10.2971 18.1981 10.0504 17.7258H5.38316C5.03006 17.7258 4.74503 17.4408 4.74503 17.0877V3.89952C4.74503 3.54642 5.03006 3.26138 5.38316 3.26138H10.2756V6.8775C10.2756 7.93255 11.1349 8.79191 12.19 8.79191H15.8061V9.70674C16.2485 9.77906 16.6782 9.89802 17.0824 10.0682V8.15377C17.0824 7.97722 17.0108 7.81799 16.8954 7.70259L11.3649 2.17206C11.2495 2.05667 11.0902 1.98511 10.9137 1.98511H5.38316ZM11.5518 4.16375L14.9037 7.51564H12.19C11.8369 7.51564 11.5518 7.2306 11.5518 6.8775V4.16375ZM14.9552 10.4936C12.3708 10.4936 10.2756 12.5888 10.2756 15.1733C10.2756 17.7577 12.3708 19.853 14.9552 19.853C17.5397 19.853 19.6349 17.7577 19.6349 15.1733C19.6349 12.5888 17.5397 10.4936 14.9552 10.4936ZM7.51029 10.919C7.15719 10.919 6.87215 11.2041 6.87215 11.5572C6.87215 11.9103 7.15719 12.1953 7.51029 12.1953H10.2972C10.6035 11.7146 10.9857 11.2806 11.4239 10.919H7.51029ZM14.9552 11.7699C15.1901 11.7699 15.3807 11.9605 15.3807 12.1953V14.7479H17.9332C18.168 14.7479 18.3586 14.9385 18.3586 15.1733C18.3586 15.4081 18.168 15.5987 17.9332 15.5987H15.3807V18.1513C15.3807 18.3861 15.1901 18.5767 14.9552 18.5767C14.7204 18.5767 14.5298 18.3861 14.5298 18.1513V15.5987H11.9773C11.7424 15.5987 11.5518 15.4081 11.5518 15.1733C11.5518 14.9385 11.7424 14.7479 11.9773 14.7479H14.5298V12.1953C14.5298 11.9605 14.7204 11.7699 14.9552 11.7699ZM7.51029 13.897C7.15719 13.897 6.87215 14.182 6.87215 14.5352C6.87215 14.8883 7.15719 15.1733 7.51029 15.1733H9.4247C9.4247 14.7351 9.47559 14.3054 9.57344 13.897H7.51029Z" fill="#F59E0B"/>
+                    </svg>
+                </div>
+                <div class="activity-content">
+                <div class="activity-title">Report generated for Employee Engagement Survey</div>
+                <div class="activity-sub">PDF report downloaded by Etienne Shey</div>
+                </div>
+                <div class="activity-time">1 week ago</div>
+            </li>
+
+        </ul>
     </div>
 
     {{-- modal || create new client --}}
@@ -539,158 +1813,158 @@
             <div class="info-container">
                 <h2>Basic Information</h2>
                 <div class="info-content">
-                    <div class="company-logo">
-                        <span>Company Logo</span>
-                        <label for="fileInput" class="upload-circle" id="uploadCircle">
-                            <div class="upload-icon">
-                                <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g opacity="0.2">
-                                        <path d="M20.2137 5.37988C18.6825 5.37988 17.2534 6.20106 16.4825 7.52294L14.3732 11.1397H10.6402C7.19966 11.1397 4.40039 13.939 4.40039 17.3795V35.6189C4.40039 39.0595 7.19966 41.8588 10.6402 41.8588H36.5594C39.9999 41.8588 42.7992 39.0595 42.7992 35.6189V17.3795C42.7992 13.939 39.9999 11.1397 36.5594 11.1397H32.8264L30.7171 7.52294C29.9462 6.20106 28.5171 5.37988 26.9859 5.37988H20.2137ZM23.5998 16.8995C28.3632 16.8995 32.2395 20.7749 32.2395 25.5393C32.2395 30.3036 28.3632 34.179 23.5998 34.179C18.8364 34.179 14.9601 30.3036 14.9601 25.5393C14.9601 20.7749 18.8364 16.8995 23.5998 16.8995ZM23.5998 19.7794C22.0722 19.7794 20.6072 20.3863 19.527 21.4664C18.4468 22.5466 17.84 24.0117 17.84 25.5393C17.84 27.0669 18.4468 28.5319 19.527 29.6121C20.6072 30.6922 22.0722 31.2991 23.5998 31.2991C25.1274 31.2991 26.5924 30.6922 27.6726 29.6121C28.7528 28.5319 29.3596 27.0669 29.3596 25.5393C29.3596 24.0117 28.7528 22.5466 27.6726 21.4664C26.5924 20.3863 25.1274 19.7794 23.5998 19.7794Z" fill="#999999"/>
-                                    </g>
-                                </svg>
-                            </div>
-                            <input type="file" id="fileInput" accept="image/*">
-                        </label>
-                        <div class="upload-text">Please upload a passport-sized photo (4x4)</div>
-                    </div>
-
-                    <div class="company-inputs">
-                        <div class="input-container">
-                            <div class="input">
-                                <label for="">Company Name *</label>
-                                <input type="text">
-                            </div>
-                            <div class="input">
-                                <label for="">Company Name *</label>
-                                <input type="text">
-                            </div>
-                        </div>
-
-                        <div class="input">
-                            <label for="">Company Name *</label>
-                            <textarea name="" id="" cols="30" rows="10"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="info-container">
-                <h2>Manager Information</h2>
-                <div class="info-content">
                     <div class="company-inputs except">
-                        <div class="input-container">
-                            <div class="input">
-                                <label for="">Full Name *</label>
-                                <input type="text">
-                            </div>
-                            <div class="input">
-                                <label for="">Position *</label>
-                                <input type="text">
-                            </div>
+                        <div class="input except">
+                            <label for="">Survey Title *</label>
+                            <input type="text">
+                        </div>
+                        <div class="input except">
+                            <label for="">Client *</label>
+                            <select name="" id="">
+                                <option value="">---select a client---</option>
+                                <option value="">MTN</option>
+                                <option value="">Orange</option>
+                                <option value="">-Iclan</option>
+                            </select>
                         </div>
 
                         <div class="input-container">
                             <div class="input">
                                 <label for="">Email *</label>
-                                <input type="text">
+                                <input type="date">
                             </div>
                             <div class="input">
                                 <label for="">Phone *</label>
-                                <input type="number">
+                                <input type="date">
                             </div>
+                        </div>
+
+                        <div class="input">
+                            <label for="">Description</label>
+                            <textarea name="" id="" cols="30" rows="10" placeholder="Brief description of the survey purpose"></textarea>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="info-container">
-                <h2>Initial Staff Upload</h2>
+                <h2>Distribution Method</h2>
+                <div class="info-content except">
+                    <div class="option-container">
+                        <label class="option">
+                            <input type="checkbox" checked>
+                            Email
+                        </label>
+                        <label class="option">
+                            <input type="checkbox">
+                            SMS
+                        </label>
+                    </div>
+
+                    <!-- Warning box -->
+                    <div class="warning">
+                        <span class="warning-icon">
+                            <svg width="41" height="42" viewBox="0 0 41 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect y="0.803223" width="40.5513" height="40.5513" rx="20.2756" fill="#FEF3C7"/>
+                                <path d="M28.4274 25.8169L21.9327 14.085C21.5941 13.4738 20.9749 13.1084 20.276 13.1084C19.5771 13.1084 18.9579 13.4738 18.6194 14.085L12.1246 25.8169C11.7962 26.4105 11.8054 27.1131 12.1502 27.6975C12.4942 28.2815 13.1042 28.6301 13.7817 28.6301H26.7708C27.4479 28.6301 28.0578 28.2815 28.4023 27.6975C28.7462 27.1136 28.7559 26.4105 28.4274 25.8169ZM19.6468 18.3522C19.6468 18.0044 19.9287 17.723 20.276 17.723C20.6234 17.723 20.9053 18.0044 20.9053 18.3522V22.5473C20.9053 22.895 20.6234 23.1765 20.276 23.1765C19.9287 23.1765 19.6468 22.895 19.6468 22.5473V18.3522ZM20.276 26.113C19.8125 26.113 19.437 25.7376 19.437 25.274C19.437 24.8105 19.8125 24.435 20.276 24.435C20.7396 24.435 21.115 24.8105 21.115 25.274C21.115 25.7376 20.7396 26.113 20.276 26.113Z" fill="#F59E0B"/>
+                            </svg>
+                        </span>
+                        Report generation may take 1–3 minutes
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-container">
+                <h2>Survey Values & Questions</h2>
                 <div class="info-content">
                     <div class="company-inputs except">
-                        <div class="file-upload">
-                            <label class="upload-btn">
-                                <input type="file" id="staffList" hidden onchange="showFileName(this)">
-                                <span>
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M3.396 13.096L3.396 13.9117C3.396 15.2633 4.49162 16.3589 5.84314 16.3589L14.0003 16.3589C15.3518 16.3589 16.4474 15.2633 16.4474 13.9117L16.4474 13.096M13.1846 6.5703L9.92172 3.30744M9.92172 3.30744L6.65886 6.5703M9.92172 3.30744L9.92172 13.096" stroke="#666666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    Upload Staff List
-                                </span>
+                        <div class="label">Select company values to assess and create questions for each value.</div>
+
+                        <!-- Values grid -->
+                        <div class="values-grid" id="valuesGrid">
+                            <label class="value">
+                                <input type="checkbox" checked>
+                                <span>Customer Focus</span>
                             </label>
-                            <span id="fileName">No file selected</span>
+                            <label class="value">
+                                <input type="checkbox" checked>
+                                <span>Innovation</span>
+                            </label>
+                            <label class="value">
+                                <input type="checkbox">
+                                <span>Integrity</span>
+                            </label>
+                            <label class="value">
+                                <input type="checkbox">
+                                <span>Teamwork</span>
+                            </label>
+                            <label class="value">
+                                <input type="checkbox">
+                                <span>Excellence</span>
+                            </label>
+                            <label class="value">
+                                <input type="checkbox">
+                                <span>Accountability</span>
+                            </label>
                         </div>
 
-                        <div class="download-template">
-                            <a href="#" download>
-                                Download Excel Template
-                                <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.87598 10.125L6.47081 10.5302L6.87598 10.9353L7.28115 10.5302L6.87598 10.125ZM7.44897 3.24902C7.44897 2.93257 7.19243 2.67603 6.87598 2.67603C6.55952 2.67603 6.30298 2.93257 6.30298 3.24902L6.87598 3.24902L7.44897 3.24902ZM3.43799 6.68701L3.03282 7.09218L6.47081 10.5302L6.87598 10.125L7.28115 9.71983L3.84316 6.28184L3.43799 6.68701ZM6.87598 10.125L7.28115 10.5302L10.7191 7.09218L10.314 6.68701L9.90879 6.28184L6.47081 9.71983L6.87598 10.125ZM6.87598 10.125L7.44897 10.125L7.44897 3.24902L6.87598 3.24902L6.30298 3.24902L6.30298 10.125L6.87598 10.125Z" fill="#AF720A"/>
-                                    <path d="M2.86523 12.9902L10.8872 12.9902" stroke="#AF720A" stroke-width="1.146"/>
-                                </svg>
-                            </a>
-                        </div>
+                        <!-- Add another value button -->
+                        <button type="button" class="add-btn" onclick="showInput()">Add Another Value</button>
 
-                        <div class="active-client">
-                            <input type="checkbox" id="activeClient" checked>
-                            <div>
-                                <span>Set as Active Client</span>
-                                <p>Active clients can receive surveys and access their reports.</p>
-                            </div>
+                        <!-- Hidden input field for new value -->
+                        <div class="new-value-input" id="newValueInput">
+                            <input type="text" id="valueName" placeholder="Enter company value">
+                            <button type="button" onclick="saveValue()">Add</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="info-container">
-                <h2>Company Values</h2>
-                <div class="info-content">
+                <h2>Survey Settings</h2>
+                <div class="info-content except">
                     <div class="company-inputs except">
-                       <div class="customer-block">
-                            <div class="inputs">
-                                <input type="text" class="title-input" value="Customer Focus">
-                                <textarea class="desc-input">Placing customers at the center of everything we do</textarea>
+
+                        <div class="input-container">
+                            <div class="input">
+                                <label for="">Response Anonymity</label>
+                                <select name="" id="">
+                                    <option value="">---select an anonymity---</option>
+                                    <option value="">Anonymous (recommended)</option>
+                                    <option value="">Reveal</option>
+                                    <option value="">Enclose</option>
+                                </select>
                             </div>
-                            <button class="delete-btn" onclick="deleteBlock(this)">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.6072 6.32799L14.9124 16.054C14.8526 16.8924 14.155 17.5419 13.3145 17.5419H6.6859C5.84544 17.5419 5.14787 16.8924 5.08799 16.054L4.39328 6.32799M8.39823 9.53196V14.3379M11.6022 9.53196V14.3379M12.4032 6.32799V3.92501C12.4032 3.48264 12.0446 3.12402 11.6022 3.12402H8.39823C7.95586 3.12402 7.59724 3.48264 7.59724 3.92501V6.32799M3.59229 6.32799H16.4081" stroke="#FF383C" stroke-width="0.96119" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
+                            <div class="input">
+                                <label for="">Response Deadline</label>
+                                <select name="" id="">
+                                    <option value="">---select a deadline---</option>
+                                    <option value="">3 days after receiving</option>
+                                    <option value="">5 days after receiving</option>
+                                    <option value="">1 week after receiving</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="customer-block">
-                            <div class="inputs">
-                                <input type="text" class="title-input" value="Customer Focus">
-                                <textarea class="desc-input">Placing customers at the center of everything we do</textarea>
+                        <div class="input-container">
+                            <div class="input">
+                                <label for="">Reminder Frequency</label>
+                                <select name="" id="">
+                                    <option value="">---select a frequency---</option>
+                                    <option value="">No automatic reminders</option>
+                                    <option value="">Daily</option>
+                                    <option value="">Weekly</option>
+                                </select>
                             </div>
-                            <button class="delete-btn" onclick="deleteBlock(this)">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.6072 6.32799L14.9124 16.054C14.8526 16.8924 14.155 17.5419 13.3145 17.5419H6.6859C5.84544 17.5419 5.14787 16.8924 5.08799 16.054L4.39328 6.32799M8.39823 9.53196V14.3379M11.6022 9.53196V14.3379M12.4032 6.32799V3.92501C12.4032 3.48264 12.0446 3.12402 11.6022 3.12402H8.39823C7.95586 3.12402 7.59724 3.48264 7.59724 3.92501V6.32799M3.59229 6.32799H16.4081" stroke="#FF383C" stroke-width="0.96119" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
-                        </div>
-
-                        <div class="customer-block">
-                            <div class="inputs">
-                                <input type="text" class="title-input" value="Customer Focus">
-                                <textarea class="desc-input">Placing customers at the center of everything we do</textarea>
+                            <div class="input">
+                                <label for="">Completion Reward</label>
+                                <select name="" id="">
+                                    <option value="">---select a reward---</option>
+                                    <option value="">No reward</option>
+                                    <option value="">Medal</option>
+                                    <option value="">Cash Price</option>
+                                </select>
                             </div>
-                            <button class="delete-btn" onclick="deleteBlock(this)">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.6072 6.32799L14.9124 16.054C14.8526 16.8924 14.155 17.5419 13.3145 17.5419H6.6859C5.84544 17.5419 5.14787 16.8924 5.08799 16.054L4.39328 6.32799M8.39823 9.53196V14.3379M11.6022 9.53196V14.3379M12.4032 6.32799V3.92501C12.4032 3.48264 12.0446 3.12402 11.6022 3.12402H8.39823C7.95586 3.12402 7.59724 3.48264 7.59724 3.92501V6.32799M3.59229 6.32799H16.4081" stroke="#FF383C" stroke-width="0.96119" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
-                        </div>
-
-                        <div class="customer-block">
-                            <div class="inputs">
-                                <input type="text" class="title-input" value="Customer Focus">
-                                <textarea class="desc-input">Placing customers at the center of everything we do</textarea>
-                            </div>
-                            <button class="delete-btn" onclick="deleteBlock(this)">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.6072 6.32799L14.9124 16.054C14.8526 16.8924 14.155 17.5419 13.3145 17.5419H6.6859C5.84544 17.5419 5.14787 16.8924 5.08799 16.054L4.39328 6.32799M8.39823 9.53196V14.3379M11.6022 9.53196V14.3379M12.4032 6.32799V3.92501C12.4032 3.48264 12.0446 3.12402 11.6022 3.12402H8.39823C7.95586 3.12402 7.59724 3.48264 7.59724 3.92501V6.32799M3.59229 6.32799H16.4081" stroke="#FF383C" stroke-width="0.96119" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -704,7 +1978,7 @@
         <form class="modal-content">
             <div class="modal-header">
                 <div class="headings">
-                    <h2>Create New Client</h2>
+                    <h2>View Survey Details</h2>
                 </div>
 
                 <svg width="29" height="30" id="closeModalClientDetails" class="close" viewBox="0 0 29 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -778,7 +2052,7 @@
 
             <div class="info-container">
                 <h2>Survey Statistics</h2>
-                <div class="info-content">
+                {{-- <div class="info-content">
                     <div class="chart">
                         <canvas id="comboChart" height="200"></canvas>
                     </div>
@@ -800,8 +2074,19 @@
                             <div class="stat-subtext">across all clients and surveys</div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
+
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, error optio minus sunt vero dolorem autem necessitatibus mollitia quaerat nesciunt facilis animi asperiores vel odio adipisci molestias consequatur dicta ea.
+            Reprehenderit ut tempore veniam, unde fugit quibusdam iure blanditiis reiciendis, quo a hic ullam. Iure tempore voluptas nesciunt numquam doloribus veritatis. Nostrum molestias omnis eaque ex distinctio, cum quia laborum.
+            Fugit tempora similique, sequi minus ipsa neque vero debitis, magnam voluptatem quam aut repudiandae eius consectetur voluptas vitae quas earum natus ad, possimus error iusto harum. Est nobis iure deserunt!
+            Repellat libero recusandae provident temporibus fuga mollitia dolorem quibusdam reprehenderit culpa blanditiis a soluta vero nemo asperiores incidunt cum suscipit, laboriosam, voluptates amet nam eligendi voluptate at! Aut, consequuntur libero?
+            Non eos repellendus vero ad eaque, incidunt error? Accusantium, molestias quam dicta id reprehenderit culpa tempora cum voluptas aliquid veritatis recusandae, et, fugiat omnis magni minus vitae facilis voluptatibus nulla.
+            Soluta porro maiores deserunt ad voluptatem sit quam, voluptatibus ratione quas ipsa tenetur magnam quis modi deleniti incidunt officia distinctio provident. Amet alias corporis nisi adipisci ipsum libero modi possimus?
+            Eius numquam explicabo eligendi fugiat consequuntur impedit exercitationem voluptatum, beatae nesciunt molestiae aliquam vitae iste deleniti mollitia ducimus! Eum accusamus mollitia quibusdam quaerat ipsa corrupti dolore doloremque earum nesciunt iusto?
+            Ex illum repudiandae perferendis blanditiis nemo, ratione ad placeat repellendus praesentium, provident odit consequatur! Quasi, perspiciatis, sed nulla rerum odio minima voluptate ex, autem facilis eius dignissimos nemo quo asperiores!
+            Ad neque excepturi cumque velit maxime fugit porro sit fuga provident. Quos illum, temporibus nobis aspernatur sapiente quas atque repudiandae, et voluptatem deleniti doloribus impedit eligendi obcaecati officiis iste corrupti.
+            Perferendis tempora laboriosam vel dolorum veniam recusandae odit? Quia eius harum unde voluptate recusandae perspiciatis! Nobis neque rem dolore similique id libero facere qui architecto, magni, quas, ab quis numquam!
 
         </form>
     </div>
@@ -982,13 +2267,13 @@
         </form>
     </div>
 
-    {{-- modal || edit client --}}
+    {{-- modal || delete client --}}
     <div id="deleteClient" class="modal">
         <form class="modal-content except">
             <div class="modal-header except">
                 <div class="headings">
-                    <h2>Remove Staff</h2>
-                    <p>Are you sure you want to remove Ettiene Shey from this client's staff list?</p>
+                    <h2>Delete Survey</h2>
+                    <p>Are you sure you want to remove this survey from the survey's list?</p>
                 </div>
 
                 <svg width="29" height="30" id="deleteClientModal" class="close" viewBox="0 0 29 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1003,8 +2288,7 @@
                     15h-1v-1h1v1zm0-3h-1V7h1v7z"/>
                 </svg>
                 <p>
-                    This will also delete all survey responses associated with this staff member.
-                    Please confirm this is what you intend to do.
+                    Are you sure you want to delete this survey? All of the data will be permanently removed. This action cannot be undone.
                 </p>
             </div>
 

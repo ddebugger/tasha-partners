@@ -776,7 +776,7 @@
                 </div>
             </div>
 
-            <div class="info-container">
+            {{-- <div class="info-container"> --}}
                 <h2>Survey Statistics</h2>
                 <div class="info-content">
                     <div class="chart">
@@ -801,7 +801,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            {{-- </div> --}}
 
         </form>
     </div>
