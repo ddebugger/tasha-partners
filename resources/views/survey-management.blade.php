@@ -2052,7 +2052,7 @@
 
             <div class="info-container">
                 <h2>Survey Statistics</h2>
-                {{-- <div class="info-content">
+                <div class="info-content except">
                     <div class="chart">
                         <canvas id="comboChart" height="200"></canvas>
                     </div>
@@ -2074,19 +2074,8 @@
                             <div class="stat-subtext">across all clients and surveys</div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
             </div>
-
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, error optio minus sunt vero dolorem autem necessitatibus mollitia quaerat nesciunt facilis animi asperiores vel odio adipisci molestias consequatur dicta ea.
-            Reprehenderit ut tempore veniam, unde fugit quibusdam iure blanditiis reiciendis, quo a hic ullam. Iure tempore voluptas nesciunt numquam doloribus veritatis. Nostrum molestias omnis eaque ex distinctio, cum quia laborum.
-            Fugit tempora similique, sequi minus ipsa neque vero debitis, magnam voluptatem quam aut repudiandae eius consectetur voluptas vitae quas earum natus ad, possimus error iusto harum. Est nobis iure deserunt!
-            Repellat libero recusandae provident temporibus fuga mollitia dolorem quibusdam reprehenderit culpa blanditiis a soluta vero nemo asperiores incidunt cum suscipit, laboriosam, voluptates amet nam eligendi voluptate at! Aut, consequuntur libero?
-            Non eos repellendus vero ad eaque, incidunt error? Accusantium, molestias quam dicta id reprehenderit culpa tempora cum voluptas aliquid veritatis recusandae, et, fugiat omnis magni minus vitae facilis voluptatibus nulla.
-            Soluta porro maiores deserunt ad voluptatem sit quam, voluptatibus ratione quas ipsa tenetur magnam quis modi deleniti incidunt officia distinctio provident. Amet alias corporis nisi adipisci ipsum libero modi possimus?
-            Eius numquam explicabo eligendi fugiat consequuntur impedit exercitationem voluptatum, beatae nesciunt molestiae aliquam vitae iste deleniti mollitia ducimus! Eum accusamus mollitia quibusdam quaerat ipsa corrupti dolore doloremque earum nesciunt iusto?
-            Ex illum repudiandae perferendis blanditiis nemo, ratione ad placeat repellendus praesentium, provident odit consequatur! Quasi, perspiciatis, sed nulla rerum odio minima voluptate ex, autem facilis eius dignissimos nemo quo asperiores!
-            Ad neque excepturi cumque velit maxime fugit porro sit fuga provident. Quos illum, temporibus nobis aspernatur sapiente quas atque repudiandae, et voluptatem deleniti doloribus impedit eligendi obcaecati officiis iste corrupti.
-            Perferendis tempora laboriosam vel dolorum veniam recusandae odit? Quia eius harum unde voluptate recusandae perspiciatis! Nobis neque rem dolore similique id libero facere qui architecto, magni, quas, ab quis numquam!
 
         </form>
     </div>
