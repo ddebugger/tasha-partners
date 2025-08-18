@@ -108,10 +108,10 @@
 .app-content .header-container .navbar .nav-items a {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.3rem;
     text-decoration: none;
     color: var(--fadeWhite);
-    font-size: 14px;
+    font-size: 12px;
     cursor: pointer;
 }
 

@@ -24,3 +24,7 @@ Route::get('/client-management', function () {
 Route::get('/survey-management', function () {
     return view('survey-management');
 });
+
+Route::get('/training-session', function () {
+    return view('training-session');
+});
