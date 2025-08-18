@@ -3,216 +3,344 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Company Values</title>
+        <title>Multi-Step Wizard</title>
         <style>
             body {
                 font-family: Arial, sans-serif;
-                background: #fafafa;
-                padding: 30px;
+                background: #f8f9fc;
+                padding: 20px;
             }
 
-            .container {
-                max-width: 800px;
-            }
-
-            .label {
-                font-size: 14px;
-                margin-bottom: 10px;
-                color: #444;
-            }
-
-            /* Grid for options */
-            .values-grid {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 10px;
-                margin-bottom: 15px;
-            }
-
-            .value {
+            .stepper {
                 display: flex;
-                align-items: center;
-                border: 2px solid #d9e2ec;
-                border-radius: 6px;
-                padding: 8px 12px;
-                cursor: pointer;
-                background: #fff;
-                transition: all 0.2s ease-in-out;
-                font-size: 14px;
+                justify-content: space-between;
+                margin-bottom: 20px;
+                list-style: none;
+                padding: 0;
             }
 
-            .value input[type="checkbox"] {
-                display: none;
-            }
-
-            .value span {
+            .stepper li {
+                flex: 1;
+                text-align: center;
                 position: relative;
-                padding-left: 25px;
             }
 
-            /* Custom checkbox square */
-            .value span::before {
+            .stepper li::before {
                 content: "";
                 position: absolute;
-                left: 0;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 16px;
-                height: 16px;
-                border: 2px solid #d1d5db;
-                border-radius: 4px;
-                background: #fff;
+                top: 12px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: #ccc;
+                z-index: 2;
             }
 
-            /* Checkmark when selected */
-            .value input:checked + span::before {
-                background: #f59e0b;
-                border-color: #f59e0b;
+            .stepper li::after {
+                content: "";
+                position: absolute;
+                top: 20px;
+                left: 100%;
+                width: 100%;
+                height: 4px;
+                background: #ccc;
+                z-index: 1;
             }
 
-            /* Highlight text + background when checked */
-            .value input:checked + span {
-                font-weight: bold;
-                background: #f0f9ff;
-                border-radius: 4px;
-                padding: 2px 6px;
-            }
-
-            /* Add button */
-            .add-btn {
-                display: inline-flex;
-                align-items: center;
-                background: #0369a1;
-                color: #fff;
-                font-size: 14px;
-                padding: 8px 14px;
-                border-radius: 20px;
-                border: none;
-                cursor: pointer;
-                transition: background 0.2s ease;
-            }
-
-            .add-btn:hover {
-                background: #025c8c;
-            }
-
-            .add-btn::before {
-                content: "+";
-                font-weight: bold;
-                margin-right: 6px;
-            }
-
-            /* Input field styling */
-            .new-value-input {
-                margin-top: 10px;
+            .stepper li:last-child::after {
                 display: none;
             }
 
-            .new-value-input input {
-                padding: 6px 10px;
-                font-size: 14px;
-                border: 2px solid #d9e2ec;
-                border-radius: 6px;
-                outline: none;
+            .stepper li.active::before {
+                background: #007bff;
             }
 
-            .new-value-input button {
-                margin-left: 6px;
-                padding: 6px 12px;
-                font-size: 14px;
-                background: #10b981;
+            .stepper li.active ~ li::before {
+                background: #ccc;
+            }
+
+            .stepper li.active::after {
+                background: #007bff;
+            }
+
+            .step-content {
+                display: none;
+                background: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .step-content.active {
+                display: block;
+            }
+
+            .buttons {
+                margin-top: 20px;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .buttons button {
+                padding: 10px 20px;
                 border: none;
-                color: white;
                 border-radius: 6px;
                 cursor: pointer;
             }
 
-            .new-value-input button:hover {
-                background: #059669;
+            .btn-back {
+                background: #ccc;
+            }
+
+            .btn-next {
+                background: #007bff;
+                color: white;
             }
         </style>
     </head>
     <body>
-        <div class="container">
-            <div class="label">
-                Select company values to assess and create questions for each
-                value.
+        <ul class="stepper">
+            <li class="active">Step 1</li>
+            <li>Step 2</li>
+            <li>Step 3</li>
+            <li>Step 4</li>
+        </ul>
+
+        <div id="step1" class="step-content active">
+            <h2>Step 1: Session Details</h2>
+            <p>Content for step 1...</p>
+            <div class="buttons">
+                <span></span>
+                <button class="btn-next" onclick="nextStep()">Next</button>
             </div>
+        </div>
 
-            <!-- Values grid -->
-            <div class="values-grid" id="valuesGrid">
-                <label class="value">
-                    <input type="checkbox" checked />
-                    <span>Customer Focus</span>
-                </label>
-                <label class="value">
-                    <input type="checkbox" checked />
-                    <span>Innovation</span>
-                </label>
-                <label class="value">
-                    <input type="checkbox" />
-                    <span>Integrity</span>
-                </label>
-                <label class="value">
-                    <input type="checkbox" />
-                    <span>Teamwork</span>
-                </label>
-                <label class="value">
-                    <input type="checkbox" />
-                    <span>Excellence</span>
-                </label>
-                <label class="value">
-                    <input type="checkbox" />
-                    <span>Accountability</span>
-                </label>
+        <div id="step2" class="step-content">
+            <h2>Step 2: Add Managers</h2>
+            <p>Content for step 2...</p>
+            <div class="buttons">
+                <button class="btn-back" onclick="prevStep()">Back</button>
+                <button class="btn-next" onclick="nextStep()">Next</button>
             </div>
+        </div>
 
-            <!-- Add another value button -->
-            <button class="add-btn" onclick="showInput()">
-                Add Another Value
-            </button>
+        <div id="step3" class="step-content">
+            <h2>Step 3: Assign Evaluators</h2>
+            <p>Content for step 3...</p>
+            <div class="buttons">
+                <button class="btn-back" onclick="prevStep()">Back</button>
+                <button class="btn-next" onclick="nextStep()">Next</button>
+            </div>
+        </div>
 
-            <!-- Hidden input field for new value -->
-            <div class="new-value-input" id="newValueInput">
-                <input
-                    type="text"
-                    id="valueName"
-                    placeholder="Enter company value"
-                />
-                <button onclick="saveValue()">Add</button>
+        <div id="step4" class="step-content">
+            <h2>Step 4: Review & Launch</h2>
+            <p>Content for step 4...</p>
+            <div class="buttons">
+                <button class="btn-back" onclick="prevStep()">Back</button>
+                <button class="btn-next" onclick="submitWizard()">
+                    Finish
+                </button>
             </div>
         </div>
 
         <script>
-            function showInput() {
-                document.getElementById("newValueInput").style.display =
-                    "block";
-                document.getElementById("valueName").focus();
+            let currentStep = 1;
+            const totalSteps = 4;
+
+            function showStep(step) {
+                // Hide all steps
+                for (let i = 1; i <= totalSteps; i++) {
+                    document
+                        .getElementById("step" + i)
+                        .classList.remove("active");
+                }
+                // Show current step
+                document.getElementById("step" + step).classList.add("active");
+
+                // Update stepper
+                let steps = document.querySelectorAll(".stepper li");
+                steps.forEach((s, index) => {
+                    if (index < step) {
+                        s.classList.add("active");
+                    } else {
+                        s.classList.remove("active");
+                    }
+                });
             }
 
-            function saveValue() {
-                var name = document.getElementById("valueName").value.trim();
-                if (name === "") return;
+            function nextStep() {
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    showStep(currentStep);
+                }
+            }
 
-                var grid = document.getElementById("valuesGrid");
+            function prevStep() {
+                if (currentStep > 1) {
+                    currentStep--;
+                    showStep(currentStep);
+                }
+            }
 
-                var newLabel = document.createElement("label");
-                newLabel.className = "value";
+            function submitWizard() {
+                alert("Wizard Completed!");
+            }
+        </script>
+    </body>
+</html>
 
-                var input = document.createElement("input");
-                input.type = "checkbox";
+<!-- ============================== next -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Stepper Progress Bar</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background: #f9f9f9;
+                padding: 40px;
+            }
 
-                var span = document.createElement("span");
-                span.textContent = name;
+            .stepper-container {
+                width: 100%;
+                max-width: 600px;
+                margin: auto;
+                position: relative;
+            }
 
-                newLabel.appendChild(input);
-                newLabel.appendChild(span);
+            /* Progress Bar Background */
+            .progressbar {
+                display: flex;
+                justify-content: space-between;
+                position: relative;
+                margin-bottom: 30px;
+            }
 
-                grid.appendChild(newLabel);
+            .progressbar::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                height: 4px;
+                width: 100%;
+                background: #e0e0e0;
+                z-index: -1;
+            }
 
-                // Reset input
-                document.getElementById("valueName").value = "";
-                document.getElementById("newValueInput").style.display = "none";
+            /* Progress Fill */
+            .progress {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                height: 4px;
+                background: orange;
+                width: 0%;
+                transition: width 0.3s ease;
+                z-index: -1;
+            }
+
+            /* Step Circles */
+            .step {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background: #e0e0e0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
+                font-weight: bold;
+                color: white;
+                position: relative;
+                z-index: 1;
+            }
+
+            .step.active {
+                background: orange;
+            }
+
+            /* Buttons */
+            .buttons {
+                text-align: center;
+            }
+
+            button {
+                background: orange;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                margin: 5px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 14px;
+            }
+
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="stepper-container">
+            <div class="progressbar">
+                <div class="progress" id="progress"></div>
+                <div class="step active">1</div>
+                <div class="step">2</div>
+                <div class="step">3</div>
+                <div class="step">4</div>
+            </div>
+            <div class="buttons">
+                <button id="prev" disabled>Previous</button>
+                <button id="next">Next</button>
+            </div>
+        </div>
+
+        <script>
+            const steps = document.querySelectorAll(".step");
+            const progress = document.getElementById("progress");
+            const prev = document.getElementById("prev");
+            const next = document.getElementById("next");
+
+            let currentStep = 1;
+
+            next.addEventListener("click", () => {
+                currentStep++;
+                if (currentStep > steps.length) {
+                    currentStep = steps.length;
+                }
+                update();
+            });
+
+            prev.addEventListener("click", () => {
+                currentStep--;
+                if (currentStep < 1) {
+                    currentStep = 1;
+                }
+                update();
+            });
+
+            function update() {
+                steps.forEach((step, idx) => {
+                    if (idx < currentStep) {
+                        step.classList.add("active");
+                    } else {
+                        step.classList.remove("active");
+                    }
+                });
+
+                progress.style.width =
+                    ((currentStep - 1) / (steps.length - 1)) * 100 + "%";
+
+                prev.disabled = currentStep === 1;
+                next.disabled = currentStep === steps.length;
             }
         </script>
     </body>

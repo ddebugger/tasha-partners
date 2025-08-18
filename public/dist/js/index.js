@@ -161,3 +161,13 @@ function saveValue() {
     document.getElementById("valueName").value = "";
     document.getElementById("newValueInput").style.display = "none";
 }
+
+//=============== training session routing ===============
+function goToRoute(url) {
+    // Navigate to the given route
+    window.location.href = url;
+}
+
+function goBack() {
+    window.history.back();
+}

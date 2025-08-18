@@ -1,18 +1,18 @@
 @extends('layout.admin.app')
 
-{{-- @section('breadcrumb')
+@section('breadcrumb')
 @include(
     'layout.admin.content',
     [
         'title' => "360-Degree Manager Evaluation Sessions",
         'breadcrumbs' => ['Home', 'Training Sessions'],
         'button' => "Create New Session",
-        'button_onclick' => "showModal()",
+        'button_onclick' => "goToRoute('/training-session/steps')",
         'button2' => "Export",
         'button2_onclick' => "exportData()",
         'end_text' => "Create and manage training sessions for 360-degree evaluations of managers in leadership programs."
     ])
-@endsection --}}
+@endsection
 
 @section('content')
 

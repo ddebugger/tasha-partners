@@ -264,5 +264,6 @@
         }
         });
     </script>
+    @stack('special-scripts')
 </body>
 </html>

@@ -28,3 +28,7 @@ Route::get('/survey-management', function () {
 Route::get('/training-session', function () {
     return view('training-session');
 });
+
+Route::get('/training-session/steps', function () {
+    return view('train1');
+});
