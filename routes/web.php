@@ -32,3 +32,7 @@ Route::get('/training-session', function () {
 Route::get('/training-session/steps', function () {
     return view('train1');
 });
+
+Route::get('/report', function () {
+    return view('report');
+});
