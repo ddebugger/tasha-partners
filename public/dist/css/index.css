@@ -2513,3 +2513,74 @@ canvas {
     color: #666;
     font-style: italic;
 }
+
+/* ========================== App Content || Report ================= */
+.filter-header-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border: 1px solid var(--lightBlue);
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #fafafa;
+}
+
+.filter-header-section .title h1 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.filter-header-section .title span {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.filter-header-section .filter-options {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #e0e4ea;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.filter-header-section .filter-options .option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--whiteColor);
+    border: 1px solid #cccccc;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.filter-header-section .filter-options .option .status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+}
+
+.filter-header-section .filter-options .option select {
+    border: none;
+    outline: none;
+    font-weight: 600;
+    font-size: 12px;
+    background-color: transparent;
+}
+
+.filter-header-section .filter-options .option select option {
+    font-size: 12px;
+}
+
+.filter-header-section .filter-options .btn {
+    border: none;
+    outline: none;
+    background-color: var(--lightBlue);
+    color: var(--whiteColor);
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
